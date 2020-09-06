@@ -1,0 +1,21 @@
+<%- include ('../Includes/header'); -%> 
+
+</head>
+
+<body>
+    <%- include ('../Includes/navigation_bar'); -%> 
+    <h1>Shop</h1>
+    <% if (products.length > 0) { %>
+        <% products.forEach(function (prod) { %>
+            <div class="card col-sm" style="width: 18rem;">
+                <img class="card-img-top" src="data:image/png;base64,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" alt="<%= prod.name %> ">
+                <div class="card-body">
+                  <h5 class="card-title"><%= prod.name %></h5>
+                  <input type="number" min="1" max="<%= prod.quantity %>" value="1">
+                  <a href="/add-to-cart/<%= prod.id %>" class="btn btn-outline-dark">Add to cart</a>
+                </div>
+              </div>
+        <% }); %> 
+    <% } %>
+
+<%- include ('../Includes/footer'); -%> 
