@@ -1,16 +1,16 @@
 const Product = require('../Model/product');
 
 exports.getStatistics_Page = (req, res, next) => {
-    res.render('admin_stuff/satistics_shop', {
+    res.render('admin_stuff/statistics_shop', {
         pageTitle: 'Information',
-        path: '/info/shop/rana_disposal'
+        path: '/shop/rana_disposal/info'
     });
 };
 
 exports.getAddProduct_Page = (req, res, next) => {
     res.render('admin_stuff/add_product', {
         pageTitle: 'Add-On',
-        path: '/add/shop/rana_disposal'
+        path: '/shop/rana_disposal/add'
     });
 };
 

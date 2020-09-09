@@ -17,3 +17,6 @@ ADMIN_POWER :-
 . delete a product
 . see statistics of the shop
 . edit the product
+
+
+. https://codepen.io/alex_rodrigues/pen/ABGdg
