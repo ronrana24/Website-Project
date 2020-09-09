@@ -40,4 +40,11 @@ module.exports = class Product {
     static fetchAll() {
         return products;
     }
+    static findByID(id, cb) {
+        products.forEach(function (product) {
+            if (product.id === id) {
+                cb(product);
+            }
+        })
+    }
 }

@@ -14,7 +14,7 @@ exports.getShop_page = (req, res, next) => {
     res.render('user_stuff/shop', {
         pageTitle: 'Shop',
         path: '/shop',
-        products: products
+        products: products,
     });
 }
 
@@ -34,3 +34,12 @@ exports.getCart_Page = (req, res, next) => {
     });
 };
 
+// Add to Cart Item
+exports.sendItemToCart = (req, res, next) => {
+    const productID = req.params.productID;
+    const qty = req.query.quantity;
+    console.log("Item " + productID + "--> " + qty);
+    Product.findByID(productID, product => {
+        console.log("Item " + product);
+    })
+}

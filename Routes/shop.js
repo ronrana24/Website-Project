@@ -20,6 +20,8 @@ router.get('/contact', shopController.getContact_Page);
 
 // CART ROUTE --> /cart
 router.get('/cart', shopController.getCart_Page);
+// GET ITEM TO CART --> /add-to-cart/:productId
+router.get('/add-to-cart/:productID', shopController.sendItemToCart);
 
 // ERROR ROUTE--> IF OTHER THAN THE ABOVE ROUTES ARE REQUESTED
 router.get('*', errorController.get404Error_Page);
