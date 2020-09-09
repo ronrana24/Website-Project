@@ -1,5 +1,5 @@
 const Product = require('../Model/product');
-
+const Cart = require('../Model/cart');
 // Gets The Home page of the Website
 exports.getHome_Page = (req, res, next) => {
     res.render('user_stuff/home', {
@@ -38,8 +38,12 @@ exports.getCart_Page = (req, res, next) => {
 exports.sendItemToCart = (req, res, next) => {
     const productID = req.params.productID;
     const qty = req.query.quantity;
+    let price;
     console.log("Item " + productID + "--> " + qty);
     Product.findByID(productID, product => {
         console.log("Item " + product);
-    })
+        price = product.price;
+    });
+    Cart.addProduct_toCart(productID, price, qty);
+    console.log(Cart.fetchAllCart());
 }

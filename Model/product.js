@@ -44,6 +44,7 @@ module.exports = class Product {
         products.forEach(function (product) {
             if (product.id === id) {
                 cb(product);
+                return product;
             }
         })
     }
