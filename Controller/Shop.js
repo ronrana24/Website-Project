@@ -1,10 +1,12 @@
 const Product = require('../Model/product');
 const Cart = require('../Model/cart');
+
 // Gets The Home page of the Website
 exports.getHome_Page = (req, res, next) => {
     res.render('user_stuff/home', {
         pageTitle: 'Rana Disposal\'s',
-        path: '/'
+        path: '/',
+        cart_items: Cart.fetchAllCart().products.length
     });
 };
 
@@ -15,6 +17,7 @@ exports.getShop_page = (req, res, next) => {
         pageTitle: 'Shop',
         path: '/shop',
         products: products,
+        cart_items: Cart.fetchAllCart().products.length
     });
 }
 
@@ -22,7 +25,8 @@ exports.getShop_page = (req, res, next) => {
 exports.getContact_Page = (req, res, next) => {
     res.render('user_stuff/contact', {
         pageTitle: 'Contact',
-        path: '/contact'
+        path: '/contact',
+        cart_items: Cart.fetchAllCart().products.length
     });
 };
 
@@ -30,7 +34,8 @@ exports.getContact_Page = (req, res, next) => {
 exports.getCart_Page = (req, res, next) => {
     res.render('user_stuff/cart', {
         pageTitle: 'Cart',
-        path: '/cart'
+        path: '/cart',
+        cart_items: Cart.fetchAllCart().products.length
     });
 };
 
@@ -39,11 +44,11 @@ exports.sendItemToCart = (req, res, next) => {
     const productID = req.params.productID;
     const qty = req.query.quantity;
     let price;
-    console.log("Item " + productID + "--> " + qty);
     Product.findByID(productID, product => {
         console.log("Item " + product);
         price = product.price;
     });
     Cart.addProduct_toCart(productID, price, qty);
     console.log(Cart.fetchAllCart());
+    res.redirect('/shop');
 }
