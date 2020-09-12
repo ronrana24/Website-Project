@@ -12,13 +12,20 @@ exports.getHome_Page = (req, res, next) => {
 
 // Shop Page
 exports.getShop_page = (req, res, next) => {
-    const products = Product.fetchAll();
-    res.render('user_stuff/shop', {
-        pageTitle: 'Shop',
-        path: '/shop',
-        products: products,
-        cart_items: Cart.fetchAllCart().products.length
-    });
+
+    //* Show all the products in the database
+    Product.fetchAll()
+    .then(products=> {
+        res.render('user_stuff/shop', {
+            pageTitle: 'Shop',
+            path: '/shop',
+            products: products,
+            cart_items: Cart.fetchAllCart().products.length
+        });
+    })
+    .catch(err => {
+        console.log(err);
+    })
 }
 
 // Contact Page
@@ -35,20 +42,29 @@ exports.getCart_Page = (req, res, next) => {
     res.render('user_stuff/cart', {
         pageTitle: 'Cart',
         path: '/cart',
-        cart_items: Cart.fetchAllCart().products.length
+        cart_items: Cart.fetchAllCart().products.length,
+        cart_products: Cart.fetchAllCart()
     });
 };
 
 // Add to Cart Item
 exports.sendItemToCart = (req, res, next) => {
-    const productID = req.params.productID;
+    const productId = req.params.productID;
     const qty = req.query.quantity;
     let price;
-    Product.findByID(productID, product => {
-        console.log("Item " + product);
-        price = product.price;
-    });
-    Cart.addProduct_toCart(productID, price, qty);
-    console.log(Cart.fetchAllCart());
-    res.redirect('/shop');
+    Product.findById(productId)
+    .then(product => {
+        console.log("Adding item to cart --> " + product);
+        res.redirect('/shop');
+    })
+    .catch(err => {
+        console.log(err);
+    })
+    // Product.findByID(productID, product => {
+    //     console.log("Item " + product);
+    //     price = product.price;
+    // });
+    // Cart.addProduct_toCart(productID, price, qty);
+    // console.log(Cart.fetchAllCart());
+    // res.redirect('/shop');
 }

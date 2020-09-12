@@ -16,6 +16,8 @@ router.post('/add', adminController.postAddProduct);
 // GET ALL PRODUCTS PAGE --> to edit the products
 router.get('/products', adminController.getAdminProducts_Page);
 
+// EDIT PRODUCT PAGE
+router.get('/edit/:productID', adminController.getAdminProduct_editPage)
 
 
 

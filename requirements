@@ -3,3 +3,5 @@ body-parser
 ejs
 nodemon
 uuid
+tailwindcss
+mongodb

@@ -6,6 +6,8 @@ var passport = require("passport");
 var LocalStrategy = require("passport-local");
 var passportLocalMongoose = require("passport-local-mongoose");
 
+const mongoConnect = require('./util/database').mongoConnect;
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
 
@@ -29,9 +31,17 @@ const adminRoute = require('./Routes/admin');
 app.use('/shop/rana_disposal', adminRoute);
 app.use(shopRoutes);
 
-// App listen -------------------------------------
+mongoConnect(() => {
+    
+    // App listen -------------------------------------
+    var PORT = 3000;
+    app.listen(PORT, function() {
+        console.log("Go to port 3000 :)");
+    });
+    
+})
 
-var PORT = 3000;
-app.listen(PORT, function() {
-    console.log("Go to port 3000 :)");
-});
+
+
+
+

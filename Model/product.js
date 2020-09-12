@@ -1,22 +1,10 @@
-var products = [
-    {
-        id: 'df5e647f-0aeb-4f15-9242-d21f5df68c07',
-        name: 'Rahul Rana',
-        price: '11',
-        quantity_price: '22',
-        quantity: '44'
-      },
-      {
-        id: 'c6099354-d91b-4261-8100-da7b15ce71c5',
-        name: 'asas',
-        price: '100',
-        quantity_price: '120',
-        quantity: '150'
-      }
-];
-const { v4: uuidv4 } = require('uuid');
+const mongodb = require('mongodb');
 
-module.exports = class Product {
+//* Reference to our database
+const getDb = require('../util/database').getDb;
+
+//* Product class
+class Product {
     constructor(name, price, quantity_price, quantity) {
         this.name = name;
         this.price = price;
@@ -25,27 +13,56 @@ module.exports = class Product {
         // this.image = product_image;
     }
 
+    //* Create a new Product and add it to our database
     save() {
-        this.id = uuidv4();
-        console.log("Saving Data...");
-        products.push({
-            id: this.id,
-            name: this.name,
-            price: this.price,
-            quantity_price: this.quantity_price,
-            quantity: this.quantity
+        const db = getDb();
+        return db.collection('products')
+        .insertOne(this)
+        .then(result => {
+            console.log(result);
+        })
+        .catch(err => {
+            console.log(err);
+        });
+        // this.id = uuidv4();
+        // console.log("Saving Data...");
+        // products.push({
+        //     id: this.id,
+        //     name: this.name,
+        //     price: this.price,
+        //     quantity_price: this.quantity_price,
+        //     quantity: this.quantity
+        // });
+    }
+
+    //* Return all the products in the database in the form of Array
+    static fetchAll() {
+        const db = getDb();
+        return db.collection('products')
+        .find()
+        .toArray()
+        .then(products => {
+            console.log(products);
+            return products;
+        }).catch(err => {
+            console.log(err);
         });
     }
 
-    static fetchAll() {
-        return products;
-    }
-    static findByID(id, cb) {
-        products.forEach(function (product) {
-            if (product.id === id) {
-                cb(product);
-                return product;
-            }
+    //* Find product by its ID and return a single product
+    static findById(productId) {
+        const db = getDb();
+        return db.collection('products')
+        .find({_id: new mongodb.ObjectID(productId)})
+        .next()
+        .then(product => {
+            console.log("Product Found-->" + product);
+            return product;
+        })
+        .catch(err => {
+            console.log(err);
         })
     }
 }
+
+module.exports = Product;

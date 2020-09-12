@@ -10,7 +10,7 @@
                 <div class="card-body">
                   <h5 class="card-title"><%= prod.name %></h5>
                   <p>Price: <%= prod.price %></p>
-                  <form action="/add-to-cart/<%= prod.id %>">
+                  <form action="/add-to-cart/<%= prod._id %>">
                     <input type="number" min="1" max="<%= prod.quantity %>" value="1" name="quantity">
                     <button class="btn btn-outline-dark">Add to cart</button>
                   </form>
