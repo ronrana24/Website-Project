@@ -6,7 +6,6 @@ exports.getHome_Page = (req, res, next) => {
     res.render('user_stuff/home', {
         pageTitle: 'Rana Disposal\'s',
         path: '/',
-        cart_items: Cart.fetchAllCart().products.length
     });
 };
 
@@ -20,7 +19,6 @@ exports.getShop_page = (req, res, next) => {
             pageTitle: 'Shop',
             path: '/shop',
             products: products,
-            cart_items: Cart.fetchAllCart().products.length
         });
     })
     .catch(err => {
@@ -33,7 +31,6 @@ exports.getContact_Page = (req, res, next) => {
     res.render('user_stuff/contact', {
         pageTitle: 'Contact',
         path: '/contact',
-        cart_items: Cart.fetchAllCart().products.length
     });
 };
 
@@ -41,9 +38,7 @@ exports.getContact_Page = (req, res, next) => {
 exports.getCart_Page = (req, res, next) => {
     res.render('user_stuff/cart', {
         pageTitle: 'Cart',
-        path: '/cart',
-        cart_items: Cart.fetchAllCart().products.length,
-        cart_products: Cart.fetchAllCart()
+        path: '/cart',  
     });
 };
 

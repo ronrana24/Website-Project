@@ -18,6 +18,7 @@ const mongoConnect = callback => {
 
 };
 
+//* This will return the database that we want.
 const getDb = () => {
     if (_db) {
         return _db;

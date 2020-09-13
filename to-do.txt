@@ -1,22 +1,22 @@
-. Make cart work
-. add html to cart and selected items
+. Make cart work    --> DONE
+. add html to cart and selected items   --> DONE
 . add a payment gateway like paytm, googlepay, upi, banktransfer to send money for clients
 . make a seach bar
 . make search bar work to filter items
-. make a shop html to list all the items
-. make a database for all the items in the shop
+. make a shop html to list all the items    --> DONE
+. make a database for all the items in the shop --> DONE
 . add images of each item
 . launch the website
 . make a home page
 . make a contact page
 . make it more for mobile
-. make a chat bot
+. Add notification when order is placed
 
 ADMIN_POWER :-
 . to Add new product with its descprition, name, price and image of the product
 . delete a product
 . see statistics of the shop
-. edit the product
+. edit the product  --> DONE
 
 
 . https://codepen.io/alex_rodrigues/pen/ABGdg

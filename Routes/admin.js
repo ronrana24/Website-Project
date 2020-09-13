@@ -17,7 +17,14 @@ router.post('/add', adminController.postAddProduct);
 router.get('/products', adminController.getAdminProducts_Page);
 
 // EDIT PRODUCT PAGE
-router.get('/edit/:productID', adminController.getAdminProduct_editPage)
+router.get('/edit/:productID', adminController.getAdminProduct_editPage);
+router.post('/edit/:productID', adminController.postAdmin_ModifyProduct);
+
+// DELETE PRODUCT FROM DATABASE
+router.post('/delete/:productID', adminController.deleteAdmin_Product);
+
+//* Admin Home Page
+router.get('/', adminController.getAdminHome_Page);
 
 
 

@@ -5,34 +5,34 @@ const getDb = require('../util/database').getDb;
 
 //* Product class
 class Product {
-    constructor(name, price, quantity_price, quantity) {
+    constructor(name, price, quantity_price, quantity, id) {
         this.name = name;
         this.price = price;
         this.quantity_price = quantity_price
         this.quantity = quantity;
+        this._id = id ? new mongodb.ObjectID(id) : null;
         // this.image = product_image;
     }
 
     //* Create a new Product and add it to our database
     save() {
         const db = getDb();
-        return db.collection('products')
-        .insertOne(this)
+        let dbOp;
+        
+        //* If product id is given then update the given product else make new Product
+        if (this._id) {
+            dbOp = db.collection('products').updateOne({_id: this._id}, { $set: this });
+        } else {
+            dbOp = db.collection('products').insertOne(this);
+        }
+
+        return dbOp
         .then(result => {
             console.log(result);
         })
         .catch(err => {
             console.log(err);
         });
-        // this.id = uuidv4();
-        // console.log("Saving Data...");
-        // products.push({
-        //     id: this.id,
-        //     name: this.name,
-        //     price: this.price,
-        //     quantity_price: this.quantity_price,
-        //     quantity: this.quantity
-        // });
     }
 
     //* Return all the products in the database in the form of Array
@@ -42,6 +42,7 @@ class Product {
         .find()
         .toArray()
         .then(products => {
+            console.log("Fetching All Products in the form of Array:")
             console.log(products);
             return products;
         }).catch(err => {
@@ -62,6 +63,19 @@ class Product {
         .catch(err => {
             console.log(err);
         })
+    }
+
+    static DeleteById(productId) {
+        const db = getDb();
+        return db.collection('products')
+        .deleteOne({_id: new mongodb.ObjectID.ObjectID(productId)})
+        .then(result => {
+            console.log("Product Id -> " + productId + " Deleted!");
+
+        })
+        .catch(err => {
+            console.log(err);
+        });
     }
 }
 

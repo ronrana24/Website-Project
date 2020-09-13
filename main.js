@@ -8,6 +8,8 @@ var passportLocalMongoose = require("passport-local-mongoose");
 
 const mongoConnect = require('./util/database').mongoConnect;
 
+const User = require('./Model/user');
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
 
