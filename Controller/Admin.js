@@ -19,9 +19,15 @@ exports.postAddProduct = (req, res, next) => {
     var price = req.body.price;
     var quantity = req.body.quantity;
     var quantity_price = req.body.quantity_price;
-    const product = new Product(name, price, quantity_price, quantity);
-    product
-    .save().then(result => {
+    const product = new Product({
+        name: name,
+        price: price,
+        quantity_price: quantity_price,
+        quantity: quantity
+    });
+
+    product.save()
+    .then(result => {
         console.log("Product Created");
     })
     .catch(err => {
@@ -31,7 +37,7 @@ exports.postAddProduct = (req, res, next) => {
 }
 
 exports.getAdminProducts_Page = (req, res, next) => {
-    Product.fetchAll()
+    Product.find()
     .then(products => {
         res.render('admin_stuff/admin_products', {
             pageTitle: 'Products',
@@ -86,7 +92,7 @@ exports.getAdminHome_Page = (req, res, next) => {
 exports.deleteAdmin_Product = (req, res, next) => {
     const productId = req.params.productID;
     console.log(productId + " is being deleted!");
-    Product.DeleteById(productId)
+    Product.findOneAndDelete(productId)
     .then(() => {
         console.log("DESTROYED!");
         res.redirect('/shop/rana_disposal/products');
@@ -102,9 +108,17 @@ exports.postAdmin_ModifyProduct = (req, res, next) => {
     const updatedPrice = req.body.price;
     const updatedQuantityPrice = req.body.quantity_price;
     const updatedQuantity = req.body.quantity;
-    const product = new Product(updatedName, updatedPrice, updatedQuantityPrice, updatedQuantity, productId);
-    console.log("Produt is being modified");
-    product.save()
+    
+    //! unable to update the product
+    Product.findById(productId)
+    .then(product => {
+        console.log("Product is being modified --> " + productId);
+        product.name = updatedName;
+        product.price = updatedPrice;
+        product.quantity = updatedQuantity;
+        product.quantity_price = updatedQuantityPrice;
+        return product.save();
+    })
     .then(result => {
         console.log("Updated Product!");
         res.redirect('/shop/rana_disposal/products');

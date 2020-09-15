@@ -5,3 +5,4 @@ nodemon
 uuid
 tailwindcss
 mongodb
+mongoose

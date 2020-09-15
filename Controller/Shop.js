@@ -13,7 +13,7 @@ exports.getHome_Page = (req, res, next) => {
 exports.getShop_page = (req, res, next) => {
 
     //* Show all the products in the database
-    Product.fetchAll()
+    Product.find()
     .then(products=> {
         res.render('user_stuff/shop', {
             pageTitle: 'Shop',
@@ -49,7 +49,8 @@ exports.sendItemToCart = (req, res, next) => {
     let price;
     Product.findById(productId)
     .then(product => {
-        console.log("Adding item to cart --> " + product);
+        console.log("Adding item to cart --> ");
+        console.log(product);
         res.redirect('/shop');
     })
     .catch(err => {

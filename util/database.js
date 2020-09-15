@@ -1,30 +1,30 @@
-//* Reference to mongo database
-const mongodb = require('mongodb');
-const MongoClient = mongodb.MongoClient;
+// //* Reference to mongo database
+// const mongodb = require('mongodb');
+// const MongoClient = mongodb.MongoClient;
 
-let _db;
+// let _db;
 
-const mongoConnect = callback => {
-    MongoClient.connect('mongodb+srv://ronrana:zuLe04F6G9oLri3X@cluster0.xyk0z.gcp.mongodb.net/shop?retryWrites=true&w=majority', {useUnifiedTopology: true})
-    .then(client => {
-    console.log("Connected!");
-    _db = client.db();
-    callback();
-    })
-    .catch(err => {
-        console.log(err);
-        throw err;
-    })
+// const mongoConnect = callback => {
+//     MongoClient.connect('mongodb+srv://ronrana:zuLe04F6G9oLri3X@cluster0.xyk0z.gcp.mongodb.net/RanaDisposal?retryWrites=true&w=majority', {useUnifiedTopology: true})
+//     .then(client => {
+//     console.log("Connected!");
+//     _db = client.db();
+//     callback();
+//     })
+//     .catch(err => {
+//         console.log(err);
+//         throw err;
+//     })
 
-};
+// };
 
-//* This will return the database that we want.
-const getDb = () => {
-    if (_db) {
-        return _db;
-    }
-    throw "No DataBase Found!";
-}
+// //* This will return the database that we want.
+// const getDb = () => {
+//     if (_db) {
+//         return _db;
+//     }
+//     throw "No DataBase Found!";
+// }
 
-exports.mongoConnect = mongoConnect;
-exports.getDb = getDb;
+// exports.mongoConnect = mongoConnect;
+// exports.getDb = getDb;

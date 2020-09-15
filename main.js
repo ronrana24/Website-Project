@@ -8,6 +8,7 @@ var passportLocalMongoose = require("passport-local-mongoose");
 
 const mongoConnect = require('./util/database').mongoConnect;
 
+
 const User = require('./Model/user');
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -26,21 +27,28 @@ app.set('views', 'views');
 // Shop Route
 const shopRoutes = require('./Routes/shop');
 // Administrator Route
-const adminRoute = require('./Routes/admin');
+const adminRoutes = require('./Routes/admin');
+// Authentication Route
+const authRoutes = require('./Routes/auth');
 
 // SERVER TO HANDLE ROUTES ------------------------------------
 
-app.use('/shop/rana_disposal', adminRoute);
+app.use('/shop/rana_disposal', adminRoutes);
 app.use(shopRoutes);
+app.use(authRoutes);
 
-mongoConnect(() => {
-    
+mongoose.connect('mongodb+srv://ronrana:zuLe04F6G9oLri3X@cluster0.xyk0z.gcp.mongodb.net/RanaDisposal?retryWrites=true&w=majority',
+{ useNewUrlParser: true, useUnifiedTopology: true})
+.then(result => {
+    console.log("Database Connected!");
     // App listen -------------------------------------
     var PORT = 3000;
     app.listen(PORT, function() {
         console.log("Go to port 3000 :)");
     });
-    
+})
+.catch(err => {
+    console.log(err);
 })
 
 
