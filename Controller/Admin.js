@@ -85,13 +85,6 @@ exports.getAdminProduct_editPage = (req, res, next) => {
     // console.log(id + " is now being edited");
 }
 
-exports.getAdminHome_Page = (req, res, next) => {
-    res.render('user_stuff/login', {
-        pageTitle: 'Admin Home',
-        path: '/shop/rana_disposal'
-    });
-}
-
 exports.deleteAdmin_Product = (req, res, next) => {
     const productId = req.params.productID;
     console.log(productId + " is being deleted!");
@@ -127,5 +120,14 @@ exports.postAdmin_ModifyProduct = (req, res, next) => {
     })
     .catch(err => {
         console.log(err);
+    });
+}
+
+exports.getAdminHome_Page = (req, res, next) => {
+    console.log("Welcome --> " + req.session.flash.name[0] + " To admin page");
+    res.render('admin_stuff/admin_home', {
+        pageTitle: 'Admin Home',
+        path: '/shop/rana_disposal',
+        name: req.session.flash.name[0]
     });
 }

@@ -1,16 +1,14 @@
-var express = require("express");
-var app = express();
-var bodyParser = require("body-parser");
-var mongoose = require("mongoose");
-var passport = require("passport");
-var LocalStrategy = require("passport-local");
-var passportLocalMongoose = require("passport-local-mongoose");
+// All the Fuctionalities -----------------------------------
+const express = require("express");
+const app = express();
+const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
-
 const csrf = require('csurf');
 const flash = require('connect-flash');
 
+// My database URL--------------------------------
 const MONGODB_URI = 'mongodb+srv://ronrana:zuLe04F6G9oLri3X@cluster0.xyk0z.gcp.mongodb.net/RanaDisposal?retryWrites=true&w=majority';
 
 
@@ -18,8 +16,6 @@ const store = new MongoDBStore({
     uri: MONGODB_URI,
     collection: 'sessions'
 });
-
-const mongoConnect = require('./util/database').mongoConnect;
 
 const csrfProtection = csrf();
 
@@ -35,24 +31,24 @@ app.use(session({
     })
 );
 
+// to add CSRF Protection / to stop the steeling of the my sessions   
 app.use(csrfProtection);
 
+// to add message to font-end side 
 app.use(flash());
-
 
 // this will serve the content of public folder
 app.use(express.static("public"));
 
 // viewing ejs file without extension
 app.set("view engine", "ejs");
-
 app.set('views', 'views');
 
-
+// local variable for all the views to protect steeling my sessions--------------------
 app.use((req, res, next) => {
     res.locals.csrfToken = req.csrfToken();
     next();
-})
+});
 
 // ROUTES VARIABLES -------------------------------
 
@@ -64,15 +60,16 @@ const adminRoutes = require('./Routes/admin');
 const authRoutes = require('./Routes/auth');
 
 // SERVER TO HANDLE ROUTES ------------------------------------
-
 app.use('/shop/rana_disposal', adminRoutes);
 app.use(authRoutes);
 app.use(shopRoutes);
 
+// Coonecting to mongoose Database i.e. --> RanaDisposal --------------------------
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true})
 .then(result => {
     console.log("Database Connected!");
-    // App listen -------------------------------------
+
+    // App listen
     var PORT = 3000;
     app.listen(PORT, function() {
         console.log("Go to port 3000 :)");
@@ -80,7 +77,12 @@ mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true}
 })
 .catch(err => {
     console.log(err);
-})
+});
+
+
+
+
+
 
 
 //! ADMIN PASSWORD IS 

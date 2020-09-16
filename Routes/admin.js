@@ -25,7 +25,7 @@ router.post('/edit/:productID', isAuth, adminController.postAdmin_ModifyProduct)
 // DELETE PRODUCT FROM DATABASE
 router.post('/delete/:productID', isAuth, adminController.deleteAdmin_Product);
 
-//* Admin Home Page
+// Admin Home Page
 router.get('/', isAuth, adminController.getAdminHome_Page);
 
 

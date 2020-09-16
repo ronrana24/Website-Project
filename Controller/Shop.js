@@ -56,11 +56,4 @@ exports.sendItemToCart = (req, res, next) => {
     .catch(err => {
         console.log(err);
     })
-    // Product.findByID(productID, product => {
-    //     console.log("Item " + product);
-    //     price = product.price;
-    // });
-    // Cart.addProduct_toCart(productID, price, qty);
-    // console.log(Cart.fetchAllCart());
-    // res.redirect('/shop');
 }
