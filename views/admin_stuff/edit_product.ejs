@@ -6,6 +6,7 @@
     <%- include('../Includes/admin_navigation_bar.ejs') %> 
     <h1>EDIT PRODUCT</h1>
     <form action="/shop/rana_disposal/edit/<%= id %>" method="POST">
+        <input type="hidden" value="<%= csrfToken %>" name="_csrf">
         <div class="form-group">
             <label for="name">Name</label>
             <input type="text" name="name" placeholder="Enter Product Name" value="<%= name %>">

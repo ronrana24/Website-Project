@@ -14,6 +14,7 @@
                   <h5 class="card-title"><%= prod.name %></h5>
                   <a href="/shop/rana_disposal/edit/<%= prod._id %>">Edit</a>
                   <form action="/shop/rana_disposal/delete/<%= prod._id %>" method="POST">
+                    <input type="hidden" value="<%= csrfToken %>" name="_csrf">
                     <button class="btn" type="submit">Delete</button>
                   </form>
                 </div>

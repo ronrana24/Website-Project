@@ -8,6 +8,7 @@
     <h1>Add Product</h1>
     <form action="/shop/rana_disposal/add" method="POST">
         <div class="form-group">
+            <input type="hidden" value="<%= csrfToken %>" name="_csrf">
             <label for="name">Name</label>
             <input type="text" name="name" placeholder="Enter Product Name">
             <label for="price">Price</label>
@@ -16,6 +17,21 @@
             <input type="number" name="quantity_price" placeholder="Enter Product's Price">
             <label for="quantity">Quantity</label>
             <input type="number" name="quantity" placeholder="Enter Product's Quantity">
+            <br>
+            <label class="mr-sm-2" for="inlineFormCustomSelect">Product Type</label>
+            <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="option">
+                <option selected>Choose...</option>
+                <option value="carry_bag">Carry Bag</option>
+                <option value="plastic_glass">Plastic Glass</option>
+                <option value="paper_glass">Paper Glass</option>
+                <option value="thermacol_plate">Thermacol Plate</option>
+                <option value="paper_plate">Paper Plate</option>
+                <option value="birthday_cap">Birthday Cap</option>
+                <option value="balloon">Balloon</option>
+                <option value="birthday_decoration">Birthday Decoration</option>
+                <option value="donna">Donna</option>
+                <option value="plastic spoon">plastic spoon</option>
+            </select>
         <!-- Choose a product image -->
         <div class="custom-file">
             <input type="file" class="custom-file-input" id="customFile">

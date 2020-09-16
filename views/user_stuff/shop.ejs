@@ -1,7 +1,8 @@
 <%- include ('../Includes/header'); -%> 
 
 <body>
-    <%- include ('../Includes/navigation_bar'); -%> 
+    <%- include ('../Includes/navigation_bar'); -%>
+    <%- include ('../Includes/search_bar') %> 
     <h1>Shop</h1>
     <% if (products.length > 0) { %>
         <% products.forEach(function (prod) { %>
@@ -11,6 +12,7 @@
                   <h5 class="card-title"><%= prod.name %></h5>
                   <p>Price: <%= prod.price %></p>
                   <form action="/add-to-cart/<%= prod._id %>">
+                    <input type="hidden" value="<%= csrfToken %>" name="_csrf">
                     <input type="number" min="1" max="<%= prod.quantity %>" value="1" name="quantity">
                     <button class="btn btn-outline-dark">Add to cart</button>
                   </form>

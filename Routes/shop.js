@@ -2,7 +2,6 @@ const shopController = require('../Controller/Shop');
 const errorController = require('../Controller/Error');
 
 const express = require('express');
-const { route } = require('./admin');
 
 // Router variable to route us to different routes
 const router = express.Router();

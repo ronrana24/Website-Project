@@ -6,3 +6,10 @@ uuid
 tailwindcss
 mongodb
 mongoose
+express-session
+connect-mongodb-session
+bcryptjs
+csurf
+connect-flash
+nodemailer
+nodemailer-sendgrid-transport

@@ -15,15 +15,18 @@ exports.getAddProduct_Page = (req, res, next) => {
 };
 
 exports.postAddProduct = (req, res, next) => {
+    console.log(req.body.option);
     var name = req.body.name;
     var price = req.body.price;
     var quantity = req.body.quantity;
     var quantity_price = req.body.quantity_price;
+    var product_type = req.body.option;
     const product = new Product({
         name: name,
         price: price,
         quantity_price: quantity_price,
-        quantity: quantity
+        quantity: quantity,
+        product_type: product_type
     });
 
     product.save()
@@ -109,7 +112,6 @@ exports.postAdmin_ModifyProduct = (req, res, next) => {
     const updatedQuantityPrice = req.body.quantity_price;
     const updatedQuantity = req.body.quantity;
     
-    //! unable to update the product
     Product.findById(productId)
     .then(product => {
         console.log("Product is being modified --> " + productId);
