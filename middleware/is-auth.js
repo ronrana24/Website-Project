@@ -2,7 +2,7 @@
 
 module.exports = (req, res, next) => {
     if (!req.session.isLoggedIn) {
-        return res.render('/login/rana_disposal');
+        return res.redirect('/login/shop/rana_disposal');
     }
     next();
 }

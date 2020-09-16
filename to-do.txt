@@ -1,5 +1,5 @@
-. Make cart work    --> DONE
-. add html to cart and selected items   --> DONE
+. Make cart work    
+. add html to cart and selected items  
 . add a payment gateway like paytm, googlepay, upi, banktransfer to send money for clients
 . make a seach bar
 . make search bar work to filter items
@@ -13,7 +13,7 @@
 . Add notification when order is placed
 
 ADMIN_POWER :-
-. to Add new product with its descprition, name, price and image of the product
+. to Add new product with its descprition, name, price and image of the product --> DONE
 . delete a product
 . see statistics of the shop
 . edit the product  --> DONE

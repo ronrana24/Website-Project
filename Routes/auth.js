@@ -4,6 +4,8 @@ const router = express.Router();
 
 const authController = require('../Controller/Auth');
 
+const { check } = require('express-validator/check');
+
 // ROUTES ---------------------------------------------------------------
 
 // Route to get the login form for the admin

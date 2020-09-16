@@ -2,6 +2,8 @@ const bcrypt = require('bcryptjs');
 
 const Admin = require("../Model/administrative");
 
+const { validationResult } = require('express-validator/check');
+
 exports.getLogin_page = (req, res, next) => {
     console.log("Checking if the user exist or not...");
     console.log(req.session);

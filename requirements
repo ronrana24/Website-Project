@@ -13,3 +13,4 @@ csurf
 connect-flash
 nodemailer
 nodemailer-sendgrid-transport
+express-validator
