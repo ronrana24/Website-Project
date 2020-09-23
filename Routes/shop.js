@@ -22,6 +22,13 @@ router.get('/cart', shopController.getCart_Page);
 // GET ITEM TO CART --> /add-to-cart/:productId
 router.get('/add-to-cart/:productID', shopController.sendItemToCart);
 
+router.get('/cart/rana_disposal/user_info', shopController.getUserInfo_Page);
+router.post('/cart/rana_disposal/user_info', shopController.postUserInfo);
+
+router.get('/cart/rana_disposal/checkout/:sessionId', shopController.getCheckout_Page);
+
+// router.post('/cart/rana_disposal/checkout', shopController.postCheckout);
+
 // ERROR ROUTE--> IF OTHER THAN THE ABOVE ROUTES ARE REQUESTED
 router.get('*', errorController.get404Error_Page);
 

@@ -1,43 +1,47 @@
 <%- include('../Includes/header.ejs') %> 
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
 </head>
 
 <body>
     <%- include('../Includes/admin_navigation_bar.ejs') %> 
 
-    <h1>Add Product</h1>
-    <form action="/shop/rana_disposal/add" method="POST">
-        <div class="form-group">
-            <input type="hidden" value="<%= csrfToken %>" name="_csrf">
-            <label for="name">Name</label>
-            <input type="text" name="name" placeholder="Enter Product Name">
-            <label for="price">Price</label>
-            <input type="number" name="price" placeholder="Enter Product's Price">
-            <label for="price">Quantity Price</label>
-            <input type="number" name="quantity_price" placeholder="Enter Product's Price">
-            <label for="quantity">Quantity</label>
-            <input type="number" name="quantity" placeholder="Enter Product's Quantity">
-            <br>
-            <label class="mr-sm-2" for="inlineFormCustomSelect">Product Type</label>
-            <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="option">
-                <option selected>Choose...</option>
-                <option value="carry_bag">Carry Bag</option>
-                <option value="plastic_glass">Plastic Glass</option>
-                <option value="paper_glass">Paper Glass</option>
-                <option value="thermacol_plate">Thermacol Plate</option>
-                <option value="paper_plate">Paper Plate</option>
-                <option value="birthday_cap">Birthday Cap</option>
-                <option value="balloon">Balloon</option>
-                <option value="birthday_decoration">Birthday Decoration</option>
-                <option value="donna">Donna</option>
-                <option value="plastic spoon">plastic spoon</option>
-            </select>
-        <!-- Choose a product image -->
-        <div class="custom-file">
-            <input type="file" class="custom-file-input" id="customFile">
-            <label class="custom-file-label" for="customFile">Choose file</label>
-          </div>
-        <button class="btn btn-outline-dark">Add</button>
-    </form>
+    <div class="container">
+        <h1>Add Product</h1>
+        <form action="/shop/rana_disposal/add" method="POST">
+            <div class="form-group">
+                <input type="hidden" value="<%= csrfToken %>" name="_csrf">
+
+                <label for="name">Name</label>
+                <input type="text" name="name" placeholder="Enter Product Name"><br>
+                <label for="price">Price</label>
+                <input type="number" name="price" placeholder="Enter Product's Price"><br>
+                <label for="price">Quantity Price</label>
+                <input type="number" name="quantity_price" placeholder="Enter Product's Price"><br>
+                <label for="quantity">Quantity</label>
+                <input type="number" name="quantity" placeholder="Enter Product's Quantity">
+                <br>
+                <label class="mr-sm-2" for="inlineFormCustomSelect">Product Type</label>
+                <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="option">
+                    <option selected>Choose...</option>
+                    <option value="carry_bag">Carry Bag</option>
+                    <option value="plastic_glass">Plastic Glass</option>
+                    <option value="paper_glass">Paper Glass</option>
+                    <option value="thermacol_plate">Thermacol Plate</option>
+                    <option value="paper_plate">Paper Plate</option>
+                    <option value="birthday_cap">Birthday Cap</option>
+                    <option value="balloon">Balloon</option>
+                    <option value="birthday_decoration">Birthday Decoration</option>
+                    <option value="donna">Donna</option>
+                    <option value="plastic spoon">plastic spoon</option>
+                </select>
+            <!-- Choose a product image -->
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="customFile">
+                <label class="custom-file-label" for="customFile">Choose file</label>
+            </div>
+            <button class="btn btn-outline-dark">Add</button>
+        </form>
+    </div>
     
 <%- include('../Includes/footer.ejs') %> 

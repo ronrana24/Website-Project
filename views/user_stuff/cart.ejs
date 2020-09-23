@@ -1,9 +1,118 @@
-<%- include('../Includes/header.ejs') %> 
+<%- include('../Includes/header.ejs') %>
+
+<link rel="stylesheet" type="text/css" href="/css/cart.css">
 
 </head>
 
 <body>
-    <%- include('../Includes/navigation_bar.ejs') %> 
-    <h1>Cart Page</h1>
-    <!-- TODO: Show cart items here with total price, item name, item image, item qty, item price of this qty --> 
-<%- include('../Includes/footer.ejs') %> 
+    <%- include('../Includes/navigation_bar.ejs') %>
+
+    <main class="main-content" role="main">
+        <div class="wrapper">
+            <div class="grid">
+                <div class="grid__item large--five-sixths push--large--one-twelfth">
+                    <header class="section-header text-center">
+                        <h1 class="text-center">Your cart</h1>
+                        <hr class="hr--small">
+                    </header>
+                    <form action="/cart" method="post" novalidate="" class="cart">
+                        <div class="cart__row medium-down--hide cart__header-labels">
+                            <div class="grid--full">
+                                <div class="grid__item large--two-fifths push--large--three-fifths">
+                                    <div class="grid--full">
+                                        <div class="grid__item one-third medium-down--half text-center">
+                                            Quantity
+                                        </div>
+                                        <div class="grid__item two-thirds medium-down--half text-right">
+                                            Total
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cart__row">
+                            <div class="grid--full cart__row--table-large">
+
+                                <div class="grid__item large--three-fifths">
+                                    <div class="grid">
+
+                                        <div class="grid__item one-third">
+                                            <a href="/collections/all/products/cairn-tote?variant=29013902065686"
+                                                class="cart__image">
+                                                <img src="https://images.unsplash.com/photo-1600372774086-aae8c8585e3b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="Cairn tote">
+                                            </a>
+                                        </div>
+                                        <div class="grid__item two-thirds">
+                                            <a href="/products/cairn-tote?variant=29013902065686" class="h4 cart__product-name">
+                                                Cairn tote
+                                            </a>
+                                            <p class="cart__product-meta">
+                                                <a href="/cart/change?line=1&amp;quantity=0">
+                                                    Remove
+                                                </a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="grid__item large--two-fifths cart__pricing">
+                                    <div class="grid--full cart__row--table">
+                                        <div class="grid__item one-third text-center">
+                                            <label for="updates_29013902065686:fb488cacbd2860de18be16b073691707"
+                                                class="visually-hidden">Quantity</label>
+                                            <div class="js-qty">
+                                                <button type="button"
+                                                    class="js-qty__adjust js-qty__adjust--minus icon-fallback-text"
+                                                    data-id="29013902065686:fb488cacbd2860de18be16b073691707"
+                                                    data-qty="2" aria-label="Reduce item quantity by one">
+                                                    <span class="quantity_inc_dec" aria-hidden="true">−</span>
+                                                </button>
+                                                <input type="text" class="js-qty__num" value="3" min="1"
+                                                    data-id="29013902065686:fb488cacbd2860de18be16b073691707"
+                                                    aria-label="quantity" pattern="[0-9]*" name="updates[]"
+                                                    id="updates_29013902065686:fb488cacbd2860de18be16b073691707">
+                                                <button type="button"
+                                                    class="js-qty__adjust js-qty__adjust--plus icon-fallback-text"
+                                                    data-id="29013902065686:fb488cacbd2860de18be16b073691707"
+                                                    data-qty="31" aria-label="Increase item quantity by one">
+                                                    <span class="quantity_inc_dec" aria-hidden="true">+</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="grid__item two-thirds text-right">
+                                            <span class="cart__price">&#8360; 234.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cart__row cart__row--last">
+                            <div class="grid--full cart__row--table-large">
+                                <div class="grid__item large--five-twelfths text-center large--text-right push--large--seven-twelfths">
+                                    <div class="grid--full cart__row--table">
+                                        <div class="grid__item one-half large--two-thirds large--text-center">
+                                            <p class="cart__subtotal">Subtotal</p>
+                                        </div>
+                                        <div class="grid__item one-half large--one-third">
+                                            <p class="cart__subtotal">&#8360; 234.00</p>
+                                        </div>
+                                    </div>
+                                    <button type="submit" name="update" class="btn--secondary update-cart">
+                                        Update Cart
+                                    </button>
+                                    <button type="submit" name="checkout" class="btn cart__checkout">
+                                        Check Out 
+                                        <span class="icon icon-arrow-right" aria-hidden="true">&#8594;</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <form action="/cart/rana_disposal/user_info" method="GET">
+        <button class="btn btn-outline-dark">Countinue</button>
+    </form>
+    <%- include('../Includes/footer.ejs') %>

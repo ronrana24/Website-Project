@@ -2,7 +2,7 @@ const bcrypt = require('bcryptjs');
 
 const Admin = require("../Model/administrative");
 
-const { validationResult } = require('express-validator/check');
+const { validationResult } = require('express-validator');
 
 exports.getLogin_page = (req, res, next) => {
     console.log("Checking if the user exist or not...");
@@ -22,11 +22,6 @@ exports.postLogin = (req, res, next) => {
     const name = req.body.name;
     Admin.findById("5f62047ac2be48511ca9d9a8")
     .then(adminUser => {
-        if(!adminUser) {
-            console.log("Not an Admin User");
-            req.flash('error', 'Invalid User');
-            return res.redirect('/');
-        }
         bcrypt.compare(password, adminUser.password)
         .then(result => {
             if (!result) {
