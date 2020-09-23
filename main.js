@@ -47,6 +47,7 @@ app.set('views', 'views');
 // local variable for all the views to protect steeling my sessions--------------------
 app.use((req, res, next) => {
     res.locals.csrfToken = req.csrfToken();
+    res.locals.cartItems = req.session.cart ? req.session.cart.items.length : 0;
     next();
 });
 

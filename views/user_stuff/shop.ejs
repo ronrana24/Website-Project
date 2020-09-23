@@ -6,23 +6,23 @@
     <h1>Shop</h1>
     <% if (products.length > 0) { %>
       <ul class="product_list_layout">
-        <% products.forEach(function (prod) { %>
+        <% for(var i=0;i<products.length;i++) { %>
           <li class="product_list_item">
             <div class="product_item_layout">
                 <div class="product_image_layout">
                     <div class="product_image">
-                        <img src="https://images.unsplash.com/photo-1600372774086-aae8c8585e3b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="<%= prod.name %>">
+                        <img src="https://images.unsplash.com/photo-1600372774086-aae8c8585e3b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="<%= products[i].name %>">
                     </div>
                 </div>
                 <div class="product_item_details">
-                    <span><%= prod.name %></span>
+                    <span><%= products[i].name %></span>
                     <div class="product_price">
-                        <span class="price" id="price">Rs. <%= prod.price %></span>
+                        <span class="price">Rs. <%= products[i].price %></span>
                     </div>
                 </div>
-                <form action="/add-to-cart/<%= prod._id %>" method="GET">
+                <form action="/add-to-cart/<%= products[i]._id %>" method="GET">
                     <div class="product_quantity_layout">
-                        <button class="product_quantity_add_remove increase_quantity" aria-label="Add Quantity" id="add" type="button" onclick="increment_value(prod._id)">
+                        <button class="product_quantity_add_remove increase_quantity" type="button" onclick="increment_value(<%- i %>, <%- products[i].quantity_price %>)">
                             <svg width="12" height="12" viewBox="0 0 12 12">
                                 <path d="M6.5 5.5H12v1H6.5V12h-1V6.5H0v-1h5.5V0h1v5.5z" fill="#000" fill-rule="evenodd">
                                 </path>
@@ -30,10 +30,10 @@
                         </button>
                         <div class="product_quantity">
                             <div class="product_input">
-                                <input aria-label="Quantity" type="number" min="1" max="<%= prod.quantity %>" step="1" value="1" name="quantity" class="input">
+                                <input aria-label="Quantity" type="number" min="1" max="<%= products[i].quantity %>" step="1" value="1" name="quantity" class="input">
                             </div>
                         </div>
-                        <button class="product_quantity_add_remove decrease_quantity" aria-label="Remove Quantity" id="remove" type="button">
+                        <button class="product_quantity_add_remove decrease_quantity" type="button" onclick="decrement_value(<%- i %>)" class="decrement_button">
                             <svg width="12" height="2" viewBox="0 0 12 2">
                                 <path d="M0 1.5v-1h12v1z" fill="#000" fill-rule="evenodd" class="decrease_quantity_path"></path>
                             </svg>
@@ -46,8 +46,11 @@
                 </form>
             </div>
         </li>
-        <% }); %> 
+        <% } %> 
       </ul>
     <% } %>
+
+
+    <script type="text/javascript" src="/javascript/shop_functionality.js"></script>
 
 <%- include ('../Includes/footer'); -%>   

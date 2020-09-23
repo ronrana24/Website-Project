@@ -450,3 +450,7 @@ input, textarea, select {
         margin-top: 30px;
     }
 }
+.cart--empty-message {
+    margin: 0 0 15px 0;
+    text-rendering: optimizeLegibility;
+}
