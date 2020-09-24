@@ -124,10 +124,10 @@ exports.postAdmin_ModifyProduct = (req, res, next) => {
 }
 
 exports.getAdminHome_Page = (req, res, next) => {
-    console.log("Welcome --> " + req.session.flash.name[0] + " To admin page");
+    console.log("Welcome --> " + req.session.adminUserName + " To admin page");
     res.render('admin_stuff/admin_home', {
         pageTitle: 'Admin Home',
         path: '/shop/rana_disposal',
-        name: req.session.flash.name[0]
+        name: req.session.adminUserName
     });
 }

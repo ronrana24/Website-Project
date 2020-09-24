@@ -12,8 +12,8 @@
         <h2 class="active"> Sign In </h2>
         <form action="/login/shop/rana_disposal" method="POST">
           <input type="hidden" value="<%= csrfToken %>" name="_csrf">
-          <input type="text" id="login" class="fadeIn second" name="name" placeholder="name">
-          <input type="password" id="password" class="fadeIn third" name="passwor" placeholder="password">
+          <input type="text" id="login" class="fadeIn second" name="name" placeholder="name" required>
+          <input type="password" id="password" class="fadeIn third" name="password" placeholder="password" required>
           <input type="submit" class="fadeIn fourth" value="Log In">
         </form>
       </div>

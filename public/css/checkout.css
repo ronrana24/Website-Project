@@ -1136,3 +1136,6 @@ td, th {
 td:last-child, th:last-child {
     text-align: right;
 }
+.float {
+    float: left;
+}

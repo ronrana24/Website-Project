@@ -3,6 +3,8 @@ const errorController = require('../Controller/Error');
 
 const express = require('express');
 
+const check_cart = require('../middleware/check-cart');
+
 // Router variable to route us to different routes
 const router = express.Router();
 
@@ -22,7 +24,8 @@ router.get('/cart', shopController.getCart_Page);
 // GET ITEM TO CART --> /add-to-cart/:productId
 router.get('/add-to-cart/:productID', shopController.sendItemToCart);
 
-router.get('/cart/rana_disposal/user_info', shopController.getUserInfo_Page);
+// Redirect if cart does not exist to prevent bogus orders
+router.get('/cart/rana_disposal/user_info', check_cart, shopController.getUserInfo_Page);
 router.post('/cart/rana_disposal/user_info', shopController.postUserInfo);
 
 router.get('/cart/rana_disposal/checkout/:sessionId', shopController.getCheckout_Page);

@@ -19,29 +19,29 @@
                         <% } %> 
                     </header>
                     <% if (cartLength > 0) { %> 
-                        <% cart.items.forEach((item) => { %> 
-                            <form action="/cart/rana_disposal/user_info" method="POST" class="cart">
-                                <div class="cart__row medium-down--hide cart__header-labels">
-                                    <div class="grid--full">
-                                        <div class="grid__item large--two-fifths push--large--three-fifths">
-                                            <div class="grid--full">
-                                                <div class="grid__item one-third medium-down--half text-center">
-                                                    Quantity
-                                                </div>
-                                                <div class="grid__item two-thirds medium-down--half text-right">
-                                                    Total
-                                                </div>
+                        <form action="/cart/rana_disposal/user_info" method="GET" class="cart">
+                            <div class="cart__row medium-down--hide cart__header-labels">
+                                <div class="grid--full">
+                                    <div class="grid__item large--two-fifths push--large--three-fifths">
+                                        <div class="grid--full">
+                                            <div class="grid__item one-third medium-down--half text-center">
+                                                Quantity
+                                            </div>
+                                            <div class="grid__item two-thirds medium-down--half text-right">
+                                                Total
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                            <% cart.items.forEach((item) => { %>
                                 <div class="cart__row">
                                     <div class="grid--full cart__row--table-large">
                                         <div class="grid__item large--three-fifths">
                                             <div class="grid">
                                                 <div class="grid__item one-third">
                                                     <a href="#" class="cart__image">
-                                                        <img src="https://images.unsplash.com/photo-1600372774086-aae8c8585e3b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="Cairn tote">
+                                                        <img src="https://images.unsplash.com/photo-1600372774086-aae8c8585e3b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="<%= item.name %>">
                                                     </a>
                                                 </div>
                                                 <div class="grid__item two-thirds">
@@ -87,37 +87,37 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="cart__row cart__row--last">
-                                    <div class="grid--full cart__row--table-large">
-                                        <div class="grid__item large--five-twelfths text-center large--text-right push--large--seven-twelfths">
-                                            <div class="grid--full cart__row--table">
-                                                <div class="grid__item one-half large--two-thirds large--text-center">
-                                                    <p class="cart__subtotal">Subtotal</p>
-                                                </div>
-                                                <div class="grid__item one-half large--one-third">
-                                                    <p class="cart__subtotal">&#8360; <%= cart.totalPrice %> </p>
-                                                </div>
+                            <% }); %>
+                            <div class="cart__row cart__row--last">
+                                <div class="grid--full cart__row--table-large">
+                                    <div class="grid__item large--five-twelfths text-center large--text-right push--large--seven-twelfths">
+                                        <div class="grid--full cart__row--table">
+                                            <div class="grid__item one-half large--two-thirds large--text-center">
+                                                <p class="cart__subtotal">Subtotal</p>
                                             </div>
-                                            <button type="submit" name="update" class="btn--secondary update-cart">
-                                                Update Cart
-                                            </button>
-                                            <button type="submit" name="checkout" class="btn cart__checkout">
-                                                Check Out 
-                                                <span class="icon icon-arrow-right" aria-hidden="true">&#8594;</span>
-                                            </button>
+                                            <div class="grid__item one-half large--one-third">
+                                                <p class="cart__subtotal">&#8360; <%= cart.totalPrice %> </p>
+                                            </div>
                                         </div>
+                                        <button type="submit" name="update" class="btn--secondary update-cart">
+                                            Update Cart
+                                        </button>
+                                        <button type="submit" name="checkout" class="btn cart__checkout">
+                                            Check Out 
+                                            <span class="icon icon-arrow-right" aria-hidden="true">&#8594;</span>
+                                        </button>
                                     </div>
                                 </div>
-                                <input type="hidden" value="<%= csrfToken %>" name="_csrf">
-                            </form>
-                        <% }); %> 
+                            </div>
+                            <!-- <input type="hidden" value="<%= csrfToken %>" name="_csrf"> -->
+                        </form> 
                     <% } %> 
                 </div>
             </div>
         </div>
     </main>
 
-    <form action="/cart/rana_disposal/user_info" method="GET">
+    <!-- <form action="/cart/rana_disposal/user_info" method="GET">
         <button class="btn btn-outline-dark">Countinue</button>
-    </form>
+    </form> -->
     <%- include('../Includes/footer.ejs') %>

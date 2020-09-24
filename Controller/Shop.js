@@ -18,7 +18,6 @@ exports.getShop_page = (req, res, next) => {
     Product.find()
     .then(products=> {
         console.log("Products Recevied --> ");
-        console.log(products);
         res.render('user_stuff/shop', {
             pageTitle: 'Shop',
             path: '/shop',
@@ -46,7 +45,13 @@ exports.sendItemToCart = (req, res, next) => {
     Product.findById(productId)
     .then(product => {
         const productName = product.name;
-        const price = parseInt(product.price);
+        let price;
+        // threshold quantity
+        if (qty >= 10) {
+            price = parseInt(product.quantity_price);
+        } else {
+            price = parseInt(product.price);
+        } 
         console.log("Adding item to cart --> ");
         cart.add(productId, price, qty, productName);
         req.session.cart = cart
@@ -69,19 +74,23 @@ exports.getCart_Page = (req, res, next) => {
 };
 
 exports.getUserInfo_Page = (req, res, next) => {
-    res.render('user_stuff/checkout', {
-        pageTitle: "User Info",
-        path: '/cart/rana_disposal/user_info'
-    });
+    if(req.query.checkout === '') {
+        res.render('user_stuff/checkout', {
+            pageTitle: "User Info",
+            path: '/cart/rana_disposal/user_info'
+        });
+    } else {
+        res.redirect('/shop');
+    }
 };
 
 exports.postUserInfo = (req, res, next) => {
-    const update_cart = req.body.update;
-    const checkout = req.body.checkout;
-    if (update_cart) {
-       return res.redirect('/');
-    }
-    res.redirect('/cart/rana_disposal/user_info');
+    // const update_cart = req.body.update;
+    // const checkout = req.body.checkout;
+    // if (update_cart) {
+    //    return res.redirect('/');
+    // }
+    // res.redirect('/cart/rana_disposal/user_info');
     // const name = req.body.name;
     // const phonenumber = req.body.phonenumber;
     // const address = req.body.address;
@@ -102,10 +111,7 @@ exports.postUserInfo = (req, res, next) => {
 exports.getCheckout_Page = (req, res, next) => {
     res.render('user_stuff/checkout', {
         pageTitle: "Checkout",
-        path: '/cart/rana_disposal/checkout/:sessionId'
+        path: '/cart/rana_disposal/checkout/:sessionId',
+        cartItem: req.session.cart
     });
 };
-
-// exports.postCheckout = (req, res, next) => {
-//     console.log("Session")
-// }

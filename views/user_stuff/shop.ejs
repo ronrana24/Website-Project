@@ -1,11 +1,22 @@
 <%- include ('../Includes/header'); -%> 
 <link rel="stylesheet" href="/css/shop.css" type="text/css">
+<link rel="stylesheet" href="/css/searchbar.css" type="text/css">
 
 <body>
     <%- include ('../Includes/navigation_bar'); -%>
-    <h1>Shop</h1>
+    <!-- <h6 class="shop_heading" style="text-align:center;font-size:23px">
+        <span class="shop_heading_1">
+            <span style="letter-spacing:0.1em;">
+                Shop
+            </span>
+        </span>
+    </h6> -->
+    <div class="search_container">
+        <input id="bar" class="searchbar" type="text" placeholder="Search..." onkeyup="searchFunction()" name="search">
+        <a id="btnSearch" class="btn-search"><i class="fa fa-search"></i></a>
+      </div>
     <% if (products.length > 0) { %>
-      <ul class="product_list_layout">
+      <ul class="product_list_layout" id="list_of_products">
         <% for(var i=0;i<products.length;i++) { %>
           <li class="product_list_item">
             <div class="product_item_layout">
@@ -15,7 +26,7 @@
                     </div>
                 </div>
                 <div class="product_item_details">
-                    <span><%= products[i].name %></span>
+                    <span class="product_name"><%= products[i].name %></span>
                     <div class="product_price">
                         <span class="price">Rs. <%= products[i].price %></span>
                     </div>
@@ -52,5 +63,6 @@
 
 
     <script type="text/javascript" src="/javascript/shop_functionality.js"></script>
+    <script  type="text/javascript" src="/javascript/searchbar_func.js"></script>
 
 <%- include ('../Includes/footer'); -%>   

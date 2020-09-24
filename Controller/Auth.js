@@ -30,7 +30,7 @@ exports.postLogin = (req, res, next) => {
                 return res.redirect('/');
             }
             console.log("User Found and Compared, Password Match");
-            req.flash('name', name);
+            req.session.adminUserName = name;
             req.session.isLoggedIn = true;
             res.redirect('/shop/rana_disposal');
         })
