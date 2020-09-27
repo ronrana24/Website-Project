@@ -112,16 +112,16 @@ header hr {
     margin: 30px 0;
     height: 0;
 } 
-.cart__row:first-child {
-    border-bottom: 1px solid #1f2021;
-    padding-bottom: 15px;
-}
 .text-right {
     text-align: right !important;
 }
 .cart__row {
     position: relative;
     margin-bottom: 30px;
+}
+.cart__row:first-child {
+    border-bottom: 1px solid #1f2021;
+    padding-bottom: 15px;
 }
 .cart__header-labels {
     font-family: 'Montserrat', sans-serif;
@@ -152,10 +152,7 @@ header hr {
 .two-thirds {
     width: 66.666%;
 }
-.cart__row {
-    position: relative;
-    margin-bottom: 30px;
-}
+
 @media screen and (min-width: 769px) {
     .cart__row--table-large {
         display: table;
@@ -188,22 +185,23 @@ header hr {
         width: 60%;
     }
 }
-.cart__image {
-    display: block;
-}
 .grid__item a {
     color: #1f2021;
     text-decoration: none;
     background: transparent;
 }
-.cart__image img {
+.cart__image{
     width: 100%;
     display: block;
     max-width: 100%;
     border: 0 none;
 }
+.cart__image:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
 .cart__product-name {
     font-style: italic;
+    cursor: default;
 }
 h4, .h4 {
     font-size: 1.1875em;
@@ -393,15 +391,6 @@ input, textarea, select {
 .cart__row .btn, .cart__row .btn--secondary, .cart__row .shopify-payment-button .shopify-payment-button__button--unbranded, .shopify-payment-button .cart__row .shopify-payment-button__button--unbranded, .cart__row .btn--secondary {
     margin-bottom: 15px;
 }
-.btn, .btn--secondary {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 600;
-    font-style: normal;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 12px 20px;
-    font-size: 0.8125em;
-}
 .btn, .btn--secondary, .rte .btn--secondary, .shopify-payment-button .shopify-payment-button__button--unbranded, .rte .btn, .rte .btn--secondary, .rte .shopify-payment-button .shopify-payment-button__button--unbranded, .shopify-payment-button .rte .shopify-payment-button__button--unbranded {
     display: inline-block;
     padding: 8px 10px;
@@ -431,6 +420,15 @@ input, textarea, select {
     -o-transition: background-color 0.4s ease-out;
     transition: background-color 0.4s ease-out;
 }
+.btn, .btn--secondary {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 12px 20px;
+    font-size: 0.8125em;
+}
 .btn--secondary, .rte .btn--secondary {
     background-color: #a56600;
 }
@@ -453,4 +451,11 @@ input, textarea, select {
 .cart--empty-message {
     margin: 0 0 15px 0;
     text-rendering: optimizeLegibility;
+}
+.btn--secondary {
+    -webkit-transition: all 0.2s ease-out;
+    -moz-transition: all 0.2s ease-out;
+    -ms-transition: all 0.2s ease-out;
+    -o-transition: all 0.2s ease-out;
+    transition: all 0.2s ease-out;
 }

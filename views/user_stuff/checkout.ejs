@@ -6,8 +6,17 @@
 
 <body>
 
+    <header class="banner" data-header="" role="banner">
+        <div class="wrap"> 
+            <a class="logo logo--left" href="/">
+                <span class="logo__text heading-1">
+                Rana Disposal's
+                </span>
+            </a>  
+        </div>
+      </header>
     <aside role="complementary" class="mobile_view">
-        <button class="order-summary-toggle order-summary-toggle--show shown-if-js" aria-expanded="false" aria-controls="order-summary" data-drawer-toggle="[data-order-summary]">
+        <button class="order-summary-toggle order-summary-toggle--show shown-if-js" aria-expanded="false" aria-controls="order-summary" data-drawer-toggle="[data-order-summary]" onclick="toggleCartDetails()">
           <span class="wrap">
             <span class="order-summary-toggle__inner">
               <span class="order-summary-toggle__icon-wrapper">
@@ -15,16 +24,16 @@
                   <path d="M17.178 13.088H5.453c-.454 0-.91-.364-.91-.818L3.727 1.818H0V0h4.544c.455 0 .91.364.91.818l.09 1.272h13.45c.274 0 .547.09.73.364.18.182.27.454.18.727l-1.817 9.18c-.09.455-.455.728-.91.728zM6.27 11.27h10.09l1.454-7.362H5.634l.637 7.362zm.092 7.715c1.004 0 1.818-.813 1.818-1.817s-.814-1.818-1.818-1.818-1.818.814-1.818 1.818.814 1.817 1.818 1.817zm9.18 0c1.004 0 1.817-.813 1.817-1.817s-.814-1.818-1.818-1.818-1.818.814-1.818 1.818.814 1.817 1.818 1.817z"></path>
                 </svg>
               </span>
-              <span class="order-summary-toggle__text order-summary-toggle__text--show">
+              <span class="order-summary-toggle__text order-summary-toggle__text--hide">
                 <span>Show order summary</span>
                 <svg width="11" height="6" xmlns="http://www.w3.org/2000/svg" class="order-summary-toggle__dropdown" fill="#000"><path d="M.504 1.813l4.358 3.845.496.438.496-.438 4.642-4.096L9.504.438 4.862 4.534h.992L1.496.69.504 1.812z"></path></svg>
               </span>
-              <span class="order-summary-toggle__text order-summary-toggle__text--hide">
+              <span class="order-summary-toggle__text order-summary-toggle__text--show">
                 <span>Hide order summary</span>
                 <svg width="11" height="7" xmlns="http://www.w3.org/2000/svg" class="order-summary-toggle__dropdown" fill="#000"><path d="M6.138.876L5.642.438l-.496.438L.504 4.972l.992 1.124L6.138 2l-.496.436 3.862 3.408.992-1.122L6.138.876z"></path></svg>
               </span>
               <span class="order-summary-toggle__total-recap total-recap" data-order-summary-section="toggle-total-recap">
-                <span class="total-recap__final-price skeleton-while-loading" data-checkout-payment-due-target="23400">$234.00</span>
+                <span class="total-recap__final-price skeleton-while-loading" data-checkout-payment-due-target="23400">&#8377; <%= cart.totalPrice %></span>
               </span>
             </span>
           </span>
@@ -36,7 +45,7 @@
             <div class="main">
                 <header class="main__header" role="banner">
 
-                    <a class="logo logo--left" href="https://brooklyn-theme-classic.myshopify.com/"><span
+                    <a class="logo logo--left" href="/"><span
                             class="logo__text heading-1"> Rana Disposal's</span></a>
                     <h1 class="visually-hidden">
                         Information
@@ -49,7 +58,7 @@
                         <form class="edit_checkout animate-floating-labels" novalidate="novalidate"
                             data-customer-information-form="true" data-email-or-phone="true"
                             action="" accept-charset="UTF-8"
-                            method="post">
+                            method="POST">
                             <div class="step__sections">
                                 <div class="section section--contact-information">
                                     <div class="section__header">
@@ -80,39 +89,29 @@
                                                         aria-describedby="checkout-context-step-one error-for-email_or_phone"
                                                         aria-required="true" class="field__input" size="30" type="email"
                                                         id="checkout_email_or_phone" autocomplete="shipping email">
-                                                    <div class="flag-selector flag-selector--hidden">
-                                                        <div class="flag-selector__icon">
-
+                                                    </div>
+                                                    <div class="fieldset-description">
+                                                        <div class="section__content">
+                                                            <div class="checkbox-wrapper">
+                                                                <div class="checkbox__input">
+                                                                    <input class="input-checkbox" type="checkbox" name="Delivery" id="delivery" onclick="addDeliveryForm()">
+                                                                </div>
+                                                                <label class="checkbox__label"
+                                                                    for="Delivery">
+                                                                    Do you want us to Deliver ?
+                                                                </label>
+                                                            </div>
                                                         </div>
-                                                        <select class="flag-selector__select"
-                                                            data-region-code="true" aria-label="Country/Region code">
-                                                            <option value="IN">India (+91)</option>
-                                                        </select>
                                                     </div>
                                                 </div>
-                                                <input type="hidden" name="checkout[email_or_phone]" value="">
                                             </div>
-                                        </div>
-                                        <div class="fieldset-description" data-buyer-accepts-marketing="">
-                                            <div class="section__content">
-                                                <div class="checkbox-wrapper">
-                                                    <div class="checkbox__input">
-                                                        <input name="checkout[buyer_accepts_marketing]" type="hidden"
-                                                            value="0"><input class="input-checkbox"
-                                                            data-backup="buyer_accepts_marketing" type="checkbox"
-                                                            value="1" name="checkout[buyer_accepts_marketing]"
-                                                            id="checkout_buyer_accepts_marketing">
-                                                    </div>
-                                                    <label class="checkbox__label"
-                                                        for="checkout_buyer_accepts_marketing">
-                                                        Do you want us to Deliver ?
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
-                                <div class="section section--shipping-address" data-shipping-address="">
+                                <div class="add_time">
+                                    <h2>Add time of your visit!</h2>
+                                    <input type="datetime-local" style="text-align: center;">
+                                </div>
+                                <div class="section section--shipping-address delivery_form" id="delivery_form">
                                     <div class="section__header">
                                         <h2 class="section__title" id="section-delivery-title">
                                             Shipping address
@@ -214,13 +213,9 @@
                                             <div class="field field--show-floating-label">
                                                 <div class="checkbox-wrapper">
                                                     <div class="checkbox__input">
-                                                        <input size="30" type="hidden" name="checkout[remember_me]">
-                                                        <input name="checkout[remember_me]" type="hidden"
-                                                            value="0"><input class="input-checkbox"
-                                                            data-backup="remember_me" type="checkbox" value="1"
-                                                            name="checkout[remember_me]" id="checkout_remember_me">
+                                                            <input class="input-checkbox" type="checkbox" name="pay_now" id="checkout_remember_me" onclick="addPayButton()">
                                                     </div>
-                                                    <label class="checkbox__label" for="checkout_remember_me">
+                                                    <label class="checkbox__label" for="pay_now">
                                                         Do you want to Pay Now?
                                                     </label>
                                                 </div>
@@ -230,8 +225,8 @@
                                 </div>
                             </div>
                             <div class="step__footer" data-step-footer="">
-                                <button name="button" type="submit" id="continue_button"
-                                    class="step__footer__continue-btn btn" aria-busy="false">
+                                <button name="order" type="submit" id="continue_button"
+                                    class="step__footer__continue-btn btn">
                                     <span class="btn__content" data-continue-button-content="true">
                                         Place Your Order
                                     </span>
@@ -239,15 +234,14 @@
                                         <use xlink:href="#spinner-button"></use>
                                     </svg>
                                 </button>
-                                <!-- <button name="button" type="submit" id="continue_button"
-                                    class="step__footer__continue-btn btn" aria-busy="false">
+                                <button name="paynow" type="submit" id="pay_now" class="step__footer__continue-btn btn displayBtn">
                                     <span class="btn__content" data-continue-button-content="true">
                                         Pay Now
                                     </span>
                                     <svg class="icon-svg icon-svg--size-18 btn__spinner icon-svg--spinner-button" aria-hidden="true" focusable="false">
                                         <use xlink:href="#spinner-button"></use>
                                     </svg>
-                                </button> -->
+                                </button>
                                 <a class="step__footer__previous-link"
                                     href="/cart">
                                     <svg focusable="false"
@@ -259,6 +253,7 @@
                                     <span class="step__footer__previous-link-content">Return to cart</span>
                                 </a>
                             </div>
+                            <input type="hidden" value="<%= csrfToken %>" name="_csrf">
                         </form>
                     </div>
                 </main>
@@ -270,85 +265,86 @@
                     </a>
                 </div>
                 <div class="sidebar__content">
-                    <% cartItem.forEach((item) => { %> 
-                        <div id="order-summary" class="order-summary order-summary--is-collapsed" data-order-summary="">
+                        <div id="order-summary" class="order-summary order-summary--is-expanded" data-order-summary="">
                             <div class="order-summary__sections">
-                                <div class="order-summary__section order-summary__section--product-list">
-                                    <div class="order-summary__section__content">
-                                        <table class="product-table">
-                                            <tbody data-order-summary-section="line-items">
-                                                <tr class="product" data-product-id="3780470407190"
-                                                    data-variant-id="29013902065686" data-product-type="women"
-                                                    data-customer-ready-visible="">
-                                                    <td class="product__image">
-                                                        <div class="product-thumbnail ">
-                                                            <div class="product-thumbnail__wrapper">
-                                                                <img alt="Cairn tote" class="product-thumbnail__image"
-                                                                    src="https://images.unsplash.com/photo-1600372774086-aae8c8585e3b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60">
+                                <% cartItems.forEach((item) => { %>
+                                    <div class="order-summary__section order-summary__section--product-list">
+                                        <div class="order-summary__section__content">
+                                            <table class="product-table">
+                                                <tbody data-order-summary-section="line-items">
+                                                    <tr class="product" data-product-id="3780470407190"
+                                                        data-variant-id="29013902065686" data-product-type="women"
+                                                        data-customer-ready-visible="">
+                                                        <td class="product__image">
+                                                            <div class="product-thumbnail ">
+                                                                <div class="product-thumbnail__wrapper">
+                                                                    <img alt="Cairn tote" class="product-thumbnail__image"
+                                                                        src="https://images.unsplash.com/photo-1600372774086-aae8c8585e3b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60">
+                                                                </div>
+                                                                <span class="product-thumbnail__quantity"
+                                                                    aria-hidden="true"><%= item.quantity %> </span>
                                                             </div>
-                                                            <span class="product-thumbnail__quantity"
-                                                                aria-hidden="true"><%= item.quantity %> </span>
-                                                        </div>
-                                                    </td>
-                                                    <th class="product__description" scope="row">
-                                                        <span class="product__description__name order-summary__emphasis">
-                                                            <%= item.name %>
-                                                        </span>
-                                                        <span class="product__description__variant order-summary__small-text"></span>
-                                                    </th>
-                                                    <td class="product__quantity visually-hidden">
-                                                        <%= item.quantity %> 
-                                                    </td>
-                                                    <td class="product__price">
-                                                        <span class="order-summary__emphasis skeleton-while-loading">&#8377; <%= item.price %></span>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                                        </td>
+                                                        <th class="product__description" scope="row">
+                                                            <span class="product__description__name order-summary__emphasis">
+                                                                <%= item.name %>
+                                                            </span>
+                                                            <span class="product__description__variant order-summary__small-text"></span>
+                                                        </th>
+                                                        <td class="product__quantity visually-hidden">
+                                                            <%= item.quantity %> 
+                                                        </td>
+                                                        <td class="product__price">
+                                                            <span class="order-summary__emphasis skeleton-while-loading">&#8377; <%= item.price * item.quantity %></span>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="order-summary__section order-summary__section--total-lines"
-                                    data-order-summary-section="payment-lines">
-                                    <table class="total-line-table">
-                                        <tbody class="total-line-table__tbody">
-                                            <tr class="total-line total-line--subtotal">
-                                                <th class="total-line__name" scope="row">Subtotal</th>
-                                                <td class="total-line__price">
-                                                    <span class="order-summary__emphasis skeleton-while-loading"
-                                                        data-checkout-subtotal-price-target="23400">
-                                                        &#8377; <%= cart.totalPrice %> 
-                                                    </span>
-                                                </td>
-                                            </tr>
-                                            <tr class="total-line total-line--taxes hidden" data-checkout-taxes="">
-                                                <th class="total-line__name" scope="row">Taxes (estimated)</th>
-                                                <td class="total-line__price">
-                                                    <span class="order-summary__emphasis skeleton-while-loading"
-                                                        data-checkout-total-taxes-target="0">&#8377; 0.00</span>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                        <tfoot class="total-line-table__footer">
-                                            <tr class="total-line">
-                                                <th class="total-line__name payment-due-label" scope="row">
-                                                    <span class="payment-due-label__total">Total</span>
-                                                </th>
-                                                <td class="total-line__price payment-due" data-presentment-currency="CAD">
-                                                    <span class="payment-due__price skeleton-while-loading--lg"
-                                                        data-checkout-payment-due-target="23400">
-                                                        &#8377; <%= cart.totalPrice %>
-                                                    </span>
-                                                </td>
-                                            </tr>
-                                        </tfoot>
-                                    </table>
-                                </div>
+                                <% }); %>
+                            <div class="order-summary__section order-summary__section--total-lines"
+                                data-order-summary-section="payment-lines">
+                                <table class="total-line-table">
+                                    <tbody class="total-line-table__tbody">
+                                        <tr class="total-line total-line--subtotal">
+                                            <th class="total-line__name" scope="row">Subtotal</th>
+                                            <td class="total-line__price">
+                                                <span class="order-summary__emphasis skeleton-while-loading"
+                                                    data-checkout-subtotal-price-target="23400">
+                                                    &#8377; <%= cart.totalPrice %> 
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        <tr class="total-line total-line--taxes hidden" data-checkout-taxes="">
+                                            <th class="total-line__name" scope="row">Taxes (estimated)</th>
+                                            <td class="total-line__price">
+                                                <span class="order-summary__emphasis skeleton-while-loading"
+                                                    data-checkout-total-taxes-target="0">&#8377; 0.00</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot class="total-line-table__footer">
+                                        <tr class="total-line">
+                                            <th class="total-line__name payment-due-label" scope="row">
+                                                <span class="payment-due-label__total">Total</span>
+                                            </th>
+                                            <td class="total-line__price payment-due" data-presentment-currency="CAD">
+                                                <span class="payment-due__price skeleton-while-loading--lg"
+                                                    data-checkout-payment-due-target="23400">
+                                                    &#8377; <%= cart.totalPrice %>
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
                             </div>
                         </div>
-                    <% }); %>
+                    </div>
                 </div>
             </aside>
         </div>
     </div>
     
+<script type="text/javascript" src="/javascript/checkout_func.js"></script>
 <%- include('../Includes/footer.ejs') %>

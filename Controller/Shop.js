@@ -53,7 +53,7 @@ exports.sendItemToCart = (req, res, next) => {
             price = parseInt(product.price);
         } 
         console.log("Adding item to cart --> ");
-        cart.add(productId, price, qty, productName);
+        cart.add(productId, price, qty, productName, product.quantity_price);
         req.session.cart = cart
         console.log(req.session.cart.items);
         res.redirect('/shop');
@@ -69,7 +69,7 @@ exports.getCart_Page = (req, res, next) => {
         pageTitle: 'Cart',
         path: '/cart',
         cart: req.session.cart,
-        cartLength: req.session.cart ? req.session.cart.items.length : 0
+        cartLength: req.session.cart ? req.session.cart.items.length : 0,
     });
 };
 
@@ -84,34 +84,51 @@ exports.getUserInfo_Page = (req, res, next) => {
     }
 };
 
-exports.postUserInfo = (req, res, next) => {
-    // const update_cart = req.body.update;
-    // const checkout = req.body.checkout;
-    // if (update_cart) {
-    //    return res.redirect('/');
-    // }
-    // res.redirect('/cart/rana_disposal/user_info');
-    // const name = req.body.name;
-    // const phonenumber = req.body.phonenumber;
-    // const address = req.body.address;
-    // const isPayNow = req.body.isPayNow;
-    // console.log("Pay now button is --> " + isPayNow);
-
-    // req.session.user_info = {
-    //     name: name,
-    //     phonenumber: phonenumber,
-    //     address: address
-    // };
-    // console.log("User info added to the session--> ");
-    // console.log(req.session);
-    // //! if pay now is on redirect to payment gateway else to confirm order route
-    // return res.redirect('/');
-};
+exports.removeItemFromCart = (req, res, next) => {
+    const productId = req.params.cartProductId;
+    console.log("Your poduct is now removing " + productId);
+    const cart = req.session.cart;
+    const cartItems = req.session.cart.items;
+    const index = cartItems.findIndex(product => product._id === productId);
+    console.log("Item is at index " + index);
+    const item = cartItems[index];
+    console.log(item);
+    cart.totalPrice = cart.totalPrice - (item.price*item.quantity);
+    cart.totalQuantity = cart.totalQuantity - item.quantity;
+    cartItems.splice(index, 1);
+    res.redirect('/cart');
+}
 
 exports.getCheckout_Page = (req, res, next) => {
     res.render('user_stuff/checkout', {
-        pageTitle: "Checkout",
-        path: '/cart/rana_disposal/checkout/:sessionId',
-        cartItem: req.session.cart
+        pageTitle: "User Info",
+        path: '/cart/rana_disposal/checkout/',
+        cartItems: req.session.cart.items,
+        cart: req.session.cart
     });
+}
+
+exports.updatedCartSession = (req, res, next) => {
+    if(req.body.update === '') {
+        res.redirect('/shop');
+    } else {
+        const quantityArray = req.body.quantity;
+        const cart = req.session.cart;
+        const cartItems = req.session.cart.items;
+        let totalPrice = 0;
+        let totalQuantity = 0;
+        for(let i=0;i<cartItems.length;i++) {
+            let item = cartItems[i];
+            item.quantity = parseInt(quantityArray[i]);
+            if(item.quantity >= 10) {
+                item.price = item.quantity_price;
+            }
+            totalPrice += item.price*item.quantity;
+            totalQuantity += item.quantity;
+        }
+        cart.totalPrice = totalPrice;
+        cart.totalQuantity = totalQuantity;
+        console.log(cart);
+        res.redirect('/cart/rana_disposal/checkout/');
+    }
 };

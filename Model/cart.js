@@ -3,7 +3,7 @@ module.exports = function Cart (oldCart) {
     this.totalQuantity = oldCart.totalQuantity || 0;
     this.totalPrice = oldCart.totalPrice || 0;
 
-    this.add = function (id, price, quantity, name) {
+    this.add = function (id, price, quantity, name, quantity_price) {
        const currentItem_id = id;
        const i = this.items.findIndex(item => item._id === id);
        if (i < 0) {
@@ -11,6 +11,7 @@ module.exports = function Cart (oldCart) {
                _id: currentItem_id,
                name: name,
                price: price,
+               quantity_price: quantity_price,
                quantity: quantity
            });
        } else {

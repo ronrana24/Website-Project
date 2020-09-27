@@ -24,11 +24,14 @@ router.get('/cart', shopController.getCart_Page);
 // GET ITEM TO CART --> /add-to-cart/:productId
 router.get('/add-to-cart/:productID', shopController.sendItemToCart);
 
-// Redirect if cart does not exist to prevent bogus orders
-router.get('/cart/rana_disposal/user_info', check_cart, shopController.getUserInfo_Page);
-router.post('/cart/rana_disposal/user_info', shopController.postUserInfo);
+// // Redirect if cart does not exist to prevent bogus orders
+// router.get('/cart/rana_disposal/user_info', check_cart, shopController.getUserInfo_Page);
+// router.post('/cart/rana_disposal/user_info', shopController.postUserInfo);
 
-router.get('/cart/rana_disposal/checkout/:sessionId', shopController.getCheckout_Page);
+router.get('/cart/remove/:cartProductId', shopController.removeItemFromCart);
+
+router.get('/cart/rana_disposal/checkout/', check_cart, shopController.getCheckout_Page);
+router.post('/cart/rana_disposal/checkout/', check_cart, shopController.updatedCartSession);
 
 // router.post('/cart/rana_disposal/checkout', shopController.postCheckout);
 

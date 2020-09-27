@@ -19,7 +19,7 @@
                         <% } %> 
                     </header>
                     <% if (cartLength > 0) { %> 
-                        <form action="/cart/rana_disposal/user_info" method="GET" class="cart">
+                        <form action="/cart/rana_disposal/checkout/" method="POST" class="cart">
                             <div class="cart__row medium-down--hide cart__header-labels">
                                 <div class="grid--full">
                                     <div class="grid__item large--two-fifths push--large--three-fifths">
@@ -34,22 +34,20 @@
                                     </div>
                                 </div>
                             </div>
-                            <% cart.items.forEach((item) => { %>
+                            <% for(let i=0;i<cartLength;i++) { %>
                                 <div class="cart__row">
                                     <div class="grid--full cart__row--table-large">
                                         <div class="grid__item large--three-fifths">
                                             <div class="grid">
                                                 <div class="grid__item one-third">
-                                                    <a href="#" class="cart__image">
-                                                        <img src="https://images.unsplash.com/photo-1600372774086-aae8c8585e3b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="<%= item.name %>">
-                                                    </a>
+                                                    <img src="https://images.unsplash.com/photo-1600372774086-aae8c8585e3b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="<%= cart.items[i].name %>" class="cart__image">
                                                 </div>
                                                 <div class="grid__item two-thirds">
-                                                    <a href="/products/cairn-tote?variant=29013902065686" class="h4 cart__product-name">
-                                                        <%= item.name %> 
-                                                    </a>
+                                                    <p class="h4 cart__product-name">
+                                                        <%= cart.items[i].name %> 
+                                                    </p>
                                                     <p class="cart__product-meta">
-                                                        <a href="/cart/change?line=1&amp;quantity=0">
+                                                        <a href="/cart/remove/<%= cart.items[i]._id %>">
                                                             Remove
                                                         </a>
                                                     </p>
@@ -59,35 +57,28 @@
                                         <div class="grid__item large--two-fifths cart__pricing">
                                             <div class="grid--full cart__row--table">
                                                 <div class="grid__item one-third text-center">
-                                                    <label for="updates_29013902065686:fb488cacbd2860de18be16b073691707"
-                                                        class="visually-hidden">Quantity</label>
                                                     <div class="js-qty">
                                                         <button type="button"
-                                                            class="js-qty__adjust js-qty__adjust--minus icon-fallback-text"
-                                                            data-id="29013902065686:fb488cacbd2860de18be16b073691707"
-                                                            data-qty="2" aria-label="Reduce item quantity by one">
+                                                            class="js-qty__adjust js-qty__adjust--minus icon-fallback-text decrease_quantity" onclick="decrement_value(<%- i %>, <%- cart.items[i].price %>, <%- cart.items[i].quantity_price %>, <%- cartLength %>)">
                                                             <span class="quantity_inc_dec" aria-hidden="true">−</span>
                                                         </button>
-                                                        <input type="text" class="js-qty__num" value="<%= item.quantity %>" min="1"
-                                                            data-id="29013902065686:fb488cacbd2860de18be16b073691707"
-                                                            aria-label="quantity" pattern="[0-9]*" name="updates[]"
-                                                            id="updates_29013902065686:fb488cacbd2860de18be16b073691707">
+                                                        <input type="text" class="js-qty__num input" value="<%= cart.items[i].quantity %>" min="1"
+                                                            pattern="[0-9]*" name="quantity">
                                                         <button type="button"
-                                                            class="js-qty__adjust js-qty__adjust--plus icon-fallback-text"
-                                                            data-id="29013902065686:fb488cacbd2860de18be16b073691707"
-                                                            data-qty="31" aria-label="Increase item quantity by one">
+                                                            class="js-qty__adjust js-qty__adjust--plus icon-fallback-text" onclick="increment_value(<%- i %>, <%- cart.items[i].price %>, <%- cart.items[i].quantity_price %>, <%- cartLength %>)">
                                                             <span class="quantity_inc_dec" aria-hidden="true">+</span>
                                                         </button>
                                                     </div>
                                                 </div>
                                                 <div class="grid__item two-thirds text-right">
-                                                    <span class="cart__price">&#8360; <%= item.price %> </span>
+                                                    <span class="cart__price">&#8360;</span>
+                                                    <span class="cart__price price"><%= (cart.items[i].price * cart.items[i].quantity) %></span>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            <% }); %>
+                            <% }; %>
                             <div class="cart__row cart__row--last">
                                 <div class="grid--full cart__row--table-large">
                                     <div class="grid__item large--five-twelfths text-center large--text-right push--large--seven-twelfths">
@@ -96,7 +87,7 @@
                                                 <p class="cart__subtotal">Subtotal</p>
                                             </div>
                                             <div class="grid__item one-half large--one-third">
-                                                <p class="cart__subtotal">&#8360; <%= cart.totalPrice %> </p>
+                                                <p class="cart__subtotal" id="total" name="totalPrice">&#8360; <%= cart.totalPrice %></p>
                                             </div>
                                         </div>
                                         <button type="submit" name="update" class="btn--secondary update-cart">
@@ -104,20 +95,19 @@
                                         </button>
                                         <button type="submit" name="checkout" class="btn cart__checkout">
                                             Check Out 
-                                            <span class="icon icon-arrow-right" aria-hidden="true">&#8594;</span>
+                                            <span class="icon icon-arrow-right">&#8594;</span>
                                         </button>
                                     </div>
                                 </div>
                             </div>
-                            <!-- <input type="hidden" value="<%= csrfToken %>" name="_csrf"> -->
+                            <input type="hidden" value="<%= csrfToken %>" name="_csrf">
                         </form> 
                     <% } %> 
                 </div>
             </div>
         </div>
     </main>
+    <script type="text/javascript" src="/javascript/cart_func.js"></script>
+    
 
-    <!-- <form action="/cart/rana_disposal/user_info" method="GET">
-        <button class="btn btn-outline-dark">Countinue</button>
-    </form> -->
-    <%- include('../Includes/footer.ejs') %>
+<%- include('../Includes/footer.ejs') %>

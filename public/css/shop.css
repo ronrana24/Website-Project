@@ -168,10 +168,13 @@ input::-webkit-inner-spin-button, input:focus{
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); 
     }
 }
-.shop_heading {
-    line-height: normal;
-    letter-spacing: normal;
-}
 .shop_heading_1 {
     color: #E2705A;
+}
+.qtyPrice {
+    text-decoration: line-through;
+    color: #b4b2b2;
+}
+.product_name {
+    font-weight: bold;
 }

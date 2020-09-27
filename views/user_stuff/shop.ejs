@@ -28,8 +28,12 @@
                 <div class="product_item_details">
                     <span class="product_name"><%= products[i].name %></span>
                     <div class="product_price">
-                        <span class="price">Rs. <%= products[i].price %></span>
+                        <span class="price actualPrice">Rs. <%= products[i].price %></span>
+                        <span class="price quntityPrice" style="display: none;">Rs. <%= products[i].quantity_price %></span>
                     </div>
+                    <!-- <div class="product_price">
+                        <span class="price">Rs. </span>
+                    </div> -->
                 </div>
                 <form action="/add-to-cart/<%= products[i]._id %>" method="GET">
                     <div class="product_quantity_layout">
