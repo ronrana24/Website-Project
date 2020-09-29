@@ -124,10 +124,21 @@ exports.postAdmin_ModifyProduct = (req, res, next) => {
 }
 
 exports.getAdminHome_Page = (req, res, next) => {
-    console.log("Welcome --> " + req.session.adminUserName + " To admin page");
+    console.log("Welcome --> " + req.session.adminName + " To admin page");
     res.render('admin_stuff/admin_home', {
         pageTitle: 'Admin Home',
         path: '/shop/rana_disposal',
-        name: req.session.adminUserName
+        name: req.session.adminName
     });
+} 
+
+exports.getOrdersPage = (req, res, next) => {
+    console.log("You are here")
+    res.render('admin_stuff/orders', {
+        pageTitle: 'Orders',
+        path: '/shop/rana_disposal/orders',
+        name: req.session.adminUserName,
+        // session: req.session
+    });
+    // req.session.destroy();
 }

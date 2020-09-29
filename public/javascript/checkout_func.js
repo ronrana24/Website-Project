@@ -9,7 +9,10 @@ const toggleCartDetails = () => {
 
 const addDeliveryForm = () => {
     const deliveryForm_Element = document.getElementById('delivery_form');
+    const time_Element = document.getElementById('time');
     deliveryForm_Element.classList.toggle('delivery_form');
+    time_Element.classList.toggle('displayBtn');
+
 }
 
 const addPayButton = () => {

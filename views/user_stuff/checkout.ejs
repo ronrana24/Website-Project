@@ -57,7 +57,7 @@
                     <div class="step" data-step="contact_information" data-last-step="false">
                         <form class="edit_checkout animate-floating-labels" novalidate="novalidate"
                             data-customer-information-form="true" data-email-or-phone="true"
-                            action="" accept-charset="UTF-8"
+                            action="/cart/rana_disposal/order" accept-charset="UTF-8"
                             method="POST">
                             <div class="step__sections">
                                 <div class="section section--contact-information">
@@ -73,22 +73,12 @@
                                     <div class="section__content" data-section="customer-information"
                                         data-shopify-pay-validate-on-load="false">
                                         <div class="fieldset">
-                                            <div data-email-or-phone-input-wrapper="true"
-                                                data-shopify-pay-email-flow="false" class="field field--email_or_phone">
+                                            <div class="field field--email_or_phone">
                                                 <div class="field__input-wrapper">
-                                                    <label class="field__label field__label--visible" for="checkout_email_or_phone">
-                                                        Email or mobile phone number
-                                                    </label>
-                                                    <input value="" placeholder="Email or mobile phone number"
+                                                    <input placeholder="Business Name or Your Name"
                                                         autocapitalize="off" spellcheck="false"
-                                                        data-email-or-phone-input="true" data-phone-flag-input="true"
-                                                        data-phone-flag-input-default-country="India"
-                                                        data-autofocus="true" data-backup="email_or_phone"
-                                                        data-address-type="shipping" data-most-popular-countries="[]"
-                                                        data-phone-flag-label="Country/Region code"
-                                                        aria-describedby="checkout-context-step-one error-for-email_or_phone"
-                                                        aria-required="true" class="field__input" size="30" type="email"
-                                                        id="checkout_email_or_phone" autocomplete="shipping email">
+                                                        class="field__input" size="30" type="text"
+                                                        id="checkout_email_or_phone" autocomplete="name" name="name">
                                                     </div>
                                                     <div class="fieldset-description">
                                                         <div class="section__content">
@@ -107,10 +97,12 @@
                                             </div>
                                     </div>
                                 </div>
-                                <div class="add_time">
+
+                                <div class="add_time" id="time">
                                     <h2>Add time of your visit!</h2>
-                                    <input type="datetime-local" style="text-align: center;">
+                                    <input type="datetime-local" style="text-align: center;" name="time">
                                 </div>
+
                                 <div class="section section--shipping-address delivery_form" id="delivery_form">
                                     <div class="section__header">
                                         <h2 class="section__title" id="section-delivery-title">
@@ -122,78 +114,47 @@
                                             <div class="address-fields" data-address-fields="">
                                                 <div class="field--half field field--optional"
                                                     data-address-field="first_name">
-                                                    <div class="field__input-wrapper"><label
-                                                            class="field__label field__label--visible"
-                                                            for="checkout_shipping_address_first_name">First name
-                                                            (optional)</label>
-                                                        <input placeholder="First name (optional)"
+                                                    <div class="field__input-wrapper">
+                                                        <input placeholder="First name"
                                                             autocomplete="shipping given-name" autocorrect="off"
                                                             data-backup="first_name" class="field__input" size="30"
-                                                            type="text" name="checkout[shipping_address][first_name]"
+                                                            type="text" name="firstName"
                                                             id="checkout_shipping_address_first_name">
                                                     </div>
                                                 </div>
                                                 <div class="field--half field field--required"
                                                     data-address-field="last_name">
-                                                    <div class="field__input-wrapper"><label
-                                                            class="field__label field__label--visible"
-                                                            for="checkout_shipping_address_last_name">Last name</label>
+                                                    <div class="field__input-wrapper">
                                                         <input placeholder="Last name"
                                                             autocomplete="shipping family-name" autocorrect="off"
                                                             data-backup="last_name" class="field__input"
                                                             aria-required="true" size="30" type="text"
-                                                            name="checkout[shipping_address][last_name]"
-                                                            id="checkout_shipping_address_last_name">
+                                                            name="lastName" autocomplete="family-name" id="checkout_shipping_address_last_name">
                                                     </div>
                                                 </div>
                                                 <div data-address-field="address1"
                                                     data-autocomplete-field-container="true"
                                                     class="field field--required">
                                                     <div class="field__input-wrapper">
-                                                        <label
-                                                            class="field__label field__label--visible"
-                                                            for="checkout_shipping_address_address1">Address</label>
+                                                        <input placeholder="Mobile number"
+                                                            autocomplete="shipping address-line1" autocorrect="off"
+                                                            class="field__input" size="10" type="number"
+                                                            name="phonenumber"
+                                                            id="checkout_shipping_address_address1">
+                                                    </div>
+                                                </div>
+                                                <div data-address-field="address1"
+                                                    data-autocomplete-field-container="true"
+                                                    class="field field--required">
+                                                    <div class="field__input-wrapper">
                                                         <input placeholder="Address"
                                                             autocomplete="shipping address-line1" autocorrect="off"
                                                             role="combobox" aria-autocomplete="list"
-                                                            aria-expanded="false" aria-required="true"
-                                                            data-backup="address1" data-autocomplete-trigger="true"
-                                                            data-autocomplete-title="Suggestions"
-                                                            data-autocomplete-single-item="1 item available"
-                                                            data-autocomplete-multi-item="{{number}} items available"
-                                                            data-autocomplete-item-selection="{{number}} of {{total}}"
-                                                            data-autocomplete-close="Close suggestions"
+                                                            autocomplete="street-address"
                                                             class="field__input" size="30" type="text"
-                                                            name="checkout[shipping_address][address1]"
+                                                            name="delivery_address"
                                                             id="checkout_shipping_address_address1">
-
-                                                        <p class="field__additional-info visually-hidden"
-                                                            data-address-civic-number-warning="">
-                                                            <svg class="icon-svg icon-svg--size-16 field__message__icon"
-                                                                aria-hidden="true" focusable="false">
-                                                                <use xlink:href="#info"></use>
-                                                            </svg>
-                                                            Add a house number if you have one
-                                                        </p>
                                                     </div>
-                                                </div>
-                                                <div data-address-field="address2"
-                                                    data-autocomplete-field-container="true"
-                                                    class="field field--optional">
-
-                                                    <div class="field__input-wrapper"><label
-                                                            class="field__label field__label--visible"
-                                                            for="checkout_shipping_address_address2">Apartment, suite,
-                                                            etc. (optional)</label>
-                                                        <input placeholder="Apartment, suite, etc. (optional)"
-                                                            autocomplete="shipping address-line2" autocorrect="off"
-                                                            data-backup="address2" class="field__input" size="30"
-                                                            type="text" name="checkout[shipping_address][address2]"
-                                                            id="checkout_shipping_address_address2">
-                                                    </div>
-                                                </div>
-                                                <div data-address-field="city" data-autocomplete-field-container="true"
-                                                    class="field field--required">
                                                 </div>
                                             </div>
                                             <!-- <div class="field field--show-floating-label">

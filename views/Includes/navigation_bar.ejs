@@ -19,9 +19,16 @@
               <a href="/">Rana Disposal's</a>
           </div>
           <div class="navbar_login_cart_layout">
-              <div class="navbar_login_cart login">
-                  <a href="/login/shop/rana_disposal">Login</a>
-              </div>
+            <% if (!customerLoggedIn) { %>
+                <div class="navbar_login_cart login">
+                    <a href="/login/shop/rana_disposal">Login</a>
+                </div>
+            <% } %>
+            <% if (customerLoggedIn) { %> 
+                <div class="navbar_login_cart login">
+                    <a href="/logout/shop/rana_disposal">Logout</a>
+                </div>
+            <% } %> 
               <div class="navbar_login_cart">
                   <a href="/cart" class="navbar_cart">
                       <svg class="icon icon--cart" viewBox="0 0 31 26">

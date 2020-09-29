@@ -2,28 +2,35 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const orderSchema = new Schema({
-    shopName: {
+    businessName: {
         type: String,
         required: true
     },
+    selfPickUp: {
+        type: String,
+    },
     phoneNumber: {
-        type: Number,
-        required: true,
-        unique: true
+        type: String,
     },
     address: {
         type: String,
-        required: true
     },
-    delivery_type: {
-        type: String,
+    time: {
+        type: String
     },
     cart: {
         items: [
-          {   productId: { type: Schema.Types.ObjectId, ref: 'Product', required: true},
+          {   
+            // productId: { type: Schema.Types.ObjectId, ref: 'Product', required: true},
+            name: {type: String, required: true},
+            price: {type: Number ,required: true},
             quantity: { type: Number, required: true }
           }
-        ]
+        ],
+        totalPrice: {
+            type: Number,
+            require: true
+        }
     }
 });
 

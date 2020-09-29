@@ -33,6 +33,8 @@ router.get('/cart/remove/:cartProductId', shopController.removeItemFromCart);
 router.get('/cart/rana_disposal/checkout/', check_cart, shopController.getCheckout_Page);
 router.post('/cart/rana_disposal/checkout/', check_cart, shopController.updatedCartSession);
 
+router.post('/cart/rana_disposal/order', shopController.placeOrder);
+
 // router.post('/cart/rana_disposal/checkout', shopController.postCheckout);
 
 // ERROR ROUTE--> IF OTHER THAN THE ABOVE ROUTES ARE REQUESTED

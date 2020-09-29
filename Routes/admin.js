@@ -28,6 +28,8 @@ router.post('/delete/:productID', isAuth, adminController.deleteAdmin_Product);
 // Admin Home Page
 router.get('/', isAuth, adminController.getAdminHome_Page);
 
+// List of all orders recievied
+router.get('/orders', isAuth, adminController.getOrdersPage);
 
 
 

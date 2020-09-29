@@ -1186,7 +1186,7 @@ td:last-child, th:last-child {
 }
 .add_time input {
     margin: 0.25vw;
-    border: 2px solid black;
+    border: 1px solid black;
 }
 .add_time input:focus {
     outline: none;

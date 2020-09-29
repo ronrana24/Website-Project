@@ -1,13 +1,62 @@
 <%- include('../Includes/header.ejs') %> 
 
-<link rel="stylesheet" type="text/css" href="/css/login.css">
+<link rel="stylesheet" type="text/css" href="/css/signup.css">
+<link rel="stylesheet" type="text/css" href="/css/font_icon.css">
 
 </head>
 
 <body>
     <%- include('../Includes/navigation_bar.ejs') %>
 
-    <div class="wrapper fadeInDown">
+    <section class="sign-in">
+      <div class="container">
+          <div class="signin-content">
+
+              <div class="signin-form">
+                  <h2 class="form-title">Log In</h2>
+                  <form method="POST" class="register-form" id="login-form">
+                    <input type="hidden" value="<%= csrfToken %>" name="_csrf">
+                      <div class="form-group">
+                          <label for="your_name">
+                            <i class="zmdi zmdi-account material-icons-name"></i>
+                          </label>
+                          <input type="text" name="username" id="your_name" placeholder="Your Username" required/>
+                      </div>
+                      <div class="form-group">
+                          <label for="your_pass"><i class="zmdi zmdi-lock"></i></label>
+                          <input type="password" name="password" id="your_pass" placeholder="Password" required/>
+                      </div>
+                      <div class="form-group">
+                          <input type="checkbox" name="remember-me" id="remember-me" class="agree-term" />
+                          <label for="remember-me" class="label-agree-term">
+                            <span>
+                              <span>
+
+                              </span>
+                            </span>
+                            Remember me
+                          </label>
+                          <a href="/signup/shop/rana_disposal/" class="signup-image-link">Create an account</a>
+                          <a href="#" class="signup-image-link">Forgot Password</a>
+                      </div>
+                      <div class="form-group form-button">
+                          <input type="submit" name="signin" id="signin" class="form-submit" value="Log in"/>
+                      </div>
+                  </form>
+                  <!-- <div class="social-login">
+                      <span class="social-label">Or login with</span>
+                      <ul class="socials">
+                          <li><a href="#"><i class="display-flex-center zmdi zmdi-facebook"></i></a></li>
+                          <li><a href="#"><i class="display-flex-center zmdi zmdi-twitter"></i></a></li>
+                          <li><a href="#"><i class="display-flex-center zmdi zmdi-google"></i></a></li>
+                      </ul>
+                  </div> -->
+              </div>
+          </div>
+      </div>
+  </section>
+
+    <!-- <div class="wrapper fadeInDown">
       <div id="formContent">
         <h2 class="active"> Sign In </h2>
         <form action="/login/shop/rana_disposal" method="POST">
@@ -15,8 +64,9 @@
           <input type="text" id="login" class="fadeIn second" name="name" placeholder="name" required>
           <input type="password" id="password" class="fadeIn third" name="password" placeholder="password" required>
           <input type="submit" class="fadeIn fourth" value="Log In">
+          <input type="submit" class="fadeIn fourth" value="Sign Up">
         </form>
       </div>
-    </div>
+    </div> -->
     
 <%- include('../Includes/footer.ejs') %> 

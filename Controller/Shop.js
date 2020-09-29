@@ -1,5 +1,6 @@
 const Product = require('../Model/product');
 const Cart = require('../Model/cart');
+const Order = require('../Model/order');
 
 const bcrypt = require('bcryptjs');
 
@@ -7,7 +8,7 @@ const bcrypt = require('bcryptjs');
 exports.getHome_Page = (req, res, next) => {
     res.render('user_stuff/home', {
         pageTitle: 'Rana Disposal\'s',
-        path: '/',
+        path: '/'
     });
 };
 
@@ -53,8 +54,8 @@ exports.sendItemToCart = (req, res, next) => {
             price = parseInt(product.price);
         } 
         console.log("Adding item to cart --> ");
-        cart.add(productId, price, qty, productName, product.quantity_price);
-        req.session.cart = cart
+        // cart.add(productId, price, qty, productName, product.quantity_price);
+        // req.session.cart = cart;
         console.log(req.session.cart.items);
         res.redirect('/shop');
     })
@@ -132,3 +133,48 @@ exports.updatedCartSession = (req, res, next) => {
         res.redirect('/cart/rana_disposal/checkout/');
     }
 };
+
+exports.placeOrder = (req, res, next) => {
+    const businessName = req.body.name;
+    const time = req.body.time;
+    const dateOfArrival = time.slice(0, 10);
+    const timeOfArrival = time.slice(11, time.length);
+    const delivery = req.body.Delivery;
+
+    let address = false;
+    let phonenumber = "0";
+    let selfPickUp = true;
+    let firstName = false;
+    let lastName = false;
+
+
+    if (delivery === "on") {
+        address = req.body.delivery_address;
+        phonenumber = req.body.phonenumber;
+        selfPickUp = false;
+    }
+
+    const cart = req.session.cart;
+
+    const order = new Order({
+        businessName: businessName,
+        selfPickUp: selfPickUp,
+        phoneNumber: phonenumber,
+        address: address,
+        time: timeOfArrival + " on " + dateOfArrival,
+        cart: cart
+    });
+    order.save()
+    .then(result => {
+        console.log("Order Placed!");
+    })
+    .catch(err => {
+        console.log(err);
+    });
+    console.log(req.session.cart);
+    req.session.cart.items = [];
+    req.session.cart.totalPrice = 0;
+    req.session.cart.totalQuantity = 0;
+
+    res.redirect('/');
+}

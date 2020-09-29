@@ -48,6 +48,7 @@ app.set('views', 'views');
 app.use((req, res, next) => {
     res.locals.csrfToken = req.csrfToken();
     res.locals.cartItems = req.session.cart ? req.session.cart.items.length : 0;
+    res.locals.customerLoggedIn = req.session.cutomerLoggedIn ? req.session.cutomerLoggedIn : false
     next();
 });
 
