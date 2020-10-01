@@ -2,6 +2,8 @@ const Product = require('../Model/product');
 const Cart = require('../Model/cart');
 const Order = require('../Model/order');
 
+const User = require('../Model/user');
+
 const bcrypt = require('bcryptjs');
 
 // Gets The Home page of the Website
@@ -42,10 +44,11 @@ exports.getContact_Page = (req, res, next) => {
 exports.sendItemToCart = (req, res, next) => {
     const productId = req.params.productID;
     const qty = parseInt(req.query.quantity);
-    const cart = new Cart(req.session.cart ? req.session.cart : {items: []});
+    // const cart = new Cart(req.session.cart ? req.session.cart : {items: []});
     Product.findById(productId)
     .then(product => {
         const productName = product.name;
+        const quantityPrice = parseInt(product.quantity_price);
         let price;
         // threshold quantity
         if (qty >= 10) {
@@ -54,14 +57,18 @@ exports.sendItemToCart = (req, res, next) => {
             price = parseInt(product.price);
         } 
         console.log("Adding item to cart --> ");
+        return req.user.addToCart(productId, qty, price, productName, quantityPrice);
+
         // cart.add(productId, price, qty, productName, product.quantity_price);
         // req.session.cart = cart;
-        console.log(req.session.cart.items);
+    })
+    .then(result => {
+        console.log(result);
         res.redirect('/shop');
     })
     .catch(err => {
         console.log(err);
-    })
+    });
 }
 
 // Cart Page
@@ -69,43 +76,40 @@ exports.getCart_Page = (req, res, next) => {
     res.render('user_stuff/cart', {
         pageTitle: 'Cart',
         path: '/cart',
-        cart: req.session.cart,
-        cartLength: req.session.cart ? req.session.cart.items.length : 0,
-    });
+        cart: req.user.cart
+    });   
 };
 
-exports.getUserInfo_Page = (req, res, next) => {
-    if(req.query.checkout === '') {
-        res.render('user_stuff/checkout', {
-            pageTitle: "User Info",
-            path: '/cart/rana_disposal/user_info'
-        });
-    } else {
-        res.redirect('/shop');
-    }
-};
+// exports.getUserInfo_Page = (req, res, next) => {
+//     console.log(req.body)
+//     if(req.query.checkout === '') {
+//         res.render('user_stuff/checkout', {
+//             pageTitle: "Checkout",
+//             path: '/cart/rana_disposal/user_info'
+//         });
+//     } else {
+//         res.redirect('/shop');
+//     }
+// };
 
 exports.removeItemFromCart = (req, res, next) => {
     const productId = req.params.cartProductId;
-    console.log("Your poduct is now removing " + productId);
-    const cart = req.session.cart;
-    const cartItems = req.session.cart.items;
-    const index = cartItems.findIndex(product => product._id === productId);
-    console.log("Item is at index " + index);
-    const item = cartItems[index];
-    console.log(item);
-    cart.totalPrice = cart.totalPrice - (item.price*item.quantity);
-    cart.totalQuantity = cart.totalQuantity - item.quantity;
-    cartItems.splice(index, 1);
-    res.redirect('/cart');
+    console.log("Your poduct is now removing " + productId);    
+    req.user
+    .removeItemFromCart(productId)
+    .then(result => {
+        res.redirect('/cart');
+    })
+    .catch(err => console.log(err));
+    // cartItems.splice(index, 1);
 }
 
 exports.getCheckout_Page = (req, res, next) => {
     res.render('user_stuff/checkout', {
         pageTitle: "User Info",
         path: '/cart/rana_disposal/checkout/',
-        cartItems: req.session.cart.items,
-        cart: req.session.cart
+        cartItems: req.user.cart.items,
+        cart: req.user.cart
     });
 }
 
@@ -114,67 +118,54 @@ exports.updatedCartSession = (req, res, next) => {
         res.redirect('/shop');
     } else {
         const quantityArray = req.body.quantity;
-        const cart = req.session.cart;
-        const cartItems = req.session.cart.items;
-        let totalPrice = 0;
-        let totalQuantity = 0;
-        for(let i=0;i<cartItems.length;i++) {
-            let item = cartItems[i];
-            item.quantity = parseInt(quantityArray[i]);
-            if(item.quantity >= 10) {
-                item.price = item.quantity_price;
-            }
-            totalPrice += item.price*item.quantity;
-            totalQuantity += item.quantity;
-        }
-        cart.totalPrice = totalPrice;
-        cart.totalQuantity = totalQuantity;
-        console.log(cart);
-        res.redirect('/cart/rana_disposal/checkout/');
+        req.user.updateCart(quantityArray, 0)
+        .then(result => {
+            res.redirect('/cart/rana_disposal/checkout/');
+        })
+        .catch(err => console.log(err));
     }
 };
 
 exports.placeOrder = (req, res, next) => {
-    const businessName = req.body.name;
-    const time = req.body.time;
-    const dateOfArrival = time.slice(0, 10);
-    const timeOfArrival = time.slice(11, time.length);
-    const delivery = req.body.Delivery;
-
-    let address = false;
-    let phonenumber = "0";
-    let selfPickUp = true;
-    let firstName = false;
-    let lastName = false;
-
-
-    if (delivery === "on") {
-        address = req.body.delivery_address;
-        phonenumber = req.body.phonenumber;
-        selfPickUp = false;
-    }
-
-    const cart = req.session.cart;
 
     const order = new Order({
-        businessName: businessName,
-        selfPickUp: selfPickUp,
-        phoneNumber: phonenumber,
-        address: address,
-        time: timeOfArrival + " on " + dateOfArrival,
-        cart: cart
+        user: {
+            name: req.user.name,
+            userId: req.user
+        },
+        cart: req.user.cart
     });
-    order.save()
-    .then(result => {
-        console.log("Order Placed!");
+    return order.save()
+    .then(cart => {
+        return req.user.clearCart();
     })
-    .catch(err => {
-        console.log(err);
-    });
-    console.log(req.session.cart);
-    req.session.cart.items = [];
-    req.session.cart.totalPrice = 0;
-    req.session.cart.totalQuantity = 0;
+    .then(() => {
+        res.redirect('/');
+    })
+    .catch(err => console.log(err));
 
-    res.redirect('/');
+    // req.user
+    // .populate('cart.items.productId')
+    // .execPopulate()
+    // .then(user => {
+    //     const products = user.cart.items.map(i => {
+    //         return {quantity: i.quantity, item: {...i.productId._doc }}
+    //     });
+    //     const order = new Order({
+    //         user: {
+    //             name: req.user.name,
+    //             userId: req.user
+    //         },
+    //         items: products
+    //     });
+    //     return order.save();
+    // })
+    // .then(cart => {
+    //     return req.user.clearCart();
+    // })
+    // .then(result => {
+    //     res.redirect('/');
+    // })
+    // .catch(err => console.log(err));
+
 }

@@ -1,4 +1,4 @@
-const increment_value = (productId, priceForSinglePiece, qunatityPrice, cartLength) => {
+const increment_value = (productId, priceForSinglePiece, cartLength, qunatityPrice) => {
     // ELEMENTS
     const inputQuantity_Element = document.getElementsByClassName("input")[productId];
     const decreaseValue_Btn = document.getElementsByClassName("decrease_quantity")[productId];
@@ -33,7 +33,7 @@ const increment_value = (productId, priceForSinglePiece, qunatityPrice, cartLeng
     totalCartPrice_Element.innerHTML = "&#8360; " + price;
         
 }
-const decrement_value = (productId, priceForSinglePiece, qunatityPrice, cartLength) => {
+const decrement_value = (productId, priceForSinglePiece, cartLength, qunatityPrice) => {
     const inputQuantity_Element = document.getElementsByClassName("input")[productId];
     const decrementValue_Btn = document.getElementsByClassName("decrease_quantity")[productId];
     const productPrice_Element = document.getElementsByClassName("price")[productId];
@@ -64,3 +64,6 @@ const decrement_value = (productId, priceForSinglePiece, qunatityPrice, cartLeng
 
     totalCartPrice_Element.innerHTML = "&#8360; " + price;
 }
+
+const totalPrice_Element = document.getElementById('totalPrice');
+

@@ -1,4 +1,5 @@
 // All the Fuctionalities -----------------------------------
+const fs = require('fs');
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -7,6 +8,9 @@ const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const csrf = require('csurf');
 const flash = require('connect-flash');
+const helmet = require('helmet');
+const compression = require('compression');
+const morgan = require('morgan');
 
 // My database URL--------------------------------
 const MONGODB_URI = 'mongodb+srv://ronrana:zuLe04F6G9oLri3X@cluster0.xyk0z.gcp.mongodb.net/RanaDisposal?retryWrites=true&w=majority';
@@ -44,11 +48,25 @@ app.use(express.static("public"));
 app.set("view engine", "ejs");
 app.set('views', 'views');
 
+app.use((req, res, next) => {
+    if (!req.session.user) {
+        return next();
+    }
+    User.findById(req.session.user._id)
+    .then(user => {
+        req.user = user;
+        next();
+    })
+    .catch(err => {
+        console.log(err);
+    });
+})
+
 // local variable for all the views to protect steeling my sessions--------------------
 app.use((req, res, next) => {
     res.locals.csrfToken = req.csrfToken();
-    res.locals.cartItems = req.session.cart ? req.session.cart.items.length : 0;
-    res.locals.customerLoggedIn = req.session.cutomerLoggedIn ? req.session.cutomerLoggedIn : false
+    res.locals.cartItems = req.user ? req.user.cart.items.length : 0;
+    res.locals.customerLoggedIn = req.session.customerLoggedIn;
     next();
 });
 
@@ -60,6 +78,12 @@ const shopRoutes = require('./Routes/shop');
 const adminRoutes = require('./Routes/admin');
 // Authentication Route
 const authRoutes = require('./Routes/auth');
+
+const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), {flags: 'a'});
+
+app.use(helmet());
+// app.use(compression());
+app.use(morgan('combined', { stream: accessLogStream }));
 
 // SERVER TO HANDLE ROUTES ------------------------------------
 app.use('/shop/rana_disposal', adminRoutes);

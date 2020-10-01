@@ -10,28 +10,33 @@
     <section class="signup">
         <div class="container">
             <div class="signup-content">
-                <div class="signup-form">
+                <div class="signin-form">
                     <h2 class="form-title">Sign up</h2>
                     <form method="POST" class="register-form" id="register-form" action="/signup/shop/rana_disposal/">
                         <input type="hidden" value="<%= csrfToken %>" name="_csrf">
                         <div class="form-group">
-                            <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                            <label for="name">
+                                <i class="fas fa-user"></i>
+                            </label>
                             <input type="text" name="name" id="name" placeholder="Your Name"/>
                         </div>
                         <div class="form-group">
-                            <label for="username"><i class="zmdi zmdi-email"></i></label>
+                            <label for="username">
+                                <i class="fas fa-signature"></i>
+                            </label>
                             <input type="text" name="username" id="email" placeholder="Your username"/>
                         </div>
                         <div class="form-group">
-                            <label for="pass"><i class="zmdi zmdi-lock"></i></label>
+                            <label for="pass">
+                                <i class="fas fa-lock"></i>
+                            </label>
                             <input type="password" name="password" id="pass" placeholder="Password"/>
                         </div>
                         <div class="form-group">
-                            <label for="re-pass"><i class="zmdi zmdi-lock-outline"></i></label>
+                            <label for="re-pass">
+                                <i class="fas fa-lock"></i>
+                            </label>
                             <input type="password" name="rePassword" id="re_pass" placeholder="Repeat your password"/>
-                        </div>
-                        <div class="form-group">
-                            <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
                         </div>
                         <a href="/login/shop/rana_disposal/" class="signup-image-link">I am already a customer</a>
                         <div class="form-group form-button">

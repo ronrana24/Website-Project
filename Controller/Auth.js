@@ -92,7 +92,8 @@ exports.addNewUser = (req, res, next) => {
                 username: username,
                 password: hashedPassword,
                 cart: {
-                    items: []
+                    items: [],
+                    totalPrice: 0
                 }
             });
             return user.save();

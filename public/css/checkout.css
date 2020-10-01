@@ -2,7 +2,6 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: 'Alegreya', serif;
 }
 
 body {
@@ -11,6 +10,7 @@ body {
     word-wrap: break-word;
     word-break: break-word;
     -webkit-font-smoothing: subpixel-antialiased;
+    font-family: 'Alegreya', serif;
 }
 
 .content {

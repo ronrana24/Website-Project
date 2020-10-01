@@ -157,7 +157,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!-- <div class="field field--show-floating-label">
+                                            <div class="field field--show-floating-label">
                                                 <div class="checkbox-wrapper">
                                                     <div class="checkbox__input">
                                                         <input size="30" type="hidden" name="checkout[remember_me]">
@@ -170,11 +170,16 @@
                                                         Save this information for next time
                                                     </label>
                                                 </div>
-                                            </div> -->
+                                            </div>
                                             <div class="field field--show-floating-label">
                                                 <div class="checkbox-wrapper">
                                                     <div class="checkbox__input">
-                                                            <input class="input-checkbox" type="checkbox" name="pay_now" id="checkout_remember_me" onclick="addPayButton()">
+                                                        <select id="checkout_remember_me" name="pay_now" required>
+                                                            <option value="none">-</option>
+                                                            <option value="Yes">Yes</option>
+                                                            <option value="No">No</option>
+                                                          </select>
+                                                            <!-- <input class="input-checkbox" type="checkbox" name="pay_now" id="checkout_remember_me" onclick="addPayButton()"> -->
                                                     </div>
                                                     <label class="checkbox__label" for="pay_now">
                                                         Do you want to Pay Now?
@@ -248,13 +253,9 @@
                                                         </td>
                                                         <th class="product__description" scope="row">
                                                             <span class="product__description__name order-summary__emphasis">
-                                                                <%= item.name %>
+                                                                <%= item.productName %>
                                                             </span>
-                                                            <span class="product__description__variant order-summary__small-text"></span>
                                                         </th>
-                                                        <td class="product__quantity visually-hidden">
-                                                            <%= item.quantity %> 
-                                                        </td>
                                                         <td class="product__price">
                                                             <span class="order-summary__emphasis skeleton-while-loading">&#8377; <%= item.price * item.quantity %></span>
                                                         </td>

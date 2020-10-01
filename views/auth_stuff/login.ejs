@@ -1,7 +1,6 @@
 <%- include('../Includes/header.ejs') %> 
 
 <link rel="stylesheet" type="text/css" href="/css/signup.css">
-<link rel="stylesheet" type="text/css" href="/css/font_icon.css">
 
 </head>
 
@@ -18,12 +17,14 @@
                     <input type="hidden" value="<%= csrfToken %>" name="_csrf">
                       <div class="form-group">
                           <label for="your_name">
-                            <i class="zmdi zmdi-account material-icons-name"></i>
+                            <i class="fas fa-user"></i>
                           </label>
                           <input type="text" name="username" id="your_name" placeholder="Your Username" required/>
                       </div>
                       <div class="form-group">
-                          <label for="your_pass"><i class="zmdi zmdi-lock"></i></label>
+                          <label for="your_pass">
+                            <i class="fas fa-lock"></i>
+                          </label>
                           <input type="password" name="password" id="your_pass" placeholder="Password" required/>
                       </div>
                       <div class="form-group">
@@ -55,18 +56,5 @@
           </div>
       </div>
   </section>
-
-    <!-- <div class="wrapper fadeInDown">
-      <div id="formContent">
-        <h2 class="active"> Sign In </h2>
-        <form action="/login/shop/rana_disposal" method="POST">
-          <input type="hidden" value="<%= csrfToken %>" name="_csrf">
-          <input type="text" id="login" class="fadeIn second" name="name" placeholder="name" required>
-          <input type="password" id="password" class="fadeIn third" name="password" placeholder="password" required>
-          <input type="submit" class="fadeIn fourth" value="Log In">
-          <input type="submit" class="fadeIn fourth" value="Sign Up">
-        </form>
-      </div>
-    </div> -->
     
 <%- include('../Includes/footer.ejs') %> 
