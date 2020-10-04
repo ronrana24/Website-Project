@@ -1,13 +1,6 @@
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
-body {
-  font-family: 'Roboto', sans-serif;
-}
   
 table {
+  font-family: 'Roboto', sans-serif;
   border: 1px solid #ccc;
   border-collapse: collapse;
   margin: 0;
@@ -89,4 +82,10 @@ table th {
 }
 ul {
   list-style-type: none;
+}
+tbody tr {
+  cursor: pointer;
+}
+tbody tr:hover {
+  background-color: rgb(141, 141, 141);
 }

@@ -1,3 +1,4 @@
+const { Timestamp } = require('mongodb');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
@@ -19,6 +20,10 @@ const orderSchema = new Schema({
             required: true,
             ref: 'User'
         }
+    },
+    date: {
+        type: String,
+        required: true
     }
 });
 

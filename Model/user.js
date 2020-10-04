@@ -84,7 +84,7 @@ userSchema.methods.addToCart = function(productId, quantity, price, productName,
   return this.save();
 }
 
-userSchema.methods.removeItemFromCart = function(productId, itemPrice) {
+userSchema.methods.removeItemFromCart = function(productId) {
   let removedItemPrice = 0;
   const updatedCartItems = this.cart.items.filter(item => {
     if (item.productId.toString() === productId.toString()) {

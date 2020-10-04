@@ -1,0 +1,35 @@
+<%- include ('../Includes/header'); -%> 
+
+<link rel="stylesheet" type="text/css" href="/css/orders.css">
+
+</head>
+
+<body>
+    <%- include ('../Includes/navigation_bar'); -%> 
+    
+    <table>
+        <caption>Orders</caption>
+        <thead>
+          <tr>
+            <th scope="col">Sr.no</th>
+            <th scope="col">Order ID</th>
+            <th scope="col">Time</th>
+          </tr>
+        </thead>
+        <% let i = 1; %> 
+        <% if (orders.length > 0) { %> 
+          <tbody>
+            <% orders.forEach(order => { %> 
+              <tr onclick="window.location.href='/order/<%= order._id %>'">
+                <td data-label="Sr.no"><%= i++ %> </td>
+                <td data-label="Order ID">#<%= order._id %></td>
+                <td data-label="Time"><%= order.date %></td>
+              </tr>
+            <% }) %>
+          </tbody>
+        <% } else { %>
+          <h1>No Orders Yet</h1>
+        <% } %>  
+      </table>
+    
+<%- include ('../Includes/footer'); -%> 

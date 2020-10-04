@@ -2,6 +2,8 @@ const Product = require('../Model/product');
 const Cart = require('../Model/cart');
 const Order = require('../Model/order');
 
+const date = require('date-and-time');
+
 const User = require('../Model/user');
 
 const bcrypt = require('bcryptjs');
@@ -128,12 +130,15 @@ exports.updatedCartSession = (req, res, next) => {
 
 exports.placeOrder = (req, res, next) => {
 
+    const now = new Date();
+
     const order = new Order({
         user: {
             name: req.user.name,
             userId: req.user
         },
-        cart: req.user.cart
+        cart: req.user.cart,
+        date: date.format(now, 'YYYY/MM/DD hh:mm A')
     });
     return order.save()
     .then(cart => {
@@ -168,4 +173,33 @@ exports.placeOrder = (req, res, next) => {
     // })
     // .catch(err => console.log(err));
 
+}
+
+exports.getOrders_Page = (req ,res, next) => {
+
+    Order.find({ "user.userId": req.user._id })
+    .then(orders => {
+        console.log(orders);
+        res.render('user_stuff/orders', {
+            pageTitle: 'Orders',
+            path: '/orders',
+            orders: orders
+        });
+    })
+    .catch(err => console.log(err));
+}
+
+exports.getOrderDetails_Page = (req, res, next) => {
+    const orderId = req.params.orderId;
+    console.log(orderId);
+    Order.findById(orderId)
+    .then(order => {
+        console.log("Requested Order");
+        console.log(order);
+        res.render('user_stuff/order_details', {
+            pageTitle: "Your Order",
+            cart: order.cart
+        });
+    })
+    .catch(err => console.log(err));
 }

@@ -35,6 +35,9 @@ router.post('/cart/rana_disposal/checkout/', check_cart, shopController.updatedC
 
 router.post('/cart/rana_disposal/order', shopController.placeOrder);
 
+router.get('/orders', shopController.getOrders_Page);
+router.get('/order/:orderId', shopController.getOrderDetails_Page);
+
 // router.post('/cart/rana_disposal/checkout', shopController.postCheckout);
 
 // ERROR ROUTE--> IF OTHER THAN THE ABOVE ROUTES ARE REQUESTED

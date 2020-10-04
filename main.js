@@ -1,5 +1,5 @@
 // All the Fuctionalities -----------------------------------
-const fs = require('fs');
+// const fs = require('fs');
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -8,9 +8,9 @@ const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const csrf = require('csurf');
 const flash = require('connect-flash');
-const helmet = require('helmet');
-const compression = require('compression');
-const morgan = require('morgan');
+// const helmet = require('helmet');
+// const compression = require('compression');
+// const morgan = require('morgan');
 
 // My database URL--------------------------------
 const MONGODB_URI = 'mongodb+srv://ronrana:zuLe04F6G9oLri3X@cluster0.xyk0z.gcp.mongodb.net/RanaDisposal?retryWrites=true&w=majority';
@@ -79,11 +79,11 @@ const adminRoutes = require('./Routes/admin');
 // Authentication Route
 const authRoutes = require('./Routes/auth');
 
-const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), {flags: 'a'});
+// const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), {flags: 'a'});
 
-app.use(helmet());
+// app.use(helmet());
 // app.use(compression());
-app.use(morgan('combined', { stream: accessLogStream }));
+// app.use(morgan('combined', { stream: accessLogStream }));
 
 // SERVER TO HANDLE ROUTES ------------------------------------
 app.use('/shop/rana_disposal', adminRoutes);

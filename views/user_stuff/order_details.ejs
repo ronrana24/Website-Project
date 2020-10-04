@@ -1,0 +1,117 @@
+<%- include ('../Includes/header'); -%> 
+
+<link rel="stylesheet" href="/css/order_details.css" type="text/css">
+
+</head>
+
+<body>
+    <%- include ('../Includes/navigation_bar'); -%> 
+    <div class="ltr cZLe8 responsive _1UAmk" data-hook="app-wrapper">
+        <div class="AUSoa">
+            <div data-hook="cart-content">
+                <div class="_3NwQm">
+                    <div class="_49NEN _1HoSi">
+                        <div data-hook="item-list" class="qtNsu">
+                            <div class="_2_ySV">
+                                <div class="_1b09Q">
+                                    <div class="_2HrQG CGRWH _1L-As _3cK0T">
+                                        <h2 class="_2Znzd" data-hook="cart-title">My Cart</h2>
+                                    </div>
+                                </div>
+                                <div>
+                                    <% cart.items.forEach(item => { %> 
+                                        <section data-hook="item" class="Ahf9B" aria-labelledby="item_sku_1">
+                                            <div class="_2ZZtv">
+                                                <div class="Ogidf">
+                                                    <div class="_2u963">
+                                                            <div class="_3HaEP" data-hook="product-thumbnail-wrapper">
+                                                                <img
+                                                                    data-hook="wix-media-image"
+                                                                    src="https://static.wixstatic.com/media/84770f_c973116c9716413ca74e8217a2279230.png/v1/fill/w_100,h_142,q_85,usm_0.66_1.00_0.01/84770f_c973116c9716413ca74e8217a2279230.png"
+                                                                    srcset="https://static.wixstatic.com/media/84770f_c973116c9716413ca74e8217a2279230.png/v1/fill/w_100,h_142,q_85,usm_0.66_1.00_0.01/84770f_c973116c9716413ca74e8217a2279230.png 1x, https://static.wixstatic.com/media/84770f_c973116c9716413ca74e8217a2279230.png/v1/fill/w_200,h_284,q_85,usm_0.66_1.00_0.01/84770f_c973116c9716413ca74e8217a2279230.png 2x, https://static.wixstatic.com/media/84770f_c973116c9716413ca74e8217a2279230.png/v1/fill/w_300,h_426,q_85,usm_0.66_1.00_0.01/84770f_c973116c9716413ca74e8217a2279230.png 3x"
+                                                                    alt="<%= item.productName %>" aria-hidden="false"
+                                                                    style="width: 100px; height: 141.875px;">
+                                                            </div>
+                                                        </div>
+                                                    <div class="_3t87a">
+                                                        <div>
+                                                            <h3 id="item_sku_1" data-hook="product-name">
+                                                                <%= item.productName %>
+                                                            </h3>
+                                                            <div class="N21Gb">
+                                                                <div class="_2wtOJ">
+                                                                    <span>
+                                                                        &#x20B9;<%= item.price %>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="_3ur41 _1vjgH"><span class="_3iS3A _13S_f"
+                                                                data-hook="product-quantity"
+                                                                data-content-hook="tooltip-content-product-quantity-1">
+                                                                <div class="Ssv6i _3GKP6 _26sRI _1boDx"
+                                                                    data-hook="product-quantity-input" data-size="small">
+                                                                    <div class="_3sBNH"><input data-hook="wsr-input"
+                                                                            class="_1RFas _2oHMR" maxlength="524288"
+                                                                            type="number" aria-label="quantity"
+                                                                            aria-describedby="1quantity_alert" value="<%= item.quantity %>"
+                                                                            style="text-overflow: clip;" readonly>
+                                                                        <div class="_3XjRl">
+                                                                            <div class="_1wTId">
+                                                                                <span data-hook="product-quantity-ticker" class="_1ytDW">
+                                                                                </span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="_3i7aE">
+                                                    <div><span class="_218Fy">Total</span><span
+                                                            data-hook="product-total-price" aria-live="polite"
+                                                            aria-relevant="all" aria-atomic="true" class="">&#x20B9;<%= (item.price * item.quantity) %></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </section>
+                                    <% }) %> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="_218Fy" aria-live="polite" aria-relevant="additions text" aria-atomic="false"></div>
+            </div>
+            <div data-hook="options-column">
+                <section data-hook="total-area" aria-label="cart summary">
+                    <h2 class="N_ptS" data-hook="totals-checkout-title">Order Summary</h2>
+                    <div class="KN0in" data-hook="totals">
+                        <div data-hook="subtotal" class="UoPiM">
+                            <dl>
+                                <div>
+                                    <dt>Subtotal</dt>
+                                    <dd data-hook="subtotal-text">&#x20B9;<%= cart.totalPrice %></dd>
+                                </div>
+                            </dl>
+                        </div>
+                        <div></div>
+                        <div class="_3XJ6U">
+                            <dl>
+                                <dt data-hook="total-label">Total</dt>
+                                <dd data-hook="estimated-total" role="status" aria-live="assertive" id="total-sum">
+                                    &#x20B9;<%= cart.totalPrice %> 
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                    <div class="ljoDU">
+                        <div data-hook="checkout-buttons" class="_2X0eZ"></div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    
+<%- include ('../Includes/footer'); -%> 
