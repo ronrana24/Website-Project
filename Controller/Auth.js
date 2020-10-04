@@ -20,6 +20,7 @@ exports.getLogin_page = (req, res, next) => {
 };
 
 exports.postLogin = (req, res, next) => {
+    console.log(req.body);
     const password = req.body.password;
     const username = req.body.username;
     Admin.findById("5f62047ac2be48511ca9d9a8")
@@ -38,11 +39,20 @@ exports.postLogin = (req, res, next) => {
                         if (doMatch) {
                             req.session.customerLoggedIn = true;
                             req.session.user = user;
+                            if (req.body.remember_me) {
+                                req.session.remember_me = true;
+                            } else {
+                                req.session.remember_me = false;
+                            }
                             req.session.save(err => {
                                 console.log(err);
                             });
                             console.log("customer enterd successfully");
-                            res.redirect('/');
+                            if (req.session.cart.items.length > 0) {
+                                res.redirect('/cart/rana_disposal/checkout/');
+                            } else {
+                                res.redirect('/');
+                            }
                         } else {
                             console.log("Dont match");
                             res.redirect('/login/shop/rana_disposal');

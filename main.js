@@ -8,6 +8,7 @@ const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const csrf = require('csurf');
 const flash = require('connect-flash');
+const Cart = require('./Model/cart');
 // const helmet = require('helmet');
 // const compression = require('compression');
 // const morgan = require('morgan');
@@ -50,6 +51,8 @@ app.set('views', 'views');
 
 app.use((req, res, next) => {
     if (!req.session.user) {
+        const cart = new Cart(req.session.cart ? req.session.cart : {items: []});
+        req.session.cart = cart;
         return next();
     }
     User.findById(req.session.user._id)
@@ -60,12 +63,12 @@ app.use((req, res, next) => {
     .catch(err => {
         console.log(err);
     });
-})
+});
 
 // local variable for all the views to protect steeling my sessions--------------------
 app.use((req, res, next) => {
     res.locals.csrfToken = req.csrfToken();
-    res.locals.cartItems = req.user ? req.user.cart.items.length : 0;
+    res.locals.cartItems = req.user ? req.user.cart.items.length : req.session.cart.items.length;
     res.locals.customerLoggedIn = req.session.customerLoggedIn;
     next();
 });
@@ -100,18 +103,8 @@ mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true}
     app.listen(PORT, function() {
         console.log("Go to port 3000 :)");
     });
+    
 })
 .catch(err => {
     console.log(err);
 });
-
-
-
-
-
-
-
-//! ADMIN PASSWORD IS 
-//- 3-A Ekta Vihar Baltana
-
-

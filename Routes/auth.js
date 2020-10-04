@@ -11,9 +11,7 @@ const { check, body } = require('express-validator');
 
 // Route to get the login form for the admin
 router.get('/login/shop/rana_disposal', authController.getLogin_page);
-router.post('/login/shop/rana_disposal', [
-    body('password', 'Please Enter a Valid Password')
-], authController.postLogin);
+router.post('/login/shop/rana_disposal', authController.postLogin);
 
 
 router.get('/signup/shop/rana_disposal/', authController.getSignUp_Page);

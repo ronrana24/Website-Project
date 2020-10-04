@@ -5,20 +5,24 @@ module.exports = function Cart (oldCart) {
 
     this.add = function (id, price, quantity, name, quantity_price) {
        const currentItem_id = id;
-       const i = this.items.findIndex(item => item._id === id);
+       const i = this.items.findIndex(item => item.productId === id);
        if (i < 0) {
            this.items.push({
-               _id: currentItem_id,
-               name: name,
+               productId: currentItem_id,
+               productName: name,
                price: price,
-               quantity_price: quantity_price,
+               quantityPrice: quantity_price,
                quantity: quantity
            });
        } else {
-           this.items[i].price += price * quantity;
-           this.items[i].quantity += quantity;
+            this.items[i].quantity += quantity;
+            if (this.items[i].quantity > 10) {
+                this.items[i].price = quantity_price;
+            } else {
+                this.items[i].price = price;
+            }           
        }
-       this.totalQuantity += quantity;
+        this.totalQuantity += quantity;
         this.totalPrice += price * quantity;
     }
 }

@@ -13,7 +13,9 @@
                   <a href="/">Home</a>
                   <a href="/shop">Shop</a>
                   <a href="/contact">Contact</a>
-                  <a href="/orders">Orders</a>
+                  <% if (customerLoggedIn) { %> 
+                    <a href="/orders">Orders</a>
+                  <% } %> 
               </div>
           </div>
           <div class="navbar_title_layout">

@@ -45,8 +45,8 @@ exports.getContact_Page = (req, res, next) => {
 // Add to Cart Item
 exports.sendItemToCart = (req, res, next) => {
     const productId = req.params.productID;
-    const qty = parseInt(req.query.quantity);
-    // const cart = new Cart(req.session.cart ? req.session.cart : {items: []});
+    const qty = parseInt(req.body.quantity);
+    const cart = new Cart(req.session.cart ? req.session.cart : {items: []});
     Product.findById(productId)
     .then(product => {
         const productName = product.name;
@@ -59,10 +59,12 @@ exports.sendItemToCart = (req, res, next) => {
             price = parseInt(product.price);
         } 
         console.log("Adding item to cart --> ");
-        return req.user.addToCart(productId, qty, price, productName, quantityPrice);
-
-        // cart.add(productId, price, qty, productName, product.quantity_price);
-        // req.session.cart = cart;
+        if (req.user) {
+            return req.user.addToCart(productId, qty, price, productName, quantityPrice);
+        } else {
+            cart.add(productId, price, qty, productName, product.quantity_price);
+            return req.session.cart = cart;
+        }
     })
     .then(result => {
         console.log(result);
@@ -78,7 +80,7 @@ exports.getCart_Page = (req, res, next) => {
     res.render('user_stuff/cart', {
         pageTitle: 'Cart',
         path: '/cart',
-        cart: req.user.cart
+        cart: req.user ? req.user.cart : req.session.cart
     });   
 };
 
@@ -96,22 +98,31 @@ exports.getCart_Page = (req, res, next) => {
 
 exports.removeItemFromCart = (req, res, next) => {
     const productId = req.params.cartProductId;
-    console.log("Your poduct is now removing " + productId);    
-    req.user
-    .removeItemFromCart(productId)
-    .then(result => {
+    console.log("Your poduct is now removing " + productId);  
+    if (req.user) {
+        req.user
+        .removeItemFromCart(productId)
+        .then(result => {
+            res.redirect('/cart');
+        })
+        .catch(err => console.log(err));
+    } else {
+        const cartItems = req.session.cart.items;
+        const index = cartItems.findIndex(item => {
+            return item.productId === productId;
+        });
+        cartItems.splice(index, 1);
         res.redirect('/cart');
-    })
-    .catch(err => console.log(err));
-    // cartItems.splice(index, 1);
+    }
+    
 }
 
 exports.getCheckout_Page = (req, res, next) => {
     res.render('user_stuff/checkout', {
         pageTitle: "User Info",
         path: '/cart/rana_disposal/checkout/',
-        cartItems: req.user.cart.items,
-        cart: req.user.cart
+        cartItems: req.user.cart.items ? req.user.cart.items : req.session.cart.items,
+        cart: req.user.cart ? req.user.cart : req.session.cart
     });
 }
 
@@ -119,12 +130,33 @@ exports.updatedCartSession = (req, res, next) => {
     if(req.body.update === '') {
         res.redirect('/shop');
     } else {
-        const quantityArray = req.body.quantity;
-        req.user.updateCart(quantityArray, 0)
-        .then(result => {
-            res.redirect('/cart/rana_disposal/checkout/');
-        })
-        .catch(err => console.log(err));
+        if (req.user) {
+            const quantityArray = req.body.quantity;
+            req.user.updateCart(quantityArray, 0)
+            .then(result => {
+                res.redirect('/cart/rana_disposal/checkout/');
+            })
+            .catch(err => console.log(err));
+        } else {
+            console.log(req.body);
+            const cart = req.session.cart;
+            const quantity = req.body.quantity;
+            let i=0;
+            let totalQuantity = 0;
+            let totalPrice = 0;
+            cart.items.forEach(item => {
+                item.quantity = parseInt(quantity[i]);
+                totalQuantity += parseInt(quantity[i]);
+                if (item.quantity > 10) {
+                    item.price = item.quantityPrice;
+                }
+                totalPrice += item.price * item.quantity;
+                i++;
+            });
+            cart.totalQuantity = totalQuantity;
+            cart.totalPrice = totalPrice;
+            res.redirect('/login/shop/rana_disposal');
+        }
     }
 };
 
@@ -142,6 +174,9 @@ exports.placeOrder = (req, res, next) => {
     });
     return order.save()
     .then(cart => {
+        if (!req.session.remember_me) {
+            req.session.destroy();
+        }
         return req.user.clearCart();
     })
     .then(() => {

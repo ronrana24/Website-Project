@@ -35,7 +35,7 @@
                         <span class="price">Rs. </span>
                     </div> -->
                 </div>
-                <form action="/add-to-cart/<%= products[i]._id %>" method="GET">
+                <form action="/add-to-cart/<%= products[i]._id %>" method="POST">
                     <div class="product_quantity_layout">
                         <button class="product_quantity_add_remove increase_quantity" type="button" onclick="increment_value(<%- i %>, <%- products[i].quantity_price %>)">
                             <svg width="12" height="12" viewBox="0 0 12 12">
