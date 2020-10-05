@@ -10,7 +10,7 @@ const csrf = require('csurf');
 const flash = require('connect-flash');
 const Cart = require('./Model/cart');
 const helmet = require('helmet');
-// const compression = require('compression');
+const compression = require('compression');
 // const morgan = require('morgan');
 
 // My database URL--------------------------------
@@ -88,7 +88,7 @@ const authRoutes = require('./Routes/auth');
 // const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), {flags: 'a'});
 
 app.use(helmet());
-// app.use(compression());
+app.use(compression());
 // app.use(morgan('combined', { stream: accessLogStream }));
 
 // SERVER TO HANDLE ROUTES ------------------------------------
@@ -97,14 +97,11 @@ app.use(authRoutes);
 app.use(shopRoutes);
 
 // Coonecting to mongoose Database i.e. --> RanaDisposal --------------------------
-mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true})
+mongoose
+.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true})
 .then(result => {
-    console.log("Database Connected!");
-
     // App listen
-    app.listen(process.env.PORT || 3000, function() {
-        console.log("Go to port 3000 :)");
-    });
+    app.listen(process.env.PORT || 3000);
     
 })
 .catch(err => {
