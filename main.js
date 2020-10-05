@@ -14,7 +14,7 @@ const Cart = require('./Model/cart');
 // const morgan = require('morgan');
 
 // My database URL--------------------------------
-const MONGODB_URI = 'mongodb+srv://ronrana:zuLe04F6G9oLri3X@cluster0.xyk0z.gcp.mongodb.net/RanaDisposal?retryWrites=true&w=majority';
+const MONGODB_URI = 'mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.xyk0z.gcp.mongodb.net/${process.env.MONGO_DEFAULT_DATABASE}?retryWrites=true&w=majority';
 
 
 const store = new MongoDBStore({
@@ -99,8 +99,7 @@ mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true}
     console.log("Database Connected!");
 
     // App listen
-    var PORT = 3000;
-    app.listen(PORT, function() {
+    app.listen(process.env.PORT || 3000, function() {
         console.log("Go to port 3000 :)");
     });
     
