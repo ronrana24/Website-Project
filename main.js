@@ -11,14 +11,10 @@ const flash = require('connect-flash');
 const Cart = require('./Model/cart');
 const helmet = require('helmet');
 const compression = require('compression');
-const dotenv = require('dotenv');
-const morgan = require('morgan');
+// const morgan = require('morgan');
 
 // My database URL--------------------------------
-const MONGODB_URI = `mongodb+srv://
-${process.env.MONGO_USER}:
-${process.env.MONGO_PASSWORD}@cluster0.xyk0z.gcp.mongodb.net/
-${process.env.MONGO_DEFAULT_DATABASE}`;
+const MONGODB_URI = 'mongodb+srv://ronrana:A8j1JXMB5ufiKFq4@cluster0.xyk0z.gcp.mongodb.net/RanaDisposal';
 
 
 const store = new MongoDBStore({
