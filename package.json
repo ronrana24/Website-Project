@@ -8,7 +8,7 @@
   },
   "scripts": {
     "build:css": "tailwind build src/style.css -o public/css/style.css",
-    "start": "NODE_ENV=production MONGO_USER=ronrana MONGO_PASSWORD=zuLe04F6G9oLri3X MONGO_DEFAULT_DATABASE=RanaDisposal node main.js",
+    "start": "NODE_ENV=production MONGO_USER=ronrana MONGO_PASSWORD=A8j1JXMB5ufiKFq4 MONGO_DEFAULT_DATABASE=RanaDisposal node main.js",
     "start-server": "node main.js"
   },
   "author": "Rahul Rana",
