@@ -12,7 +12,7 @@ const Cart = require('./Model/cart');
 const helmet = require('helmet');
 const compression = require('compression');
 const dotenv = require('dotenv');
-// const morgan = require('morgan');
+const morgan = require('morgan');
 
 // My database URL--------------------------------
 const MONGODB_URI = `mongodb+srv://
