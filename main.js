@@ -14,7 +14,10 @@ const helmet = require('helmet');
 // const morgan = require('morgan');
 
 // My database URL--------------------------------
-const MONGODB_URI = 'mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.xyk0z.gcp.mongodb.net/${process.env.MONGO_DEFAULT_DATABASE}?retryWrites=true&w=majority';
+const MONGODB_URI = `mongodb+srv://
+${process.env.MONGO_USER}:
+${process.env.MONGO_PASSWORD}@cluster0.xyk0z.gcp.mongodb.net/
+${process.env.MONGO_DEFAULT_DATABASE}?retryWrites=true&w=majority`;
 
 
 const store = new MongoDBStore({
