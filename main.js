@@ -11,13 +11,14 @@ const flash = require('connect-flash');
 const Cart = require('./Model/cart');
 const helmet = require('helmet');
 const compression = require('compression');
+const dotenv = require('dotenv');
 // const morgan = require('morgan');
 
 // My database URL--------------------------------
 const MONGODB_URI = `mongodb+srv://
 ${process.env.MONGO_USER}:
 ${process.env.MONGO_PASSWORD}@cluster0.xyk0z.gcp.mongodb.net/
-${process.env.MONGO_DEFAULT_DATABASE}?retryWrites=true&w=majority`;
+${process.env.MONGO_DEFAULT_DATABASE}`;
 
 
 const store = new MongoDBStore({
@@ -88,7 +89,7 @@ const authRoutes = require('./Routes/auth');
 // const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), {flags: 'a'});
 
 app.use(helmet());
-app.use(compression());
+// app.use(compression());
 // app.use(morgan('combined', { stream: accessLogStream }));
 
 // SERVER TO HANDLE ROUTES ------------------------------------

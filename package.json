@@ -8,7 +8,7 @@
   },
   "scripts": {
     "build:css": "tailwind build src/style.css -o public/css/style.css",
-    "start": "NODE_ENV=production MONGO_USER=ronrana MONGO_PASSWORD=A8j1JXMB5ufiKFq4 MONGO_DEFAULT_DATABASE=RanaDisposal node main.js",
+    "start": "MONGO_USER=ronrana MONGO_PASSWORD=A8j1JXMB5ufiKFq4 MONGO_DEFAULT_DATABASE=RanaDisposal node main.js",
     "start-server": "node main.js"
   },
   "author": "Rahul Rana",
@@ -22,6 +22,7 @@
     "csurf": "^1.11.0",
     "date-and-time": "^0.14.1",
     "date-time": "^3.1.0",
+    "dotenv": "^8.2.0",
     "ejs": "^3.1.3",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
