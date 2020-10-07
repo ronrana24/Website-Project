@@ -1,53 +1,57 @@
 <div class="navbar_layout">
-  <div class="navbar_inner_layout">
-      <div class="navbar_menu_title_layout">
-          <div class="navbar_menu_layout one-quater">
-              <div class="navbar_mobile_hide">
-                  <button type="button" class="icon-fallback-text site-nav__link site-nav__link--burger js-drawer-open-button-left" aria-controls="NavDrawer" aria-expanded="false">
-                      <span class="burger-icon burger-icon--top"></span>
-                      <span class="burger-icon burger-icon--mid"></span>
-                      <span class="burger-icon burger-icon--bottom"></span>
+    <div class="navbar_inner_layout">
+        <div class="navbar_menu_title_layout">
+            <div class="navbar_menu_layout one-quater">
+                <div class="navbar_mobile_hide">
+                    <button type="button"
+                        class="icon-fallback-text site-nav__link site-nav__link--burger js-drawer-open-button-left"
+                        aria-controls="NavDrawer" aria-expanded="false" id="navbar_btn" style="z-index: 1005;">
+                        <span class="burger-icon burger-icon--top" id="burger--top"></span>
+                        <span class="burger-icon burger-icon--mid" id="burger--mid"></span>
+                        <span class="burger-icon burger-icon--bottom" id="burger--bottom"></span>
                     </button>
-              </div>
-              <div class="navbar_menu">
-                  <a href="/">Home</a>
-                  <a href="/shop">Shop</a>
-                  <a href="/contact">Contact</a>
-                  <% if (customerLoggedIn) { %> 
+                </div>
+                <div class="navbar_menu">
+                    <a href="/">Home</a>
+                    <a href="/shop">Shop</a>
+                    <a href="/contact">Contact</a>
+                    <% if (customerLoggedIn) { %>
                     <a href="/orders">Orders</a>
-                  <% } %> 
-              </div>
-          </div>
-          <div class="navbar_title_layout">
-              <a href="/">Rana Disposal's</a>
-          </div>
-          <div class="navbar_login_cart_layout">
-            <% if (!customerLoggedIn) { %>
+                    <% } %>
+                </div>
+            </div>
+            <div class="navbar_title_layout">
+                <a href="/">Rana Disposal's</a>
+            </div>
+            <div class="navbar_login_cart_layout">
+                <% if (!customerLoggedIn) { %>
                 <div class="navbar_login_cart login">
                     <a href="/login/shop/rana_disposal">Login</a>
                 </div>
-            <% } %>
-            <% if (customerLoggedIn) { %> 
+                <% } %>
+                <% if (customerLoggedIn) { %>
                 <div class="navbar_login_cart login">
                     <a href="/logout/shop/rana_disposal">Logout</a>
                 </div>
-            <% } %> 
-              <div class="navbar_login_cart">
-                  <a href="/cart" class="navbar_cart">
-                      <svg class="icon icon--cart" viewBox="0 0 31 26">
-                          <g class="svg-icon cart-icon--odd">
-                            <circle stroke-miterlimit="10" cx="22.5" cy="21.5" r="1"></circle>
-                            <circle stroke-miterlimit="10" cx="9.5" cy="21.5" r="1"></circle>
-                            <path fill="none" stroke-miterlimit="10" d="M0,1.5h5c0.6,0,1.1,0.4,1.1,1l1.7,13
-                              c0.1,0.5,0.6,1,1.1,1h15c0.5,0,1.2-0.4,1.4-0.9l3.3-8.1c0.2-0.5-0.1-0.9-0.6-0.9H12"></path>
-                          </g>
-                      </svg>
-                      <div class="navbar_cart_icon_quantity">
-                          <span><%= cartItems %></span>
-                      </div>
-                  </a>
-              </div>
-          </div>
-      </div>
-  </div>
+                <% } %>
+                <% if(!adminUserLoggedIn) { %> 
+                    <div class="navbar_login_cart">
+                        <a href="/cart" class="navbar_cart">
+                            <svg class="icon icon--cart" viewBox="0 0 31 26">
+                                <g class="svg-icon cart-icon--odd">
+                                    <circle stroke-miterlimit="10" cx="22.5" cy="21.5" r="1"></circle>
+                                    <circle stroke-miterlimit="10" cx="9.5" cy="21.5" r="1"></circle>
+                                    <path fill="none" stroke-miterlimit="10" d="M0,1.5h5c0.6,0,1.1,0.4,1.1,1l1.7,13
+                                    c0.1,0.5,0.6,1,1.1,1h15c0.5,0,1.2-0.4,1.4-0.9l3.3-8.1c0.2-0.5-0.1-0.9-0.6-0.9H12"></path>
+                                </g>
+                            </svg>
+                            <div class="navbar_cart_icon_quantity">
+                                <span><%= cartItems %></span>
+                            </div>
+                        </a>
+                    </div>
+                <% } %> 
+            </div>
+        </div>
+    </div>
 </div>

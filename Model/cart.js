@@ -16,7 +16,7 @@ module.exports = function Cart (oldCart) {
            });
        } else {
             this.items[i].quantity += quantity;
-            if (this.items[i].quantity > 10) {
+            if (this.items[i].quantity >= 10) {
                 this.items[i].price = quantity_price;
             } else {
                 this.items[i].price = price;

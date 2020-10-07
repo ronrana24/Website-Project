@@ -1,6 +1,6 @@
 const shopController = require('../Controller/Shop');
 const errorController = require('../Controller/Error');
-
+const isAuth = require('../middleware/is-auth');
 const express = require('express');
 
 const check_cart = require('../middleware/check-cart');
@@ -31,8 +31,8 @@ router.post('/add-to-cart/:productID', shopController.sendItemToCart);
 
 router.get('/cart/remove/:cartProductId', shopController.removeItemFromCart);
 
-router.get('/cart/rana_disposal/checkout/', check_cart, shopController.getCheckout_Page);
-router.post('/cart/rana_disposal/checkout/', check_cart,shopController.updatedCartSession);
+router.get('/cart/rana_disposal/checkout/', check_cart, isAuth.isCustomerLogged, shopController.getCheckout_Page);
+router.post('/cart/rana_disposal/checkout/', check_cart, isAuth.isCustomerLogged, shopController.updatedCartSession);
 
 router.post('/cart/rana_disposal/order', shopController.placeOrder);
 

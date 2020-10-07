@@ -12,9 +12,4 @@ module.exports = (req, res, next) => {
             return res.redirect('/shop');
         }
     }
-    // if (req.user.cart.items.length > 0 || req.session.cart.items.length > 0) {
-    //     return next();
-    // } else {
-    //     res.redirect('/shop');
-    // }
 }

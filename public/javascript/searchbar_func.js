@@ -1,7 +1,6 @@
 const searchFunction = () => {
     const input = document.getElementById("bar");
-    // console.log(input)
-    // console.log(input.value);
+    console.log(input.value);
     let filter = input.value.toLowerCase();
     const ul = document.getElementById("list_of_products");
     let li = document.getElementsByTagName('li');

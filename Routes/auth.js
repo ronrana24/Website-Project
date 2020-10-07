@@ -5,6 +5,7 @@ const router = express.Router();
 const authController = require('../Controller/Auth');
 
 const { check, body } = require('express-validator');
+const { route } = require('./shop');
 // const { route } = require('./shop');
 
 // ROUTES ---------------------------------------------------------------
@@ -18,6 +19,11 @@ router.get('/signup/shop/rana_disposal/', authController.getSignUp_Page);
 router.post('/signup/shop/rana_disposal/', authController.addNewUser);
 
 router.get('/logout/shop/rana_disposal', authController.logoutUser);
+
+router.get('/shop/rana_disposal/admin/signup', authController.getAdminSignUp_Page);
+router.post('/shop/rana_disposal/admin/signup', authController.addAdminUser);
+
+router.get('/shop/rana_disposal/admin/signout', authController.logoutAdminUser);
 
 
 

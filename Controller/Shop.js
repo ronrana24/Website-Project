@@ -84,17 +84,6 @@ exports.getCart_Page = (req, res, next) => {
     });   
 };
 
-// exports.getUserInfo_Page = (req, res, next) => {
-//     console.log(req.body)
-//     if(req.query.checkout === '') {
-//         res.render('user_stuff/checkout', {
-//             pageTitle: "Checkout",
-//             path: '/cart/rana_disposal/user_info'
-//         });
-//     } else {
-//         res.redirect('/shop');
-//     }
-// };
 
 exports.removeItemFromCart = (req, res, next) => {
     const productId = req.params.cartProductId;
@@ -127,10 +116,8 @@ exports.getCheckout_Page = (req, res, next) => {
 }
 
 exports.updatedCartSession = (req, res, next) => {
-    if(req.body.update === '') {
-        res.redirect('/shop');
-    } else {
-        if (req.user) {
+    if (req.user) {
+        if (req.user.cart.items.length > 0)  {
             const quantityArray = req.body.quantity;
             req.user.updateCart(quantityArray, 0)
             .then(result => {
@@ -155,10 +142,11 @@ exports.updatedCartSession = (req, res, next) => {
             });
             cart.totalQuantity = totalQuantity;
             cart.totalPrice = totalPrice;
-            res.redirect('/login/shop/rana_disposal');
+            req.session.save();
+            res.redirect('/cart/rana_disposal/checkout/');
         }
     }
-};
+}
 
 exports.placeOrder = (req, res, next) => {
 

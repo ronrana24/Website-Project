@@ -11,14 +11,16 @@ const flash = require('connect-flash');
 const Cart = require('./Model/cart');
 const helmet = require('helmet');
 const compression = require('compression');
+require('dotenv').config();
 // const morgan = require('morgan');
 
 // My database URL--------------------------------
-const MONGODB_URI = 'mongodb+srv://ronrana:A8j1JXMB5ufiKFq4@cluster0.xyk0z.gcp.mongodb.net/RanaDisposal';
+const MONGODB_URI = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.xyk0z.gcp.mongodb.net/
+${process.env.MONGO_DEFAULT_DATABASE}?retryWrites=true&w=majority`;
 
 
 const store = new MongoDBStore({
-    uri: MONGODB_URI,
+    uri: MONGODB_URI, 
     collection: 'sessions'
 });
 
@@ -70,6 +72,7 @@ app.use((req, res, next) => {
     res.locals.csrfToken = req.csrfToken();
     res.locals.cartItems = req.user ? req.user.cart.items.length : req.session.cart.items.length;
     res.locals.customerLoggedIn = req.session.customerLoggedIn;
+    res.locals.adminUserLoggedIn = req.session.adminUserLoggedIn;
     next();
 });
 
@@ -100,10 +103,12 @@ app.use(shopRoutes);
 
 // Coonecting to mongoose Database i.e. --> RanaDisposal --------------------------
 mongoose
-.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true})
+.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
 .then(result => {
     // App listen
-    app.listen(process.env.PORT || 3000);
+    app.listen(process.env.PORT || 3000, ()=> {
+        console.log("Site Launched!");
+    });
     
 })
 .catch(err => {

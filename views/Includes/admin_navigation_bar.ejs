@@ -3,11 +3,13 @@
       <div class="navbar_menu_title_layout">
           <div class="navbar_menu_layout one-quater">
               <div class="navbar_mobile_hide">
-                  <button type="button" class="icon-fallback-text site-nav__link site-nav__link--burger js-drawer-open-button-left" aria-controls="NavDrawer" aria-expanded="false">
-                      <span class="burger-icon burger-icon--top"></span>
-                      <span class="burger-icon burger-icon--mid"></span>
-                      <span class="burger-icon burger-icon--bottom"></span>
-                    </button>
+                <button type="button"
+                class="icon-fallback-text site-nav__link site-nav__link--burger js-drawer-open-button-left"
+                aria-controls="NavDrawer" aria-expanded="false" id="navbar_btn" style="z-index: 1005;">
+                <span class="burger-icon burger-icon--top" id="burger--top"></span>
+                <span class="burger-icon burger-icon--mid" id="burger--mid"></span>
+                <span class="burger-icon burger-icon--bottom" id="burger--bottom"></span>
+            </button>
               </div>
               <div class="navbar_menu">
                   <a href="/shop/rana_disposal/">Home</a>
@@ -21,6 +23,9 @@
               <a href="/">Rana Disposal's</a>
           </div>
           <div class="navbar_login_cart_layout">
+            <div class="navbar_login_cart">
+                <a href="/shop/rana_disposal/admin/signout">Logout</a>
+              </div>
               <div class="navbar_login_cart">
                 <a href="/shop/rana_disposal/orders">Orders</a>
               </div>

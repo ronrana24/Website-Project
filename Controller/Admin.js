@@ -1,4 +1,5 @@
 const Product = require('../Model/product');
+const Order = require('../Model/order');
 
 exports.getStatistics_Page = (req, res, next) => {
     res.render('admin_stuff/statistics_shop', {
@@ -133,12 +134,17 @@ exports.getAdminHome_Page = (req, res, next) => {
 } 
 
 exports.getOrdersPage = (req, res, next) => {
-    console.log("You are here")
-    res.render('admin_stuff/orders', {
-        pageTitle: 'Orders',
-        path: '/shop/rana_disposal/orders',
-        name: req.session.adminUserName,
-        // session: req.session
-    });
+    Order.find()
+    .then(orders => {
+        console.log(orders);
+        res.render('admin_stuff/orders', {
+            pageTitle: 'Orders',
+            path: '/shop/rana_disposal/orders',
+            name: req.session.adminUserName,
+            orders: orders
+            // session: req.session
+        });
+    })
+    .catch(err => console.log(err));
     // req.session.destroy();
 }

@@ -5,86 +5,42 @@
 
 <body>
     <%- include ('../Includes/admin_navigation_bar'); -%> 
-    <table>
-        <caption>Orders</caption>
-        <thead>
-          <tr>
-            <th scope="col">Business Name</th>
-            <th scope="col">Address</th>
-            <th scope="col">Phone Number</th>
-            <th scope="col">Products</th>
-            <th scope="col">Quantity</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td data-label="Business Name">Visa - 3412</td>
-            <td data-label="Address">04/01/2016</td>
-            <td data-label="Phone Number">$1,190</td>
-            <td data-label="Products">
-              <ul>
-                <li>03/01/2016 - 03/31/2016</li>
-                <li>03/01/2016 - 03/31/2016</li>
-              </ul>
-            </td>
-            <td data-label="Quantity">
-              <ul>
-                <li>$1,190</li>
-                <li>$1,190</li>
-              </ul>
-            </td>
-          </tr>
-          <tr>
-            <td data-label="Business Name">Visa - 3412</td>
-            <td data-label="Address">04/01/2016</td>
-            <td data-label="Phone Number">$1,190</td>
-            <td data-label="Products">
-              <ul>
-                <li>03/01/2016 - 03/31/2016</li>
-                <li>03/01/2016 - 03/31/2016</li>
-              </ul>
-            </td>
-            <td data-label="Quantity">
-              <ul>
-                <li>$1,190</li>
-                <li>$1,190</li>
-              </ul>
-            </td>
-          </tr>
-          <tr>
-            <td data-label="Business Name">Visa - 3412</td>
-            <td data-label="Address">04/01/2016</td>
-            <td data-label="Phone Number">$1,190</td>
-            <td data-label="Products">
-              <ul>
-                <li>03/01/2016 - 03/31/2016</li>
-                <li>03/01/2016 - 03/31/2016</li>
-              </ul>
-            </td>
-            <td data-label="Quantity">
-              <ul>
-                <li>$1,190</li>
-                <li>$1,190</li>
-              </ul>
-            </td>
-          <tr>
-            <td data-label="Business Name">Visa - 3412</td>
-            <td data-label="Address">04/01/2016</td>
-            <td data-label="Phone Number">$1,190</td>
-            <td data-label="Products">
-              <ul>
-                <li>03/01/2016 - 03/31/2016</li>
-                <li>03/01/2016 - 03/31/2016</li>
-              </ul>
-            </td>
-            <td data-label="Quantity">
-              <ul>
-                <li>$1,190</li>
-                <li>$1,190</li>
-              </ul>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+    <% if (orders.length == 0) { %>
+      <h1>No Orders Yet !</h1>
+      <% } else { %>
+        <table>
+          <caption>Orders</caption>
+          <thead>
+            <tr>
+              <th scope="col">Business Name</th>
+              <th scope="col">Address</th>
+              <th scope="col">Phone Number</th>
+              <th scope="col">Products</th>
+              <th scope="col">Quantity</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% orders.forEach(order => { %> 
+            <tr>
+              <td data-label="Business Name"><%= order.user.name %></td>
+              <td data-label="Address">04/01/2016</td>
+              <td data-label="Phone Number">$1,190</td> 
+              <td data-label="Products">
+                <ul>
+                  <li>03/01/2016 - 03/31/2016</li>
+                  <li>03/01/2016 - 03/31/2016</li>
+                </ul>
+              </td>
+              <td data-label="Quantity">
+                <ul>
+                  <li>$1,190</li>
+                  <li>$1,190</li>
+                </ul>
+              </td>
+            </tr>
+            <% }); %> 
+          </tbody>
+        </table>
+      <% } %>   
     
 <%- include ('../Includes/footer'); -%> 

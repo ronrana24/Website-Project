@@ -165,3 +165,42 @@
         display: none !important;
     }
 }
+
+.burger-icon--top-close {
+    -webkit-transform: translateY(10px) translateY(-50%) rotate(-45deg);
+    transform: translateY(6px) translateY(-50%) rotate(-45deg);
+}
+.burger-icon--mid-close {
+    opacity: 0;
+}
+.burger-icon--bottom-close {
+    -webkit-transform: translateY(-10px) translateY(50%) rotate(45deg);
+    transform: translateY(-10px) translateY(50%) rotate(45deg);
+}
+.style-kfdore2qoverlay {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+#MENU_AS_CONTAINER_EXPANDABLE_MENU {
+    position: relative;
+    margin: 0px 0px 0 0;
+    left: 34px;
+    grid-area: 2 / 1 / 3 / 2;
+    justify-self: start;
+    align-self: start;
+}
+.style-kfdor75f > ul {
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+}
+.style-kfdor75fmenuContainer {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
