@@ -18,29 +18,30 @@
                             <label for="name">
                                 <i class="fas fa-user"></i>
                             </label>
-                            <input type="text" name="name" id="name" placeholder="Your Name"/>
+                            <input type="text" name="name" id="name" placeholder="Your Name" onkeypress="removeError()" required/>
                         </div>
                         <div class="form-group">
                             <label for="username">
                                 <i class="fas fa-signature"></i>
                             </label>
-                            <input type="text" name="username" id="email" placeholder="Your username"/>
+                            <input type="text" name="username" id="email" placeholder="Your username" onkeypress="removeError()" required/>
                         </div>
                         <div class="form-group">
                             <label for="pass">
                                 <i class="fas fa-lock"></i>
                             </label>
-                            <input type="password" name="password" id="pass" placeholder="Password"/>
+                            <input type="password" name="password" id="pass" placeholder="Password" onkeypress="removeError()" required/>
                         </div>
                         <div class="form-group">
                             <label for="re-pass">
                                 <i class="fas fa-lock"></i>
                             </label>
-                            <input type="password" name="rePassword" id="re_pass" placeholder="Repeat your password"/>
+                            <input type="password" name="rePassword" id="re_pass" placeholder="Repeat your password" onkeypress="removeError()" onkeyup="checkPassword()" required/>
+                            <span style="color: red;" id="error"></span>
                         </div>
                         <a href="/login/shop/rana_disposal/" class="signup-image-link">I am already a customer</a>
                         <div class="form-group form-button">
-                            <input type="submit" name="signup" id="signup" class="form-submit" value="Register"/>
+                            <input type="submit" name="signup" id="signup" class="form-submit" value="Register" onclick="checkValidation()"/>
                         </div>
                     </form>
                 </div>
@@ -48,4 +49,7 @@
         </div>
     </section>
     
+
+    <script type="text/javascript" src="/javascript/signup_func.js"></script>
+
 <%- include('../Includes/footer.ejs') %> 

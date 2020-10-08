@@ -15,8 +15,6 @@ const checkValidation = () => {
             username.classList.add('invalid');
             shakeInputField(username);
         }
-    } else {
-       
     }
 }
 
@@ -27,8 +25,4 @@ const removeError = () => {
     if (password.value !== "") {
         password.classList.remove('invalid');
     }
-}
-
-const shakeInputField = (element) => {
-    element.style.animation = "shake 0.5s";
 }
