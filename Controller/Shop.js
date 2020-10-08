@@ -162,9 +162,17 @@ exports.placeOrder = (req, res, next) => {
     });
     return order.save()
     .then(cart => {
-        if (!req.session.remember_me) {
-            req.session.destroy();
-        }
+        const items = req.user.cart.items;
+        items.forEach(item => {
+            Product.findByIdAndUpdate(item.productId)
+            .then(product => {
+                product.quantity -= item.quantity;
+                product.save();
+            })
+            .catch(err => {
+                console.lof(err);
+            });
+        });
         return req.user.clearCart();
     })
     .then(() => {

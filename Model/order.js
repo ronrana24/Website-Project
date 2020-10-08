@@ -1,3 +1,4 @@
+const Product = require('../Model/product');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
@@ -25,5 +26,18 @@ const orderSchema = new Schema({
         required: true
     }
 });
+
+// orderSchema.methods.decreaseQuantityOnPlaceOrder = function(items) {
+//     items.forEach(item => {
+//         Product.findByIdAndUpdate(item.productId)
+//         .then(product => {
+//             product.quantity -= item.quantity;
+//         })
+//         .catch(err => {
+//             console.lof(err);
+//         });
+//     });
+//     return Product.save();
+// }
 
 module.exports = mongoose.model('Order', orderSchema);

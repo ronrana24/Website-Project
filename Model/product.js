@@ -25,6 +25,10 @@ const productSchema = new Schema({
 });
 
 
+// productSchema.methods.decreaseQuantityOnPlaceOrder = function(items){
+
+// }
+
 module.exports = mongoose.model('Product', productSchema)
 
 

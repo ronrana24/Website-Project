@@ -14,7 +14,8 @@ exports.getLogin_page = (req, res, next) => {
     } else {
         res.render('auth_stuff/login', {
             pageTitle: 'Login',
-            path: '/login/shop/rana_disposal'
+            path: '/login/shop/rana_disposal',
+            errorMessage: req.flash('error')
         });
     }
 };
@@ -30,6 +31,7 @@ exports.postLogin = (req, res, next) => {
                 User.findOne({username: username})
                 .then(user => {
                     if (!user) {
+                        req.flash('error', 'Email or Password does not match.');
                         console.log("User name not found please sign up first or try again");
                         return res.redirect('/login/shop/rana_disposal/');
                     }
@@ -39,7 +41,7 @@ exports.postLogin = (req, res, next) => {
                             req.session.customerLoggedIn = true;
                             req.session.user = user;
                             if (!req.body.remember_me) {
-                                req.session.remember_me = false;
+                                req.session.cookie.maxAge = 1 * 60 * 60 * 1000;
                             }
 
                             if (req.session.cart.items.length > 0) {
