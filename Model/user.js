@@ -38,6 +38,10 @@ const userSchema = new Schema({
             quantityPrice: {
               type: Number,
               required: true
+            },
+            threshold_quantity: {
+              type: Number,
+              required: true
             }
           }
         ],
@@ -49,31 +53,41 @@ const userSchema = new Schema({
 });
 
 
-userSchema.methods.addToCart = function(productId, quantity, price, productName, quantityPrice) {
+userSchema.methods.addToCart = function(productId, quantity, price, productName, quantityPrice, threshold_qty) {
   const cartProductIndex = this.cart.items.findIndex(cartProduct => {
     return cartProduct.productId.toString() === productId;
   });
-  console.log(cartProductIndex);
+  console.log("Item found in location " + cartProductIndex);
+  console.log("Quantity " + quantity + " Price " + price + " threshold qty " + threshold_qty + " quantity price " + quantityPrice);
   let newQuantity = quantity;
   let newPrice = price;
   const updatedCartItems = [...this.cart.items];
-  let newTotalPrice = price*quantity;
   let updatedTotalPrice = this.cart.totalPrice;
 
   if(cartProductIndex >= 0) {
     newQuantity = this.cart.items[cartProductIndex].quantity + newQuantity;
+    console.log("New Quatity is " + newQuantity);
     updatedCartItems[cartProductIndex].quantity = newQuantity;
-    updatedCartItems[cartProductIndex].price = newPrice;
-    updatedTotalPrice = this.cart.totalPrice + newTotalPrice;
+    if(newQuantity >= threshold_qty) {
+      updatedCartItems[cartProductIndex].price = quantityPrice;
+    } else {
+      updatedCartItems[cartProductIndex].price = newPrice;
+    }
+    updatedTotalPrice = this.cart.totalPrice + (newQuantity * updatedCartItems[cartProductIndex].price);
   } else {
     updatedCartItems.push({
       productId: productId,
       productName: productName,
       quantity: newQuantity,
       price: newPrice,
-      quantityPrice: quantityPrice
+      quantityPrice: quantityPrice,
+      threshold_quantity: threshold_qty
     });
-    updatedTotalPrice = newTotalPrice + updatedTotalPrice;
+    if(quantity >= threshold_qty) {
+      updatedTotalPrice = quantity*quantityPrice;
+    } else {
+      updatedTotalPrice = price*quantity;
+    }
   }
   const updatedCart = {
     items: updatedCartItems,

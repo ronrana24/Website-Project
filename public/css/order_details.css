@@ -402,3 +402,8 @@
         max-width: 50px;
     }
 }
+@media (min-width: 749px) {
+    .center {
+        width: 980px;
+    }
+}

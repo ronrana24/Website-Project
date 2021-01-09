@@ -5,7 +5,11 @@
 </head>
 
 <body>
+  <% if (adminUserLoggedIn) { %> 
+    <%- include('../Includes/admin_navigation_bar.ejs') %>
+  <% } else { %> 
     <%- include('../Includes/navigation_bar.ejs') %> 
+  <% } %> 
 
     <section class="text-gray-700 body-font relative">
         <div class="container px-5 py-24 mx-auto flex sm:flex-no-wrap flex-wrap">

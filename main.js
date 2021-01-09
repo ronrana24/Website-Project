@@ -1,4 +1,4 @@
-// All the Fuctionalities -----------------------------------
+// ----------------------------------- All the Fuctionalities -----------------------------------
 // const fs = require('fs');
 const express = require("express");
 const app = express();
@@ -14,10 +14,14 @@ const compression = require('compression');
 require('dotenv').config();
 // const morgan = require('morgan');
 
-// My database URL--------------------------------
+// ------------------------------------------------------------------------
+
+// ---------------------------------------------------- DATABASE URI---------------------------------------------------------
+
 const MONGODB_URI = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.xyk0z.gcp.mongodb.net/
 ${process.env.MONGO_DEFAULT_DATABASE}?retryWrites=true&w=majority`;
 
+// -----------------------------------------------------------------------------------------------------------------------------
 
 const store = new MongoDBStore({
     uri: MONGODB_URI, 
@@ -46,6 +50,16 @@ app.use(flash());
 
 // this will serve the content of public folder
 app.use(express.static("public"));
+
+app.use(
+    helmet({
+      contentSecurityPolicy: false,
+    })
+  );
+
+app.use(compression());
+
+// app.use(morgan('combined', { stream: accessLogStream }));
 
 // viewing ejs file without extension
 app.set("view engine", "ejs");
@@ -76,7 +90,7 @@ app.use((req, res, next) => {
     next();
 });
 
-// ROUTES VARIABLES -------------------------------
+// ---------------------------- ROUTES VARIABLES -------------------------------
 
 // Shop Route
 const shopRoutes = require('./Routes/shop');
@@ -85,32 +99,31 @@ const adminRoutes = require('./Routes/admin');
 // Authentication Route
 const authRoutes = require('./Routes/auth');
 
+// ---------------------------------------------------------------
+
 // const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), {flags: 'a'});
 
-// app.use(helmet());
-app.use(
-    helmet({
-      contentSecurityPolicy: false,
-    })
-  );
-app.use(compression());
-// app.use(morgan('combined', { stream: accessLogStream }));
+// ---------------------------------- SERVER TO HANDLE ROUTES ------------------------------------
 
-// SERVER TO HANDLE ROUTES ------------------------------------
 app.use('/shop/rana_disposal', adminRoutes);
 app.use(authRoutes);
 app.use(shopRoutes);
 
-// Coonecting to mongoose Database i.e. --> RanaDisposal --------------------------
+// -------------------------------------------------------------------------------
+
+// -------------------------------- Connecting to mongoose Database i.e. --> RanaDisposal --------------------------
 mongoose
 .connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
 .then(result => {
     // App listen
     app.listen(process.env.PORT || 3000, ()=> {
         console.log("Site Launched!");
+        console.log("Go to port 3000");
     });
     
 })
 .catch(err => {
     console.log(err);
 });
+
+// -------------------------------------------------------------------------

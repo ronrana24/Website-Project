@@ -59,13 +59,13 @@
                                                 <div class="grid__item one-third text-center">
                                                     <div class="js-qty">
                                                         <button type="button"
-                                                            class="js-qty__adjust js-qty__adjust--minus icon-fallback-text decrease_quantity" onclick="decrement_value(<%- i %>, <%- cart.items[i].price %>, <%- cart.items.length %>, <%- cart.items[i].quantityPrice %>)">
+                                                            class="js-qty__adjust js-qty__adjust--minus icon-fallback-text decrease_quantity" onclick="decrement_value(<%- i %>, <%- cart.items[i].price %>, <%- cart.items.length %>, <%- cart.items[i].quantityPrice %>, <%- cart.items[i].threshold_quantity %>)">
                                                             <span class="quantity_inc_dec" aria-hidden="true">−</span>
                                                         </button>
                                                         <input type="text" class="js-qty__num input" value="<%= cart.items[i].quantity %>" min="1"
                                                             pattern="[0-9]*" name="quantity">
                                                         <button type="button"
-                                                            class="js-qty__adjust js-qty__adjust--plus icon-fallback-text" onclick="increment_value(<%- i %>, <%- cart.items[i].price %>, <%- cart.items.length %>, <%- cart.items[i].quantityPrice %>)">
+                                                            class="js-qty__adjust js-qty__adjust--plus icon-fallback-text" onclick="increment_value(<%- i %>, <%- cart.items[i].price %>, <%- cart.items.length %>, <%- cart.items[i].quantityPrice %>, <%- cart.items[i].threshold_quantity %>)">
                                                             <span class="quantity_inc_dec" aria-hidden="true">+</span>
                                                         </button>
                                                     </div>

@@ -18,16 +18,16 @@ const productSchema = new Schema({
         type: Number,
         required: true
     },
+    threshold_quantity: {
+        type: Number,
+        required: true
+    },
     product_type: {
         type: String,
         required: true
     }
 });
 
-
-// productSchema.methods.decreaseQuantityOnPlaceOrder = function(items){
-
-// }
 
 module.exports = mongoose.model('Product', productSchema)
 

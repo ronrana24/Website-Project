@@ -1,12 +1,13 @@
+// ----------------------- IMPORTS ------------------------------------------
+
 const Product = require('../Model/product');
 const Cart = require('../Model/cart');
 const Order = require('../Model/order');
-
 const date = require('date-and-time');
-
 const User = require('../Model/user');
-
 const bcrypt = require('bcryptjs');
+
+//? ------------------------------------------------------------------------
 
 // Gets The Home page of the Website
 exports.getHome_Page = (req, res, next) => {
@@ -17,21 +18,37 @@ exports.getHome_Page = (req, res, next) => {
 };
 
 // Shop Page
-exports.getShop_page = (req, res, next) => {
+exports.getShop_Page = (req, res, next) => {
 
-    //* Show all the products in the database
-    Product.find()
-    .then(products=> {
-        console.log("Products Recevied --> ");
-        res.render('user_stuff/shop', {
-            pageTitle: 'Shop',
-            path: '/shop',
-            products: products,
-        });
-    })
-    .catch(err => {
-        console.log(err);
-    })
+    const query = req.query.product_type
+    if(query.length === 0) {
+        req.redirect("/lookbook");
+    } else {
+
+        //* Show all the products in the database
+        Product.find()
+        .then(products=> {
+            console.log("Products Recevied --> ");
+            res.render('user_stuff/shop', {
+                pageTitle: 'Shop',
+                path: '/shop',
+                products: products,
+                query: req.query.product_type
+            });
+            console.log(req.query.product_type);
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    }
+}
+
+// LookBook Page
+exports.getLookBook_page = (req, res, next) => {
+    res.render('user_stuff/lookbook', {
+        pageTitle: 'LookBook',
+        path: '/lookbook',
+    });
 }
 
 // Contact Page
@@ -46,29 +63,20 @@ exports.getContact_Page = (req, res, next) => {
 exports.sendItemToCart = (req, res, next) => {
     const productId = req.params.productID;
     const qty = parseInt(req.body.quantity);
-    const cart = new Cart(req.session.cart ? req.session.cart : {items: []});
+    let product_type;
     Product.findById(productId)
     .then(product => {
+        product_type = product.product_type
         const productName = product.name;
         const quantityPrice = parseInt(product.quantity_price);
-        let price;
-        // threshold quantity
-        if (qty >= 10) {
-            price = parseInt(product.quantity_price);
-        } else {
-            price = parseInt(product.price);
-        } 
+        const price = parseInt(product.price);
+        const threshold_qty = parseInt(product.threshold_quantity);
         console.log("Adding item to cart --> ");
-        if (req.user) {
-            return req.user.addToCart(productId, qty, price, productName, quantityPrice);
-        } else {
-            cart.add(productId, price, qty, productName, product.quantity_price);
-            return req.session.cart = cart;
-        }
+        return req.user.addToCart(productId, qty, price, productName, quantityPrice, threshold_qty);
     })
     .then(result => {
         console.log(result);
-        res.redirect('/shop');
+        res.redirect("/shop?product_type=" + product_type);
     })
     .catch(err => {
         console.log(err);
@@ -80,7 +88,7 @@ exports.getCart_Page = (req, res, next) => {
     res.render('user_stuff/cart', {
         pageTitle: 'Cart',
         path: '/cart',
-        cart: req.user ? req.user.cart : req.session.cart
+        cart: req.user.cart
     });   
 };
 
@@ -229,7 +237,7 @@ exports.getOrderDetails_Page = (req, res, next) => {
         console.log(order);
         res.render('user_stuff/order_details', {
             pageTitle: "Your Order",
-            cart: order.cart
+            cart: order.cart,
         });
     })
     .catch(err => console.log(err));

@@ -4,6 +4,13 @@ const password = document.getElementById('pass');
 const repassword = document.getElementById('re_pass');
 const error = document.getElementById('error');
 
+console.log(name.innerHTML);
+console.log(username.innerHTML);
+console.log(name.value);
+console.log(username.value);
+console.log(password.value);
+console.log(password.innerHTML);
+
 const checkValidation = () => {
 
     if (username.value === "") {

@@ -1,4 +1,4 @@
-const increment_value = (productId, priceForSinglePiece, cartLength, qunatityPrice) => {
+const increment_value = (productId, priceForSinglePiece, cartLength, qunatityPrice, threshold_quantity) => {
     // ELEMENTS
     const inputQuantity_Element = document.getElementsByClassName("input")[productId];
     const decreaseValue_Btn = document.getElementsByClassName("decrease_quantity")[productId];
@@ -17,7 +17,7 @@ const increment_value = (productId, priceForSinglePiece, cartLength, qunatityPri
     const inputQuantity = inputQuantity_Element.value;
 
     // if quantity is above or equal to threshold change selling price to quantity_price
-    if (inputQuantity_Element.value >= 10) {
+    if (inputQuantity_Element.value >= threshold_quantity) {
         productPrice_Element.innerHTML = (qunatityPrice*inputQuantity);
     } else {
         productPrice_Element.innerHTML = (inputQuantity*priceForSinglePiece);
@@ -33,7 +33,7 @@ const increment_value = (productId, priceForSinglePiece, cartLength, qunatityPri
     totalCartPrice_Element.innerHTML = "&#8360; " + price;
         
 }
-const decrement_value = (productId, priceForSinglePiece, cartLength, qunatityPrice) => {
+const decrement_value = (productId, priceForSinglePiece, cartLength, qunatityPrice, threshold_quantity) => {
     const inputQuantity_Element = document.getElementsByClassName("input")[productId];
     const decrementValue_Btn = document.getElementsByClassName("decrease_quantity")[productId];
     const productPrice_Element = document.getElementsByClassName("price")[productId];
@@ -48,7 +48,7 @@ const decrement_value = (productId, priceForSinglePiece, cartLength, qunatityPri
     } else {
         inputQuantity_Element.value = current_quantity - 1;
 
-        if (inputQuantity_Element.value < 10) {
+        if (inputQuantity_Element.value < threshold_quantity) {
             productPrice_Element.innerHTML = (priceForSinglePiece*inputQuantity_Element.value);
         } else {
             productPrice_Element.innerHTML = (qunatityPrice*inputQuantity_Element.value);

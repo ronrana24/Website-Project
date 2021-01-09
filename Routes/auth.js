@@ -13,6 +13,8 @@ const { route } = require('./shop');
 // Route to get the login form for the admin
 router.get('/login/shop/rana_disposal', authController.getLogin_page);
 router.post('/login/shop/rana_disposal', authController.postLogin);
+router.get('/login/shop/rana_disposal/forgot', authController.forgot_password_page);
+router.post('/login/shop/rana_disposal/forgot', authController.forgot_password);
 
 
 router.get('/signup/shop/rana_disposal/', authController.getSignUp_Page);

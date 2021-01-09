@@ -1,26 +1,51 @@
 <%- include('../Includes/header.ejs') %> 
 
+<link rel="stylesheet" type="text/css" href="/css/form.css">
+
 </head>
 
 <body>
     <%- include('../Includes/admin_navigation_bar.ejs') %> 
-    <h1>EDIT PRODUCT</h1>
-    <form action="/shop/rana_disposal/edit/<%= id %>" method="POST">
-        <input type="hidden" value="<%= csrfToken %>" name="_csrf">
-        <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" name="name" placeholder="Enter Product Name" value="<%= name %>">
-            <label for="price">Price</label>
-            <input type="number" name="price" placeholder="Enter Product's Price" value="<%= price %>">
-            <label for="price">Quantity Price</label>
-            <input type="number" name="quantity_price" placeholder="Enter Product's Price" value="<%= quantity_price %>">
-            <label for="quantity">Quantity</label>
-            <input type="number" name="quantity" placeholder="Enter Product's Quantity" value="<%= quantity %>">
-        <!-- Choose a product image -->
-        <div class="custom-file">
-            <input type="file" class="custom-file-input" id="customFile">
-            <label class="custom-file-label" for="customFile">Choose file</label>
-          </div>
-        <button class="btn btn-outline-dark">Modify</button>
-    </form>
+
+    <div class="page-wrapper p-t-180 p-b-100 font-robo">
+        <div class="wrapper wrapper--w960">
+            <div class="card card-2">
+                <div class="card-body">
+                    <h2 class="title">EDIT PRODUCT</h2>
+                    <form method="POST" action="/shop/rana_disposal/edit/<%= id %>" method="POST">
+                        <input type="hidden" value="<%= csrfToken %>" name="_csrf">
+                        <div class="input-group">
+                            <label class="input--style-2">Name</label>
+                            <input class="input--style-2" type="text" placeholder="Name" name="name" value="<%= name %>">
+                        </div>
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <label class="input--style-2">Price</label>
+                                <div class="input-group">
+                                    <input class="input--style-2" type="number" placeholder="Price" name="price" value="<%= price %>">
+                                    <i class="fas fa-rupee-sign input-icon"></i>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <label class="input--style-2">Quantity</label>
+                                <div class="input-group">
+                                    <input class="input--style-2" type="number" placeholder="Quantity" name="quantity" value="<%= quantity %>">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="input--style-2">Quantity Price</label>
+                                    <input class="input--style-2" type="number" placeholder="Quantity Price" name="quantity_price" value="<%= quantity_price %>">
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <button class="btn btn--radius btn--green" type="submit">Modify</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 <%- include('../Includes/footer.ejs') %>

@@ -31,6 +31,9 @@ router.get('/', isAuth.isAdminLogged, adminController.getAdminHome_Page);
 // List of all orders recievied
 router.get('/orders', isAuth.isAdminLogged, adminController.getOrdersPage);
 
+// Details of all orders
+router.get('/order/:orderId', isAuth.isAdminLogged, adminController.getOrderDetails_page);
+
 
 
 // Export the whole module

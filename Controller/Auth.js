@@ -159,3 +159,35 @@ exports.logoutAdminUser = (req, res, next) => {
     req.session.destroy();
     res.redirect('/');
 }
+
+exports.forgot_password_page = (req, res, next) => {
+    res.render('auth_stuff/forgot_password', {
+        pageTitle: "Forgot Password",
+        path: "/login/shop/rana_disposal/forgot"
+    });
+}
+
+exports.forgot_password = (req, res, next) => {
+    const username = req.body.username;
+    const password = req.body.password;
+    const confirm_password = req.body.confirm_password;
+
+    if (confirm_password == password) {
+        User.findOne({"username": username})
+        .then(user => {
+            return bcrypt
+            .hash(password, 12)
+            .then(hashedPassword => {
+                user.password = hashedPassword;
+                return user.save();
+            })
+            .then(result => {
+                console.log("Password has been changed");
+                res.redirect('/login/shop/rana_disposal');
+            })
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    }
+}

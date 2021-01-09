@@ -180,3 +180,21 @@ ul a {
     color: inherit;
     cursor: pointer;
 }
+.color ul li {
+    display: inline-block;
+    margin-top: 4px;
+}
+._1sm4P {
+    position: relative;
+    display: block;
+
+}
+.UZE8T {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    display: block;
+    position: relative;
+    cursor: pointer;
+    border: 1px solid #c9c9c9;
+}

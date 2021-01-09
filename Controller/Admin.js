@@ -21,12 +21,14 @@ exports.postAddProduct = (req, res, next) => {
     var price = req.body.price;
     var quantity = req.body.quantity;
     var quantity_price = req.body.quantity_price;
+    const threshold_quantity = req.body.threshold_quantity;
     var product_type = req.body.option;
     const product = new Product({
         name: name,
         price: price,
         quantity_price: quantity_price,
         quantity: quantity,
+        threshold_quantity: threshold_quantity,
         product_type: product_type
     });
 
@@ -37,7 +39,7 @@ exports.postAddProduct = (req, res, next) => {
     .catch(err => {
         console.log(err);
     });
-    res.redirect('/shop');
+    res.redirect('/shop/rana_disposal/products');
 }
 
 exports.getAdminProducts_Page = (req, res, next) => {
@@ -143,8 +145,24 @@ exports.getOrdersPage = (req, res, next) => {
             name: req.session.adminUserName,
             orders: orders
             // session: req.session
-        });
+        }); 
     })
     .catch(err => console.log(err));
     // req.session.destroy();
+}
+
+exports.getOrderDetails_page = (req, res, next) => {
+    const orderId = req.params.orderId;
+    Order.findById(orderId)
+    .then(order => {
+        console.log("Details of Recieved order is");
+        console.log(order);
+        res.render('admin_stuff/admin_orderDetails', {
+            pageTitle: "Order of " + order.user.name,
+            path: '/shop/rana_disposal/order'+ orderId,
+            order: order,
+            cart: order.cart
+        });
+    })
+    .catch(err => console.log(err));
 }

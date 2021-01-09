@@ -1,4 +1,4 @@
-function increment_value(productId, qty_price) {
+function increment_value(productId, qty_price, threshold) {
     const input_quantity = document.getElementsByClassName("input")[productId];
     const decrement_value_btn = document.getElementsByClassName("decrease_quantity")[productId];
     const actualPrice = document.getElementsByClassName("actualPrice")[productId];
@@ -12,7 +12,7 @@ function increment_value(productId, qty_price) {
 
     input_quantity.value = current_quantity + 1;
     
-    if (input_quantity.value >= 10) {
+    if (input_quantity.value >= threshold) {
         actualPrice.classList.add("qtyPrice");
         quantityPrice.style.display = ""
     }

@@ -8,39 +8,36 @@
     <% if (orders.length == 0) { %>
       <h1>No Orders Yet !</h1>
       <% } else { %>
+        <form style="text-align: center;">
+          <input type="text" id="myInput" onkeyup="searchName()" placeholder="Search for names.." title="Type in a name">
+          <input type="date" placeholder="Date of purchase">
+          <input type="number" placeholder="Amount">
+          <button type="button" onclick="">Go</button>
+        </form>
         <table>
-          <caption>Orders</caption>
           <thead>
             <tr>
               <th scope="col">Business Name</th>
-              <th scope="col">Address</th>
               <th scope="col">Phone Number</th>
-              <th scope="col">Products</th>
-              <th scope="col">Quantity</th>
+              <th scope="col">Order Id</th>
+              <th scope="col">Date of Purchase</th>
+              <th scope="col">Total Price</th>
             </tr>
           </thead>
           <tbody>
             <% orders.forEach(order => { %> 
-            <tr>
+            <tr class="customer_info" onclick="window.location.href='/shop/rana_disposal/order/<%= order._id %>'">
               <td data-label="Business Name"><%= order.user.name %></td>
-              <td data-label="Address">04/01/2016</td>
-              <td data-label="Phone Number">$1,190</td> 
-              <td data-label="Products">
-                <ul>
-                  <li>03/01/2016 - 03/31/2016</li>
-                  <li>03/01/2016 - 03/31/2016</li>
-                </ul>
-              </td>
-              <td data-label="Quantity">
-                <ul>
-                  <li>$1,190</li>
-                  <li>$1,190</li>
-                </ul>
-              </td>
+              <td data-label="Phone Number">9999999999</td> 
+              <td data-label="Order Id"><%= order._id %> </td>
+              <td data-label="Date of Purchase"><%= order.date %> </td>
+              <td data-label="Total Price"><%= order.cart.totalPrice %> </td>
             </tr>
             <% }); %> 
           </tbody>
         </table>
-      <% } %>   
+      <% } %>
+      
+      <script  type="text/javascript" src="/javascript/admin_order.js"></script>
     
 <%- include ('../Includes/footer'); -%> 
