@@ -156,7 +156,7 @@ body {
 
 .form-group {
   position: relative;
-  margin-bottom: 25px;
+  margin-bottom: 15px;
   overflow: hidden; 
 }
 .form-group:last-child {
@@ -254,7 +254,7 @@ label {
   -o-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
   color: #222; 
-  bottom: -20%;
+  bottom: -30%;
 }
 
 .label-has-error {

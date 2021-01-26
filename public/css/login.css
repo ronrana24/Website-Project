@@ -252,6 +252,10 @@ html {
       outline: none;
   } 
   
-  #icon {
+  /* #icon {
     width:60%;
+  } */
+
+  .error {
+    color: rgb(7, 145, 7);
   }

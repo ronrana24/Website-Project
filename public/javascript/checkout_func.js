@@ -1,3 +1,28 @@
+const form = document.getElementsByTagName('form')[0];
+const business_name = document.getElementById('business_name');
+const deliver_or_not = document.getElementById('delivery');
+
+form.addEventListener('submit', (e) => {
+    
+    
+    checkInputs();
+
+});
+
+
+
+const checkInput = () => {
+    const nameValue = business_name.value.trim();
+    // const
+    // if (nameValue.length === "") {
+    //     setErrorFor(input)
+    // }
+}
+
+
+
+
+
 const toggleCartDetails = () => {
     const cartDetails = document.getElementById('order-summary');
 
@@ -12,7 +37,7 @@ const addDeliveryForm = () => {
     const time_Element = document.getElementById('time');
     deliveryForm_Element.classList.toggle('delivery_form');
     time_Element.classList.toggle('displayBtn');
-
+    console.log(deliver_or_not.value)
 }
 
 const addPayButton = () => {

@@ -359,3 +359,11 @@
       padding: 40px 50px;
     }
   }
+
+  .error {
+    border-color: rgb(170, 2, 2);
+  }
+
+  .success {
+    border-color: rgb(7, 145, 7);
+  }

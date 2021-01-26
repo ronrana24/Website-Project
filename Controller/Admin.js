@@ -138,7 +138,7 @@ exports.getAdminHome_Page = (req, res, next) => {
 exports.getOrdersPage = (req, res, next) => {
     Order.find()
     .then(orders => {
-        console.log(orders);
+        // console.log(orders);
         res.render('admin_stuff/orders', {
             pageTitle: 'Orders',
             path: '/shop/rana_disposal/orders',

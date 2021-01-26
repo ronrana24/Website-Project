@@ -33,6 +33,7 @@ exports.postLogin = (req, res, next) => {
                     if (!user) {
                         req.flash('error', 'Email or Password does not match.');
                         console.log("User name not found please sign up first or try again");
+                        console.log(req.session);
                         return res.redirect('/login/shop/rana_disposal/');
                     }
                     bcrypt.compare(password, user.password)

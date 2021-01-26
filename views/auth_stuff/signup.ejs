@@ -18,30 +18,33 @@
                             <label for="name">
                                 <i class="fas fa-user"></i>
                             </label>
-                            <input type="text" name="name" id="name" placeholder="Your Name" onkeypress="removeError()" required/>
+                            <input type="text" name="name" id="name" placeholder="Your Name"/>
+                            <p></p>
                         </div>
                         <div class="form-group">
                             <label for="username">
                                 <i class="fas fa-signature"></i>
                             </label>
-                            <input type="text" name="username" id="email" placeholder="Your username" onkeypress="removeError()" required/>
+                            <input type="text" name="username" id="username" placeholder="Your username"/>
+                            <p></p>
                         </div>
                         <div class="form-group">
                             <label for="pass">
                                 <i class="fas fa-lock"></i>
                             </label>
-                            <input type="password" name="password" id="pass" placeholder="Password" onkeypress="removeError()" required/>
+                            <input type="password" name="password" id="pass" placeholder="Password"/>
+                            <p></p>
                         </div>
                         <div class="form-group">
                             <label for="re-pass">
                                 <i class="fas fa-lock"></i>
                             </label>
-                            <input type="password" name="rePassword" id="re_pass" placeholder="Repeat your password" onkeypress="removeError()" onkeyup="checkPassword()" required/>
-                            <span style="color: red;" id="error"></span>
+                            <input type="password" name="rePassword" id="re_pass" placeholder="Repeat your password"/>
+                            <p></p>
                         </div>
                         <a href="/login/shop/rana_disposal/" class="signup-image-link">I am already a customer</a>
                         <div class="form-group form-button">
-                            <input type="submit" name="signup" id="signup" class="form-submit" value="Register" onclick="checkValidation()"/>
+                            <input type="submit" name="signup" id="signup" class="form-submit" value="Register"/>
                         </div>
                     </form>
                 </div>

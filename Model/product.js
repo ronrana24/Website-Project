@@ -12,7 +12,6 @@ const productSchema = new Schema({
     },
     quantity_price: {
         type: Number,
-        required: true
     },
     quantity: {
         type: Number,
@@ -20,7 +19,6 @@ const productSchema = new Schema({
     },
     threshold_quantity: {
         type: Number,
-        required: true
     },
     product_type: {
         type: String,
