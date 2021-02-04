@@ -1,0 +1,56 @@
+<div class="col-md-8 mb-4">
+    <section>
+      <!-- Grid row -->
+      <div class="row">
+
+          <% for(var i=0;i<products.length;i++) { %>
+            
+        <div class="col-md-4 mb-5 pdt">
+          <div class="">
+              <a href="/shop/rana_disposal/edit/<%= products[i]._id %>">
+            <div class="view zoom overlay rounded z-depth-2">
+              <img class="img-fluid w-100" src="/photos/carry_bag/hotstar.jpg" alt="<%= products[i].name %>">
+              <% if (products[i].quantity <= 0) { %>
+                <div class="oos">
+                <%- include('../Includes/out_of_stock.ejs'); %>
+                </div> 
+              <% } else if(products[i].quantity < 5)  { %>
+                <div class="limit">
+                <%- include('../Includes/soonTag.ejs'); %> 
+                </div>
+              <% } %> 
+            </div>
+            <div class="text-center pt-4 pdtName">
+              <h5><%= products[i].name %></h5>
+              <p>
+                  <span class="mr-1">
+                        Price: <span class="product_price">&#8377;<%= products[i].price %></span>
+                      <br>
+                        Quantity Price: &#8377;<%= products[i].quantity_price %>
+                        <br>
+                        Thresh. Quantity: &#8377;<%= products[i].threshold_quantity %>
+                  </span>
+              </p>
+            </div>
+              <div class="product_quantity_layout">
+                  <div class="product_quantity">
+                      <div class="product_input">
+                          <input value="<%= products[i].quantity %>" name="quantity" class="input" readonly>
+                      </div>
+                  </div>
+              </div>
+              <form action="/shop/rana_disposal/delete/<%= products[i]._id %>" method="POST">
+                  <button class="product_item_add_to_cart" type="submit">
+                      <input type="hidden" value="<%= csrfToken %>" name="_csrf">
+                      <span>Delete</span>
+                  </button>
+                </form>
+        </a>
+          </div>
+        </div> 
+        <% } %> 
+
+      </div>
+    </section>
+  </div>
+</div>

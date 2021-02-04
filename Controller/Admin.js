@@ -48,7 +48,7 @@ exports.getAdminProducts_Page = (req, res, next) => {
         res.render('admin_stuff/admin_products', {
             pageTitle: 'Products',
             path: '/shop/rana_disposal/products',
-            products: products
+            products: products,
         });
     })
 };
@@ -138,17 +138,14 @@ exports.getAdminHome_Page = (req, res, next) => {
 exports.getOrdersPage = (req, res, next) => {
     Order.find()
     .then(orders => {
-        // console.log(orders);
         res.render('admin_stuff/orders', {
             pageTitle: 'Orders',
             path: '/shop/rana_disposal/orders',
             name: req.session.adminUserName,
             orders: orders
-            // session: req.session
         }); 
     })
     .catch(err => console.log(err));
-    // req.session.destroy();
 }
 
 exports.getOrderDetails_page = (req, res, next) => {

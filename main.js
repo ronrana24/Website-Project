@@ -35,7 +35,7 @@ const User = require('./Model/user');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(session({
-        secret: 'Name of the website is Rana Disposal\'s and is created by Rahul Rana and this is the SECRET!',
+        secret: 'Name of the website is Rana Disposal\'s and is created by Rahul Rana and this is the SECRET dont tel anybody!',
         resave: false,
         saveUninitialized: false,
         store: store

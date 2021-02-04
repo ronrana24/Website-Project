@@ -1,0 +1,92 @@
+<%- include ('../Includes/header'); -%> 
+<link rel="stylesheet" href="/css/shop.css" type="text/css">
+<link rel="stylesheet" href="/css/searchbar.css" type="text/css">
+
+<body>
+    <%- include ('../Includes/navigation_bar'); -%>
+
+    <main class="skin-light">
+        <div class="container">
+          <div class="row mt-5">
+            <div class="col-md-4 mb-4">
+              <section>
+                <section>
+                  <h5>Subcategories</h5>
+                  <div class="text-muted small text-uppercase mb-5">
+                    <p class="mb-3"><a href="#!" class="card-link-secondary">Carry Bags</a></p>
+                    <p class="mb-3"><a href="#!" class="card-link-secondary">Tea &amp; Coffee Cups</a></p>
+                    <p class="mb-3"><a href="#!" class="card-link-secondary">Birthday Items</a></p>
+                    <p class="mb-3"><a href="#!" class="card-link-secondary">Spoons &amp; Forks</a></p>
+                    <p class="mb-3"><a href="#!" class="card-link-secondary">Packing Products</a></p>
+                    <p class="mb-3"><a href="#!" class="card-link-secondary">Tissue &amp; Napkins</a></p>
+                    <p class="mb-3"><a href="#!" class="card-link-secondary">Eatable Items</a></p>
+                    <p class="mb-3"><a href="#!" class="card-link-secondary">Plates</a></p>
+                  </div>
+                </section>
+                <section>
+                  <h5 class="pt-2 mb-4">Filters</h5>
+                  <section class="mb-4">
+                    <div class="md-form md-outline mt-0 d-flex justify-content-between align-items-center">
+                      <input type="text" id="search" class="form-control mb-0" placeholder="Search Product Name..">
+                      <a href="#!" class="btn btn-flat btn-md px-3 waves-effect"><i class="fas fa-search fa-lg"></i></a>
+                    </div>
+                  </section>
+                  <section class="mb-4">
+                    <h6 class="font-weight-bold mb-3">Price</h6>
+                    <div class="form-check pl-0 mb-3">
+                      <input type="radio" class="form-check-input" id="under50" name="materialExampleRadios">
+                      <label class="form-check-label small text-uppercase card-link-secondary" for="under50">
+                        Under &#8377;50
+                      </label>
+                    </div>
+                    <div class="form-check pl-0 mb-3">
+                      <input type="radio" class="form-check-input" id="50150" name="materialExampleRadios">
+                      <label class="form-check-label small text-uppercase card-link-secondary" for="50150">
+                        &#8377;50 to &#8377;150
+                      </label>
+                    </div>
+                    <div class="form-check pl-0 mb-3">
+                      <input type="radio" class="form-check-input" id="150250" name="materialExampleRadios">
+                      <label class="form-check-label small text-uppercase card-link-secondary" for="15025">
+                        &#8377;150 to &#8377;250
+                      </label>
+                    </div>
+                    <div class="form-check pl-0 mb-3">
+                      <input type="radio" class="form-check-input" id="250300" name="materialExampleRadios">
+                      <label class="form-check-label small text-uppercase card-link-secondary" for="250300">&#8377;250 to
+                        &#8377;300</label>
+                    </div>
+                    <div class="form-check pl-0 mb-3">
+                      <input type="radio" class="form-check-input" id="300above" name="materialExampleRadios">
+                      <label class="form-check-label small text-uppercase card-link-secondary" for="300above">&#8377;300 &amp;
+                        Above</label>
+                    </div>
+                    <form>
+                      <div class="d-flex align-items-center mt-4 pb-1">
+                        <div class="md-form md-outline my-0">
+                          <input id="from" type="text" class="form-control mb-0">
+                          <label for="form" class="">&#8377; Min</label>
+                        </div>
+                        <p class="px-2 mb-0 text-muted"> - </p>
+                        <div class="md-form md-outline my-0">
+                          <input id="to" type="text" class="form-control mb-0">
+                          <label for="to" class="">&#8377; Max</label>
+                        </div>
+                      </div>
+                    </form>
+    
+                  </section>    
+                </section>
+              </section>
+            </div>
+            
+            <%- include ('../Includes/product_display'); %> 
+    
+        </div>
+      </main>
+    
+    <script type="text/javascript" src="/javascript/shop_functionality.js"></script>
+    <script type="text/javascript" src="/javascript/navbar_func.js"></script>
+    <script type="text/javascript" src="/javascript/filter.js"></script>
+
+<%- include ('../Includes/footer'); -%>   

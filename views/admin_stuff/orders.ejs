@@ -50,7 +50,7 @@
             <% orders.forEach(order => { %> 
             <tr class="customer_info" onclick="window.location.href='/shop/rana_disposal/order/<%= order._id %>'">
               <td data-label="Business Name" class="name"><%= order.user.name %></td>
-              <td data-label="Phone Number">9999999999</td> 
+              <td data-label="Phone Number"><%= order.phonenumber ? order.phonenumber : "N/A" %></td> 
               <td data-label="Order Id" class="order_id"><%= order._id %> </td>
               <td data-label="Date of Purchase" class="dop"><%= order.date %> </td>
               <td data-label="Total Price"><%= order.cart.totalPrice %> </td>

@@ -24,6 +24,12 @@ const orderSchema = new Schema({
     date: {
         type: String,
         required: true
+    },
+    phonenumber: {
+        type: Number
+    },
+    address: {
+        type: String
     }
 });
 

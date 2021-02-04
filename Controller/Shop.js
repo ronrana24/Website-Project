@@ -19,28 +19,19 @@ exports.getHome_Page = (req, res, next) => {
 
 // Shop Page
 exports.getShop_Page = (req, res, next) => {
-
-    const query = req.query.product_type
-    if(query.length === 0) {
-        req.redirect("/lookbook");
-    } else {
-
-        //* Show all the products in the database
-        Product.find()
-        .then(products=> {
-            console.log("Products Recevied --> ");
-            res.render('user_stuff/shop', {
-                pageTitle: 'Shop',
-                path: '/shop',
-                products: products,
-                query: req.query.product_type
-            });
-            console.log(req.query.product_type);
-        })
-        .catch(err => {
-            console.log(err);
-        })
-    }
+    //* Show all the products in the database
+    Product.find()
+    .then(products=> {
+        console.log("Products Recevied --> ");
+        res.render('user_stuff/products', {
+            pageTitle: 'Products',
+            path: '/shop',
+            products: products,
+        });
+    })
+    .catch(err => {
+        console.log(err);
+    })
 }
 
 // LookBook Page
@@ -115,11 +106,14 @@ exports.removeItemFromCart = (req, res, next) => {
 }
 
 exports.getCheckout_Page = (req, res, next) => {
+    const name = req.user.name.split(" ");
     res.render('user_stuff/checkout', {
         pageTitle: "User Info",
         path: '/cart/rana_disposal/checkout/',
         cartItems: req.user.cart.items ? req.user.cart.items : req.session.cart.items,
-        cart: req.user.cart ? req.user.cart : req.session.cart
+        cart: req.user.cart ? req.user.cart : req.session.cart,
+        firstName: name[0],
+        lastName: name[1]
     });
 }
 
@@ -159,6 +153,9 @@ exports.updatedCartSession = (req, res, next) => {
 exports.placeOrder = (req, res, next) => {
 
     const now = new Date();
+    const address = req.body.delivery_address;
+    const phonenumber = req.body.phonenumber;
+    const name = req.body.name;
 
     const order = new Order({
         user: {
@@ -166,7 +163,9 @@ exports.placeOrder = (req, res, next) => {
             userId: req.user
         },
         cart: req.user.cart,
-        date: date.format(now, 'YYYY/MM/DD hh:mm A')
+        date: date.format(now, 'YYYY/MM/DD hh:mm A'),
+        phonenumber: phonenumber,
+        address: address
     });
     return order.save()
     .then(cart => {

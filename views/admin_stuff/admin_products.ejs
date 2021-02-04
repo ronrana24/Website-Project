@@ -8,13 +8,109 @@
 <body>
     <%- include('../Includes/admin_navigation_bar.ejs') %> 
 
-    <div class="search_container">
-      <input id="bar" class="searchbar" type="text" placeholder="Search..." onkeyup="searchFunction()" name="search">
-      <a id="btnSearch" class="btn-search">
-        <i class="fa fa-search"></i>
-      </a>
-    </div>
-  <% if (products.length > 0) { %>
+
+
+    <main class="skin-light">
+      <div class="container">
+        <div class="row mt-5">
+          <div class="col-md-4 mb-4">
+            <section>
+              <section>
+                <h5>Subcategories</h5>
+                <div class="text-muted small text-uppercase mb-5">
+                  <p class="mb-3"><a href="#!" class="card-link-secondary">Carry Bags</a></p>
+                  <p class="mb-3"><a href="#!" class="card-link-secondary">Tea &amp; Coffee Cups</a></p>
+                  <p class="mb-3"><a href="#!" class="card-link-secondary">Birthday Items</a></p>
+                  <p class="mb-3"><a href="#!" class="card-link-secondary">Spoons &amp; Forks</a></p>
+                  <p class="mb-3"><a href="#!" class="card-link-secondary">Packing Products</a></p>
+                  <p class="mb-3"><a href="#!" class="card-link-secondary">Tissue &amp; Napkins</a></p>
+                  <p class="mb-3"><a href="#!" class="card-link-secondary">Eatable Items</a></p>
+                  <p class="mb-3"><a href="#!" class="card-link-secondary">Plates</a></p>
+                </div>
+              </section>
+              <section>
+                <h5 class="pt-2 mb-4">Filters</h5>
+                <section class="mb-4">
+                  <div class="md-form md-outline mt-0 d-flex justify-content-between align-items-center">
+                    <input type="text" id="search" class="form-control mb-0" placeholder="Search Product Name..">
+                    <a href="#!" class="btn btn-flat btn-md px-3 waves-effect"><i class="fas fa-search fa-lg"></i></a>
+                  </div>
+                </section>
+                <section class="mb-4">
+
+                  <h6 class="font-weight-bold mb-3">Availability</h6>
+      
+                  <div class="form-check pl-0 mb-3">
+                    <input type="checkbox" class="form-check-input filled-in" id="in_stock">
+                    <label class="form-check-label small text-uppercase card-link-secondary" for="in_stock">In Stock</label>
+                  </div>
+                  <div class="form-check pl-0 mb-3">
+                    <input type="checkbox" class="form-check-input filled-in" id="out_of_stock">
+                    <label class="form-check-label small text-uppercase card-link-secondary" for="out_of_stock">Out Of Stock</label>
+                  </div>
+                  <div class="form-check pl-0 mb-3">
+                    <input type="checkbox" class="form-check-input filled-in" id="limited">
+                    <label class="form-check-label small text-uppercase card-link-secondary" for="limited">Limited</label>
+                  </div>
+      
+                </section>
+                <section class="mb-4">
+                  <h6 class="font-weight-bold mb-3">Price</h6>
+                  <div class="form-check pl-0 mb-3">
+                    <input type="radio" class="form-check-input" id="under50" name="materialExampleRadios">
+                    <label class="form-check-label small text-uppercase card-link-secondary" for="under50">
+                      Under &#8377;50
+                    </label>
+                  </div>
+                  <div class="form-check pl-0 mb-3">
+                    <input type="radio" class="form-check-input" id="50150" name="materialExampleRadios">
+                    <label class="form-check-label small text-uppercase card-link-secondary" for="50150">
+                      &#8377;50 to &#8377;150
+                    </label>
+                  </div>
+                  <div class="form-check pl-0 mb-3">
+                    <input type="radio" class="form-check-input" id="150250" name="materialExampleRadios">
+                    <label class="form-check-label small text-uppercase card-link-secondary" for="15025">
+                      &#8377;150 to &#8377;250
+                    </label>
+                  </div>
+                  <div class="form-check pl-0 mb-3">
+                    <input type="radio" class="form-check-input" id="250300" name="materialExampleRadios">
+                    <label class="form-check-label small text-uppercase card-link-secondary" for="250300">&#8377;250 to
+                      &#8377;300</label>
+                  </div>
+                  <div class="form-check pl-0 mb-3">
+                    <input type="radio" class="form-check-input" id="300above" name="materialExampleRadios">
+                    <label class="form-check-label small text-uppercase card-link-secondary" for="300above">&#8377;300 &amp;
+                      Above</label>
+                  </div>
+                  <form>
+                    <div class="d-flex align-items-center mt-4 pb-1">
+                      <div class="md-form md-outline my-0">
+                        <input id="from" type="text" class="form-control mb-0">
+                        <label for="form" class="">&#8377; Min</label>
+                      </div>
+                      <p class="px-2 mb-0 text-muted"> - </p>
+                      <div class="md-form md-outline my-0">
+                        <input id="to" type="text" class="form-control mb-0">
+                        <label for="to" class="">&#8377; Max</label>
+                      </div>
+                    </div>
+                  </form>
+  
+                </section>    
+              </section>
+            </section>
+          </div>
+          
+          <%- include ('../Includes/admin_product_display.ejs'); %> 
+  
+      </div>
+    </main>
+
+
+
+  <!-- <% if (products.length > 0) { %>
     <ul class="product_list_layout" id="list_of_products">
       <% for(var i=0;i<products.length;i++) { %>
         <a href="/shop/rana_disposal/edit/<%= products[i]._id %>"
@@ -34,7 +130,7 @@
                     <!-- <div class="product_price">
                         <span class="price">Rs. </span>
                     </div> -->
-                </div>
+                <!-- </div>
                   <div class="product_quantity_layout">
                       <div class="product_quantity">
                           <div class="product_input">
@@ -52,25 +148,8 @@
         </li>
       <% } %> 
     </ul>
-  <% } %>
-
-
-    <!-- <% if (products.length > 0) { %>
-        <% products.forEach(function (prod) { %>
-            <div class="card col-sm" style="width: 18rem;">
-                <img class="card-img-top" src="data:image/png;base64,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" alt="<%= prod.name %> ">
-                <div class="card-body">
-                  <h5 class="card-title"><%= prod.name %></h5>
-                  <a href="/shop/rana_disposal/edit/<%= prod._id %>">Edit</a>
-                  <form action="/shop/rana_disposal/delete/<%= prod._id %>" method="POST">
-                    <input type="hidden" value="<%= csrfToken %>" name="_csrf">
-                    <button class="btn" type="submit">Delete</button>
-                  </form>
-                </div>
-              </div>
-        <% }); %> 
-    <% } %> -->
-
-    <script  type="text/javascript" src="/javascript/searchbar_func.js"></script>
+  <% } %> --> -->
+  
+    <script type="text/javascript" src="/javascript/filter.js"></script>
     
 <%- include('../Includes/footer.ejs') %>
